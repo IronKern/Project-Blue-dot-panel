@@ -1,14 +1,14 @@
-/* Grundlegende Stile */
+/* Basic Styles */
 :root {
-    --primary-blue: #000080; /* Dunkles Blau */
-    --accent-blue: #87CEEB; /* Helles Himmelblau */
+    --primary-blue: #000080; /* Dark Blue */
+    --accent-blue: #87CEEB; /* Light Sky Blue */
     --black: #000000;
     --white: #ffffff;
     --light-grey: #f4f4f4;
     --dark-grey: #333;
-    --text-color: #e0e0e0; /* Heller Text für dunklen Hintergrund */
-    --card-bg: #1a1a2e; /* Dunklerer Hintergrund für Karten */
-    --border-color: #004080; /* Blauer Rand für Elemente */
+    --text-color: #e0e0e0; /* Lighter text for dark background */
+    --card-bg: #1a1a2e; /* Darker background for cards */
+    --border-color: #004080; /* Blue border for elements */
 }
 
 body {
@@ -47,7 +47,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Ermöglicht Umbruch auf kleineren Bildschirmen */
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 
 .logo {
@@ -60,7 +60,7 @@ header .container {
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Leuchtender Effekt */
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Glowing effect */
 }
 
 .logo h1 {
@@ -106,9 +106,9 @@ nav ul li a:hover {
     transform: translateY(-2px);
 }
 
-/* Hamburger Menü (Mobile) */
+/* Hamburger Menu (Mobile) */
 .hamburger {
-    display: none; /* Standardmäßig versteckt auf Desktops */
+    display: none; /* Hidden by default on desktops */
     cursor: pointer;
     flex-direction: column;
     gap: 5px;
@@ -204,11 +204,11 @@ nav ul li a:hover {
 }
 
 .status-online {
-    color: #4CAF50; /* Grün für Online */
+    color: #4CAF50; /* Green for Online */
 }
 
 .status-offline {
-    color: #F44336; /* Rot für Offline */
+    color: #F44336; /* Red for Offline */
 }
 
 .last-updated {
@@ -255,7 +255,7 @@ nav ul li a:hover {
 
 .search-bar input:focus {
     border-color: var(--white);
-    box-shadow: 0 0 15px rgba(135, 206, 235, 0.5); /* Leuchten beim Fokus */
+    box-shadow: 0 0 15px rgba(135, 206, 235, 0.5); /* Glow on focus */
 }
 
 .command-categories {
@@ -355,19 +355,19 @@ footer p {
     }
 
     nav ul {
-        display: none; /* Versteckt Standard-Navigation auf kleineren Bildschirmen */
+        display: none; /* Hide default navigation on smaller screens */
         flex-direction: column;
         width: 100%;
         background-color: var(--primary-blue);
         position: absolute;
-        top: 80px; /* Unter dem Header */
+        top: 80px; /* Below the header */
         left: 0;
         padding: 20px 0;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 
     nav ul.nav-active {
-        display: flex; /* Zeigt das Menü an, wenn aktiv */
+        display: flex; /* Show menu when active */
     }
 
     nav ul li {
@@ -376,7 +376,7 @@ footer p {
     }
 
     .hamburger {
-        display: flex; /* Zeigt Hamburger-Icon auf kleineren Bildschirmen */
+        display: flex; /* Show hamburger icon on smaller screens */
     }
 
     .hamburger.active .bar:nth-child(1) {
@@ -409,11 +409,11 @@ footer p {
     }
 
     .live-stats-grid {
-        grid-template-columns: 1fr; /* Einzelne Spalte auf Mobil */
+        grid-template-columns: 1fr; /* Single column on mobile */
     }
 
     .command-list {
-        grid-template-columns: 1fr; /* Einzelne Spalte auf Mobil */
+        grid-template-columns: 1fr; /* Single column on mobile */
     }
 
     .search-bar input {
