@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Blue Dot - Dein Discord Bot</title>
+    <title>Project Blue Dot - Your Discord Bot</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="Assets/applogo.png" type="image/png">
+    <link rel="icon" href="assets/applogo.png.heic" type="image/heic">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <img src="Assets/applogo.png" alt="Project Blue Dot Logo">
+                <img src="assets/applogo.png.heic" alt="Project Blue Dot Logo">
                 <h1>Project Blue Dot</h1>
             </div>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#home">Dashboard</a></li>
                     <li><a href="#commands">Commands</a></li>
-                    <li><a href="https://discord.gg/dein-support-link" target="_blank">Support</a></li>
-                    <li><a href="https://discord.com/oauth2/authorize?client_id=DEINE_BOT_ID&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-invite">Bot Einladen</a></li>
+                    <li><a href="https://discord.gg/YOUR_SUPPORT_DISCORD_LINK" target="_blank">Support</a></li>
+                    <li><a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_CLIENT_ID&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-invite">Invite Bot</a></li>
                 </ul>
                 <div class="hamburger">
                     <div class="bar"></div>
@@ -33,50 +34,50 @@
     <main>
         <section id="home" class="hero-section">
             <div class="container">
-                <h2>Project Blue Dot: Dein ultimativer Discord-Assistent.</h2>
-                <p>Erhalte Live-Statistiken und entdecke alle mächtigen Befehle.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=DEINE_BOT_ID&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-primary">Bot zu deinem Server hinzufügen</a>
+                <h2>Project Blue Dot: Your Ultimate Discord Assistant.</h2>
+                <p>Get live statistics and discover all powerful commands.</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_CLIENT_ID&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-primary">Add Bot to Your Server</a>
             </div>
         </section>
 
         <section id="live-panel" class="panel-section">
             <div class="container">
-                <h3>Live Informationen zum Bot</h3>
+                <h3>Live Bot Information</h3>
                 <div class="live-stats-grid">
                     <div class="stat-card">
                         <h4>Status</h4>
                         <p id="bot-status" class="status-online">Online</p>
                     </div>
                     <div class="stat-card">
-                        <h4>Server</h4>
-                        <p id="server-count">Lädt...</p>
+                        <h4>Servers</h4>
+                        <p id="server-count">Loading...</p>
                     </div>
                     <div class="stat-card">
-                        <h4>Benutzer</h4>
-                        <p id="user-count">Lädt...</p>
+                        <h4>Users</h4>
+                        <p id="user-count">Loading...</p>
                     </div>
                     <div class="stat-card">
                         <h4>Ping</h4>
-                        <p id="bot-ping">Lädt...</p>
+                        <p id="bot-ping">Loading...</p>
                     </div>
                     <div class="stat-card">
                         <h4>Uptime</h4>
-                        <p id="bot-uptime">Lädt...</p>
+                        <p id="bot-uptime">Loading...</p>
                     </div>
                 </div>
-                <p class="last-updated">Letzte Aktualisierung: <span id="last-updated-time">Lädt...</span></p>
+                <p class="last-updated">Last Updated: <span id="last-updated-time">Loading...</span></p>
             </div>
         </section>
 
         <section id="commands" class="commands-section">
             <div class="container">
-                <h3>Alle Commands</h3>
+                <h3>All Commands</h3>
                 <div class="search-bar">
-                    <input type="text" id="command-search" placeholder="Befehl suchen...">
+                    <input type="text" id="command-search" placeholder="Search command...">
                 </div>
 
                 <div class="command-categories">
-                    <button class="category-btn active" data-category="all">Alle</button>
+                    <button class="category-btn active" data-category="all">All</button>
                     <button class="category-btn" data-category="economy">Economy</button>
                     <button class="category-btn" data-category="utility">Utility</button>
                     <button class="category-btn" data-category="moderation">Moderation</button>
@@ -89,202 +90,202 @@
                 <div class="command-list">
                     <div class="command-card" data-category="economy">
                         <h4>/bank</h4>
-                        <p>Überprüft dein Kontostand.</p>
+                        <p>Check your account balance.</p>
                         <code>/bank</code>
                     </div>
                     <div class="command-card" data-category="economy">
                         <h4>/deposit &lt;amount&gt;</h4>
-                        <p>Zahlt Geld auf dein Bankkonto ein.</p>
+                        <p>Deposit money to your bank account.</p>
                         <code>/deposit 100</code>
                     </div>
                     <div class="command-card" data-category="economy">
                         <h4>/withdraw &lt;amount&gt;</h4>
-                        <p>Hebt Geld von deinem Bankkonto ab.</p>
+                        <p>Withdraw money from your bank account.</p>
                         <code>/withdraw 50</code>
                     </div>
                     <div class="command-card" data-category="economy">
                         <h4>/gift &lt;user&gt; &lt;amount&gt;</h4>
-                        <p>Schenkt einem Benutzer Geld.</p>
-                        <code>/gift @Benutzername 20</code>
+                        <p>Gift money to a user.</p>
+                        <code>/gift @Username 20</code>
                     </div>
                     <div class="command-card" data-category="economy">
                         <h4>/daily</h4>
-                        <p>Fordert deine tägliche Belohnung ein.</p>
+                        <p>Claim your daily reward.</p>
                         <code>/daily</code>
                     </div>
                     <div class="command-card" data-category="economy">
                         <h4>/leaderboard</h4>
-                        <p>Zeigt die reichsten Benutzer an.</p>
+                        <p>Show the richest users.</p>
                         <code>/leaderboard</code>
                     </div>
                     <div class="command-card" data-category="economy">
                         <h4>/shop</h4>
-                        <p>Durchstöbert den Shop.</p>
+                        <p>Browse the shop.</p>
                         <code>/shop</code>
                     </div>
                     <div class="command-card" data-category="economy">
                         <h4>/steal &lt;user&gt;</h4>
-                        <p>Versucht, einen Benutzer auszurauben (riskant!).</p>
-                        <code>/steal @Benutzername</code>
+                        <p>Attempt to steal from a user (risky!).</p>
+                        <code>/steal @Username</code>
                     </div>
                     <div class="command-card" data-category="economy">
                         <h4>/gamble &lt;amount&gt;</h4>
-                        <p>Spielt um Geld - 50/50 Chance.</p>
+                        <p>Gamble money - 50/50 chance.</p>
                         <code>/gamble 10</code>
                     </div>
 
                     <div class="command-card" data-category="utility">
                         <h4>/commands</h4>
-                        <p>Zeigt dieses Befehlsmenü an.</p>
+                        <p>Show this command menu.</p>
                         <code>/commands</code>
                     </div>
                     <div class="command-card" data-category="utility">
                         <h4>/stats</h4>
-                        <p>Zeigt deine Statistiken an.</p>
+                        <p>Show your statistics.</p>
                         <code>/stats</code>
                     </div>
                      <div class="command-card" data-category="utility">
                         <h4>/love &lt;user&gt;</h4>
-                        <p>Berechnet den Liebesprozentsatz.</p>
+                        <p>Calculate love percentage.</p>
                         <code>/love @Partner</code>
                     </div>
                     <div class="command-card" data-category="utility">
                         <h4>/password</h4>
-                        <p>Generiert ein sicheres Passwort.</p>
+                        <p>Generate a secure password.</p>
                         <code>/password</code>
                     </div>
                     <div class="command-card" data-category="utility">
                         <h4>/remind &lt;time&gt; &lt;message&gt;</h4>
-                        <p>Setzt eine Erinnerung.</p>
-                        <code>/remind 1h Kaffee trinken</code>
+                        <p>Set a reminder.</p>
+                        <code>/remind 1h Drink coffee</code>
                     </div>
                     <div class="command-card" data-category="utility">
                         <h4>/userinfo</h4>
-                        <p>Ruft Informationen über einen Benutzer ab.</p>
-                        <code>/userinfo @Benutzername</code>
+                        <p>Get information about a user.</p>
+                        <code>/userinfo @Username</code>
                     </div>
                      <div class="command-card" data-category="utility">
                         <h4>/serverinfo</h4>
-                        <p>Ruft detaillierte Serverinformationen ab.</p>
+                        <p>Get detailed server information.</p>
                         <code>/serverinfo</code>
                     </div>
                      <div class="command-card" data-category="utility">
                         <h4>/avatar</h4>
-                        <p>Ruft den Avatar eines Benutzers ab.</p>
-                        <code>/avatar @Benutzername</code>
+                        <p>Get a user's avatar.</p>
+                        <code>/avatar @Username</code>
                     </div>
                      <div class="command-card" data-category="utility">
                         <h4>/weather</h4>
-                        <p>Ruft Wetterinformationen für eine Stadt ab.</p>
+                        <p>Get weather information for a city.</p>
                         <code>/weather Berlin</code>
                     </div>
                      <div class="command-card" data-category="utility">
                         <h4>/ping</h4>
-                        <p>Überprüft die Latenz und Antwortzeit des Bots.</p>
+                        <p>Check bot's latency and response time.</p>
                         <code>/ping</code>
                     </div>
                     <div class="command-card" data-category="utility">
                         <h4>/math</h4>
-                        <p>Berechnet einen mathematischen Ausdruck.</p>
+                        <p>Calculate a mathematical expression.</p>
                         <code>/math 5 * (2 + 3)</code>
                     </div>
                     <div class="command-card" data-category="utility">
                         <h4>/random_number</h4>
-                        <p>Generiert eine Zufallszahl zwischen zwei Werten.</p>
+                        <p>Generate a random number between two values.</p>
                         <code>/random_number 1 100</code>
                     </div>
                     <div class="command-card" data-category="utility">
                         <h4>/stats (Slash Command)</h4>
-                        <p>Zeigt Bot-Statistiken an.</p>
+                        <p>Show bot statistics.</p>
                         <code>/stats</code>
                     </div>
                     <div class="command-card" data-category="utility">
                         <h4>/owner</h4>
-                        <p>Findet heraus, wer der allmächtige Besitzer dieses Bots ist.</p>
+                        <p>Find out who the almighty owner of this bot is.</p>
                         <code>/owner</code>
                     </div>
 
                     <div class="command-card" data-category="moderation staff">
                         <h4>/kick</h4>
-                        <p>Kickt ein Mitglied. (Nur für Staff)</p>
-                        <code>/kick @Benutzername Regelverstoß</code>
+                        <p>Kick a member. (Staff only)</p>
+                        <code>/kick @Username Rule violation</code>
                     </div>
                      <div class="command-card" data-category="moderation staff">
                         <h4>/timeout</h4>
-                        <p>Versetzt ein Mitglied für eine angegebene Minutenanzahl in Timeout.</p>
-                        <code>/timeout @Benutzername 60 Beleidigung</code>
+                        <p>Timeout a member for a specified minute duration.</p>
+                        <code>/timeout @Username 60 Insult</code>
                     </div>
                      <div class="command-card" data-category="moderation staff">
                         <h4>/ban</h4>
-                        <p>Verbannt ein Mitglied. (Nur für Staff)</p>
-                        <code>/ban @Benutzername Permanenter Verstoß</code>
+                        <p>Ban a member. (Staff only)</p>
+                        <code>/ban @Username Permanent violation</code>
                     </div>
                      <div class="command-card" data-category="moderation staff">
                         <h4>/clear</h4>
-                        <p>Löscht Nachrichten aus dem Kanal. (Nur für Staff)</p>
+                        <p>Clear messages from the channel. (Staff only)</p>
                         <code>/clear 50</code>
                     </div>
                      <div class="command-card" data-category="moderation staff">
                         <h4>/nuke</h4>
-                        <p>Erstellt einen Kanal neu. (Nur für Staff)</p>
+                        <p>Recreate a channel. (Staff only)</p>
                         <code>/nuke</code>
                     </div>
                     <div class="command-card" data-category="moderation staff">
                         <h4>/announce</h4>
-                        <p>Erstellt eine Ankündigung. (Nur für Staff)</p>
-                        <code>/announce #ankündigungen Willkommen an alle!</code>
+                        <p>Create an announcement. (Staff only)</p>
+                        <code>/announce #announcements Welcome everyone!</code>
                     </div>
 
                     <div class="command-card" data-category="fun">
                         <h4>/coinflip</h4>
-                        <p>Wirft eine Münze.</p>
+                        <p>Flip a coin.</p>
                         <code>/coinflip</code>
                     </div>
                     <div class="command-card" data-category="fun">
                         <h4>/eightball</h4>
-                        <p>Stellt dem magischen 8-Ball eine Frage.</p>
-                        <code>/eightball Wird es regnen?</code>
+                        <p>Ask the magic 8-ball a question.</p>
+                        <code>/eightball Will it rain?</code>
                     </div>
                     <div class="command-card" data-category="fun">
                         <h4>/roll</h4>
-                        <p>Wirft einen Würfel mit einer angegebenen Anzahl von Seiten.</p>
+                        <p>Roll a dice with a specified number of sides.</p>
                         <code>/roll 6</code>
                     </div>
                     <div class="command-card" data-category="fun">
                         <h4>/quote</h4>
-                        <p>Generiert ein inspirierendes Zitat.</p>
+                        <p>Get an inspirational quote.</p>
                         <code>/quote</code>
                     </div>
                     <div class="command-card" data-category="fun">
                         <h4>/choose</h4>
-                        <p>Wählt zwischen mehreren Optionen (durch Komma getrennt).</p>
-                        <code>/choose Apfel, Banane, Orange</code>
+                        <p>Choose between multiple options (separated by comma).</p>
+                        <code>/choose Apple, Banana, Orange</code>
                     </div>
 
                     <div class="command-card" data-category="timezone">
                         <h4>/timezone &lt;timezone&gt;</h4>
-                        <p>Legt deine Zeitzone fest.</p>
+                        <p>Set your timezone.</p>
                         <code>/timezone Europe/Berlin</code>
                     </div>
                     <div class="command-card" data-category="timezone">
                         <h4>/time</h4>
-                        <p>Zeigt deine aktuelle Zeit an.</p>
+                        <p>Show your current time.</p>
                         <code>/time</code>
                     </div>
                     <div class="command-card" data-category="timezone">
                         <h4>/time &lt;user&gt;</h4>
-                        <p>Zeigt die Zeit von jemandem an.</p>
-                        <code>/time @Benutzername</code>
+                        <p>Show someone's time.</p>
+                        <code>/time @Username</code>
                     </div>
                     <div class="command-card" data-category="timezone">
                         <h4>/timezones</h4>
-                        <p>Listet alle verfügbaren Zeitzonen auf.</p>
+                        <p>List all available timezones.</p>
                         <code>/timezones</code>
                     </div>
 
                      <div class="command-card" data-category="utility">
                         <h4>/ticket</h4>
-                        <p>Erstellt ein Support-Ticket.</p>
+                        <p>Create a support ticket.</p>
                         <code>/ticket</code>
                     </div>
                 </div>
@@ -294,7 +295,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Project Blue Dot. Alle Rechte vorbehalten.</p>
+            <p>&copy; 2025 Project Blue Dot. All rights reserved.</p>
             <p>Made with ❤️ by BigFlush</p>
             </div>
     </footer>
