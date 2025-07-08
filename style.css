@@ -5,7 +5,8 @@
     --text-primary: #E0E0E0; /* Main text color, soft white */
     --text-secondary: #808080; /* Secondary text, lighter grey */
     --text-highlight: #FFFFFF; /* Pure white for strong highlights */
-    --accent-blue: #007BFF; /* Primary blue accent, can be subtle */
+    --accent-blue: #007BFF; /* Primary blue accent */
+    --dark-blue: #0047AB; /* Dunkleres Blau für Text des Buttons */
     --logo-glow: rgba(0, 123, 255, 0.7); /* Stronger blue glow for logo */
 
     --border-color: #333333; /* Subtle border for elements */
@@ -13,11 +14,12 @@
     --font-primary: 'Inter', sans-serif;
     --font-secondary: 'Montserrat', sans-serif; /* For headings and bold elements */
 
-    --transition-duration-long: 1.0s; /* Längere Dauer für Hauptanimationen */
-    --transition-duration-medium: 0.6s; /* Mittlere Dauer */
-    --transition-duration-short: 0.3s; /* Kurze Dauer für Hover etc. */
-    --transition-ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Neue, smoothe Ease-Funktion */
-    --animation-delay-step: 0.08s; /* Standard delay step for staggered animations */
+    --transition-duration-long: 1.2s; /* Noch längere Dauer für Hauptanimationen */
+    --transition-duration-medium: 0.7s; /* Mittlere Dauer */
+    --transition-duration-short: 0.4s; /* Kurze Dauer für Hover etc. */
+    /* Neuere, geschmeidigere Ease-Funktion */
+    --transition-ease-smoother: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --animation-delay-step: 0.1s; /* Standard delay step for staggered animations */
 }
 
 /* --- Base Styles --- */
@@ -41,7 +43,7 @@ body {
 a {
     color: var(--text-primary);
     text-decoration: none;
-    transition: color var(--transition-duration-short) var(--transition-ease-smooth);
+    transition: color var(--transition-duration-short) var(--transition-ease-smoother);
 }
 
 a:hover {
@@ -71,7 +73,7 @@ header .container {
     gap: 10px;
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smooth) forwards;
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smoother) forwards;
     animation-delay: 0.2s; /* Initial delay for logo */
 }
 
@@ -80,7 +82,7 @@ header .container {
     width: 45px;
     border-radius: 50%;
     box-shadow: 0 0 15px var(--logo-glow);
-    transition: transform var(--transition-duration-short) var(--transition-ease-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-smooth);
+    transition: transform var(--transition-duration-short) var(--transition-ease-smoother), box-shadow var(--transition-duration-short) var(--transition-ease-smoother);
 }
 
 .logo img:hover {
@@ -107,7 +109,7 @@ nav ul li {
     margin-left: 30px;
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smooth) forwards;
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smoother) forwards;
     /* Delays set by JS for staggered effect */
 }
 
@@ -129,7 +131,7 @@ nav ul li a::after {
     background-color: var(--text-highlight);
     transform: scaleX(0);
     transform-origin: bottom right;
-    transition: transform var(--transition-duration-medium) var(--transition-ease-smooth); /* Smoother underline transition */
+    transition: transform var(--transition-duration-medium) var(--transition-ease-smoother); /* Smoother underline transition */
 }
 
 nav ul li a:hover {
@@ -141,23 +143,47 @@ nav ul li a:hover::after {
     transform-origin: bottom left;
 }
 
-.btn-invite {
-    background-color: transparent; /* Transparent background */
+.btn-invite, .btn-primary { /* Both buttons share these core styles */
+    background-color: transparent; /* Transparent background by default */
     color: var(--text-highlight); /* White text */
-    padding: 10px 22px;
+    padding: 12px 28px; /* Slightly larger padding */
     border-radius: 30px;
-    font-weight: 600;
+    font-weight: 700; /* Fetter für "Add Bot to Your Server" */
     border: 1px solid var(--text-highlight); /* White border */
-    transition: background-color var(--transition-duration-short) var(--transition-ease-smooth), color var(--transition-duration-short) var(--transition-ease-smooth), transform var(--transition-duration-short) var(--transition-ease-smooth), border-color var(--transition-duration-short) var(--transition-ease-smooth);
+    transition: background-color var(--transition-duration-short) var(--transition-ease-smoother),
+                color var(--transition-duration-short) var(--transition-ease-smoother),
+                transform var(--transition-duration-short) var(--transition-ease-smoother),
+                border-color var(--transition-duration-short) var(--transition-ease-smoother);
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smooth) forwards;
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smoother) forwards;
     /* Delay set by JS */
+}
+
+/* Specific styling for btn-invite (Header button) */
+.btn-invite {
+    /* Animation delay handled by JS for header items */
+}
+
+/* Specific styling for btn-primary (Hero button) */
+.btn-primary {
+    color: var(--bg-dark); /* Dark text on white background initially */
+    background-color: var(--text-highlight); /* White background */
+    border-color: var(--text-highlight); /* White border */
+    font-size: 1.2em; /* Bigger font size for prominence */
+    padding: 15px 35px; /* Even larger padding for hero button */
+    font-weight: 800; /* Noch fetter */
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-blue); /* Blue on hover */
+    color: var(--text-highlight); /* White text on hover */
+    border-color: var(--accent-blue); /* Blue border on hover */
 }
 
 .btn-invite:hover {
     background-color: var(--accent-blue); /* Blue on hover */
-    color: var(--text-highlight);
+    color: var(--text-highlight); /* White text on hover */
     border-color: var(--accent-blue); /* Blue border on hover */
     transform: translateY(-2px);
 }
@@ -169,7 +195,7 @@ nav ul li a:hover::after {
     flex-direction: column;
     gap: 6px;
     padding: 5px;
-    transition: all var(--transition-duration-medium) var(--transition-ease-smooth);
+    transition: all var(--transition-duration-medium) var(--transition-ease-smoother);
 }
 
 .hamburger .bar {
@@ -177,7 +203,7 @@ nav ul li a:hover::after {
     height: 2px; /* Thinner bars */
     background-color: var(--text-highlight);
     border-radius: 2px;
-    transition: all var(--transition-duration-medium) var(--transition-ease-smooth);
+    transition: all var(--transition-duration-medium) var(--transition-ease-smoother);
 }
 
 /* --- Section General Styles --- */
@@ -314,7 +340,7 @@ section {
     color: var(--text-primary);
     font-size: 1.1em;
     outline: none;
-    transition: border-color var(--transition-duration-short) var(--transition-ease-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-smooth);
+    transition: border-color var(--transition-duration-short) var(--transition-ease-smoother), box-shadow var(--transition-duration-short) var(--transition-ease-smoother);
 }
 
 .search-bar input::placeholder {
@@ -343,7 +369,7 @@ section {
     cursor: pointer;
     font-size: 0.95em;
     font-weight: 500;
-    transition: background-color var(--transition-duration-short) var(--transition-ease-smooth), color var(--transition-duration-short) var(--transition-ease-smooth), border-color var(--transition-duration-short) var(--transition-ease-smooth);
+    transition: background-color var(--transition-duration-short) var(--transition-ease-smoother), color var(--transition-duration-short) var(--transition-ease-smoother), border-color var(--transition-duration-short) var(--transition-ease-smoother);
 }
 
 .category-btn:hover {
@@ -412,8 +438,8 @@ footer {
 .anim-target.in-view .anim-item {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity var(--transition-duration-long) var(--transition-ease-smooth),
-                transform var(--transition-duration-long) var(--transition-ease-smooth);
+    transition: opacity var(--transition-duration-long) var(--transition-ease-smoother),
+                transform var(--transition-duration-long) var(--transition-ease-smoother);
 }
 
 /* Special case for header items to animate on page load */
@@ -422,7 +448,7 @@ header nav ul li,
 header .btn-invite {
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smooth) forwards;
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smoother) forwards;
 }
 
 header .logo { animation-delay: 0.2s; }
@@ -475,7 +501,7 @@ header .btn-invite { animation-delay: 0.9s; }
 
     nav ul.nav-active {
         display: flex;
-        animation: fadeIn var(--transition-duration-short) var(--transition-ease-smooth);
+        animation: fadeIn var(--transition-duration-short) var(--transition-ease-smoother);
     }
 
     nav ul li {
