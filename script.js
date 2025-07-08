@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Set the "Development Status" - currently static as it's not in the API response
             // If you add a 'development_status' field to your /api/stats endpoint, you can
             // change this to: developmentStatus.textContent = data.development_status;
-            developmentStatus.textContent = 'In Arbeit'; // Currently static
+            developmentStatus.textContent = 'Work in progress'; // Static for now, as requested
             developmentStatus.className = 'stat-value status-wip'; // Set appropriate class for styling
 
             // Update the last updated time to current browser time
@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lastUpdatedTime.textContent = 'Failed to load';
             lastCommand.textContent = 'N/A';
             totalCommands.textContent = 'N/A';
-            developmentStatus.textContent = 'Fehler beim Laden'; // Set appropriate error message
-            developmentStatus.className = 'stat-value status-offline'; // Or another error class
+            developmentStatus.textContent = 'Error loading'; // Changed to English
+            developmentStatus.className = 'stat-value status-offline';
         }
     }
 
@@ -90,24 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchBotStats();
     setInterval(fetchBotStats, 10000); // Fetches data every 10 seconds
 
-    // --- Command Search and Filter Functionality ---
-    const commandSearchInput = document.getElementById('command-search');
+    // --- Command Filter Functionality (Simplified after removing search bar) ---
+    // The search input no longer exists, but we keep category filtering.
     const categoryButtons = document.querySelectorAll('.category-btn');
     const commandItems = document.querySelectorAll('.command-item');
 
-    function filterCommands() {
-        const searchTerm = commandSearchInput.value.toLowerCase();
+    function filterCommandsByCategory() {
         const activeCategory = document.querySelector('.category-btn.active').dataset.category;
 
         commandItems.forEach(item => {
-            const commandName = item.querySelector('h4').textContent.toLowerCase();
-            const commandDescription = item.querySelector('p').textContent.toLowerCase();
             const itemCategories = item.dataset.category.split(' ');
 
-            const matchesSearch = commandName.includes(searchTerm) || commandDescription.includes(searchTerm);
             const matchesCategory = activeCategory === 'all' || itemCategories.includes(activeCategory);
 
-            if (matchesSearch && matchesCategory) {
+            if (matchesCategory) {
                 item.style.display = 'block';
             } else {
                 item.style.display = 'none';
@@ -115,18 +111,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    commandSearchInput.addEventListener('keyup', filterCommands);
-
     categoryButtons.forEach(button => {
         button.addEventListener('click', () => {
             document.querySelector('.category-btn.active').classList.remove('active');
             button.classList.add('active');
-            filterCommands();
+            filterCommandsByCategory(); // Use the simplified function
         });
     });
 
     // Call initial filter to display all commands
-    filterCommands();
+    filterCommandsByCategory(); // Use the simplified function
 
     // --- Intersection Observer for Animations ---
     const animTargets = document.querySelectorAll('.anim-target');
