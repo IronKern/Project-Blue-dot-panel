@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Hamburger Menu Functionality ===
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    // We no longer need to explicitly set --i for nav items here, CSS takes care of initial animation
-    // And for mobile menu, we reset animations via CSS class removal.
 
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('nav-active');
@@ -95,13 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Add 'in-view' class to the target section
                 entry.target.classList.add('in-view');
 
                 // Apply staggered animation to its anim-items
                 const animItems = entry.target.querySelectorAll('.anim-item');
                 animItems.forEach((item, index) => {
-                    item.style.transitionDelay = `${index * 0.08}s`; // Staggered delay for each anim-item
+                    // Set delay using CSS variable from :root
+                    item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
                 });
 
                 // Optional: Unobserve once animated if it's a one-time animation
@@ -111,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // entry.target.classList.remove('in-view');
                 // Reset transition delays if not in view (important if you re-observe)
                 entry.target.querySelectorAll('.anim-item').forEach(item => {
-                    item.style.transitionDelay = '0s';
+                    item.style.transitionDelay = '0s'; // Reset delay
                 });
             }
         });
@@ -123,13 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Manually trigger initial observer check in case elements are already in view on load
-    // This often happens for the first section (hero)
     observer.takeRecords().forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
             const animItems = entry.target.querySelectorAll('.anim-item');
             animItems.forEach((item, index) => {
-                item.style.transitionDelay = `${index * 0.08}s`;
+                item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
             });
         }
     });
