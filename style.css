@@ -15,7 +15,7 @@
 
     --transition-duration: 0.8s; /* Longer, smoother transitions */
     --transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1); /* Elegant bezier curve */
-    --animation-delay-step: 0.1s;
+    --animation-delay-step: 0.1s; /* Standard delay step for staggered animations */
 }
 
 /* --- Base Styles --- */
@@ -67,9 +67,11 @@ header .container {
     display: flex;
     align-items: center;
     gap: 10px;
-    opacity: 0; /* Hidden by default, will fade in via JS */
+    /* Initial state, will animate on load for header */
+    opacity: 0;
     transform: translateY(-10px);
     animation: fadeInSlideDown 0.8s var(--transition-ease) forwards;
+    animation-delay: 0.2s; /* Initial delay for logo */
 }
 
 .logo img {
@@ -102,10 +104,12 @@ nav ul {
 
 nav ul li {
     margin-left: 30px;
-    opacity: 0; /* Hidden by default, will fade in via JS */
+    /* Initial state for nav items, will animate on load */
+    opacity: 0;
     transform: translateY(-10px);
     animation: fadeInSlideDown 0.8s var(--transition-ease) forwards;
-    animation-delay: calc(0.1s + (var(--i) * 0.05s)); /* Staggered animation */
+    /* This delay will be set dynamically by JS for a staggered effect */
+    /* animation-delay: calc(0.3s + (var(--i) * 0.05s)); */
 }
 
 nav ul li a {
@@ -145,10 +149,12 @@ nav ul li a:hover::after {
     border-radius: 30px; /* More rounded */
     font-weight: 600;
     transition: background-color 0.3s var(--transition-ease), color 0.3s var(--transition-ease), transform 0.3s var(--transition-ease);
-    opacity: 0; /* Hidden by default, will fade in via JS */
+    /* Initial state for button, will animate on load */
+    opacity: 0;
     transform: translateY(-10px);
     animation: fadeInSlideDown 0.8s var(--transition-ease) forwards;
-    animation-delay: calc(0.1s + (var(--i) * 0.05s) + 0.2s); /* Staggered and slightly delayed */
+    /* This delay will be set dynamically by JS */
+    /* animation-delay: calc(0.3s + (var(--i) * 0.05s) + 0.2s); */
 }
 
 .btn-invite:hover {
@@ -198,8 +204,6 @@ section {
     color: var(--text-secondary);
     margin-bottom: 20px;
     line-height: 1;
-    transform: translateX(-20px);
-    opacity: 0;
 }
 
 .section-title {
@@ -209,8 +213,6 @@ section {
     color: var(--text-highlight);
     margin-bottom: 40px;
     line-height: 1.2;
-    transform: translateX(-20px);
-    opacity: 0;
 }
 
 /* --- Hero Section --- */
@@ -233,8 +235,6 @@ section {
     color: var(--text-highlight);
     margin-bottom: 20px;
     line-height: 1.1;
-    transform: translateY(20px);
-    opacity: 0;
 }
 
 .hero-section p {
@@ -242,14 +242,6 @@ section {
     font-weight: 300;
     color: var(--text-primary);
     margin-bottom: 50px;
-    transform: translateY(20px);
-    opacity: 0;
-}
-
-.btn-primary {
-    /* Inherits from .btn-invite */
-    transform: translateY(20px);
-    opacity: 0;
 }
 
 /* --- Dashboard Section (Reimagined for Cleanliness) --- */
@@ -269,8 +261,6 @@ section {
     padding: 30px;
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .stat-item .stat-label {
@@ -304,8 +294,6 @@ section {
     font-size: 0.9em;
     color: var(--text-secondary);
     margin-top: 40px;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 /* --- Commands Section (Reimagined for Cleanliness) --- */
@@ -316,8 +304,6 @@ section {
 .search-bar {
     text-align: left; /* Align search left */
     margin-bottom: 40px;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .search-bar input {
@@ -347,8 +333,6 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 10px; /* Smaller gap */
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .category-btn {
@@ -387,8 +371,6 @@ section {
     border-bottom: 1px solid var(--border-color); /* Subtle separator */
     padding-bottom: 20px;
     margin-bottom: 20px;
-    opacity: 0;
-    transform: translateY(20px);
 }
 
 .command-item:last-child {
@@ -421,34 +403,36 @@ footer {
 }
 
 /* --- Animation Classes (Controlled by JavaScript) --- */
-.anim-target .anim-item {
+/* Initial hidden state for animatable items */
+.anim-item {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity var(--transition-duration) var(--transition-ease), transform var(--transition-duration) var(--transition-ease);
 }
 
+/* Final visible state when 'in-view' class is added by JS */
 .anim-target.in-view .anim-item {
     opacity: 1;
     transform: translateY(0);
+    transition: opacity var(--transition-duration) var(--transition-ease),
+                transform var(--transition-duration) var(--transition-ease);
 }
 
-/* Staggered animation for general items */
-.anim-target.in-view .anim-item:nth-child(1) { transition-delay: 0s; }
-.anim-target.in-view .anim-item:nth-child(2) { transition-delay: calc(0s + var(--animation-delay-step)); }
-.anim-target.in-view .anim-item:nth-child(3) { transition-delay: calc(0s + var(--animation-delay-step) * 2); }
-.anim-target.in-view .anim-item:nth-child(4) { transition-delay: calc(0s + var(--animation-delay-step) * 3); }
-/* ... and so on for more items, or use JS to set custom delays */
-/* For the command list, each command-item gets its own delay */
-.command-list .command-item {
+/* Special case for header items to animate on page load */
+header .logo,
+header nav ul li,
+header .btn-invite {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity var(--transition-duration) var(--transition-ease), transform var(--transition-duration) var(--transition-ease);
+    transform: translateY(-10px);
+    animation: fadeInSlideDown 0.8s var(--transition-ease) forwards;
 }
 
-.command-list.in-view .command-item {
-    opacity: 1;
-    transform: translateY(0);
-}
+header .logo { animation-delay: 0.2s; }
+header nav ul li:nth-child(1) { animation-delay: 0.4s; }
+header nav ul li:nth-child(2) { animation-delay: 0.5s; }
+header nav ul li:nth-child(3) { animation-delay: 0.6s; }
+header nav ul li:nth-child(4) { animation-delay: 0.7s; }
+header nav ul li:nth-child(5) { animation-delay: 0.8s; }
+header .btn-invite { animation-delay: 0.9s; }
 
 
 /* --- Keyframe Animations (Specific) --- */
@@ -485,7 +469,7 @@ footer {
         top: 65px; /* Adjust based on header height */
         left: 0;
         padding: 20px 0;
-        box-shadow: 0 5px 20px var(--shadow-dark);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.5); /* Use rgba for shadow */
         z-index: 999;
         text-align: center;
     }
@@ -497,6 +481,10 @@ footer {
 
     nav ul li {
         margin: 15px 0;
+        /* Reset animation for mobile menu as it's controlled by JS toggle */
+        opacity: 1;
+        transform: translateY(0);
+        animation: none;
     }
 
     nav ul li a {
@@ -509,6 +497,10 @@ footer {
 
     .btn-invite {
         margin-top: 20px; /* Push invite button down in mobile menu */
+        /* Reset animation for mobile menu */
+        opacity: 1;
+        transform: translateY(0);
+        animation: none;
     }
 
     .hamburger {
