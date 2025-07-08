@@ -2,15 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Hamburger Menu Functionality ===
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    const navItems = document.querySelectorAll('nav ul li'); // Get all individual nav items
+    // We no longer need to explicitly set --i for nav items here, CSS takes care of initial animation
+    // And for mobile menu, we reset animations via CSS class removal.
 
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('nav-active');
         hamburger.classList.toggle('active');
-        // Apply staggered animation to nav items on mobile
-        navItems.forEach((item, index) => {
-            item.style.setProperty('--i', index); // Set custom property for delay
-        });
     });
 
     // Close mobile nav when a link is clicked
@@ -39,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         serverCount.textContent = (Math.floor(Math.random() * 500) + 100).toLocaleString();
         userCount.textContent = (Math.floor(Math.random() * 50000) + 10000).toLocaleString();
         botPing.textContent = `${Math.floor(Math.random() * 100) + 20}ms`;
-        botUptime.textContent = '3 days, 12 hours';
+        botUptime.textContent = '3 days, 12 hours'; // Example uptime
         lastUpdatedTime.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
     }
 
@@ -50,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // === Command Search and Filter Functionality ===
     const commandSearchInput = document.getElementById('command-search');
     const categoryButtons = document.querySelectorAll('.category-btn');
-    const commandItems = document.querySelectorAll('.command-item'); // Changed from command-card to command-item
+    const commandItems = document.querySelectorAll('.command-item');
 
     function filterCommands() {
         const searchTerm = commandSearchInput.value.toLowerCase();
@@ -59,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         commandItems.forEach(item => {
             const commandName = item.querySelector('h4').textContent.toLowerCase();
             const commandDescription = item.querySelector('p').textContent.toLowerCase();
-            const itemCategories = item.dataset.category.split(' '); // Get all categories of the command
+            const itemCategories = item.dataset.category.split(' ');
 
             const matchesSearch = commandName.includes(searchTerm) || commandDescription.includes(searchTerm);
             const matchesCategory = activeCategory === 'all' || itemCategories.includes(activeCategory);
@@ -98,55 +95,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Add 'in-view' class to trigger animations
+                // Add 'in-view' class to the target section
                 entry.target.classList.add('in-view');
 
-                // Stagger animations for children if needed (e.g., command list items)
-                if (entry.target.classList.contains('command-list')) {
-                    entry.target.querySelectorAll('.command-item').forEach((item, index) => {
-                        item.style.transitionDelay = `${index * 0.05}s`; // Staggered delay
-                    });
-                } else if (entry.target.classList.contains('dashboard-stats')) {
-                     entry.target.querySelectorAll('.stat-item').forEach((item, index) => {
-                        item.style.transitionDelay = `${index * 0.05}s`;
-                    });
-                } else if (entry.target.id === 'home' || entry.target.id === 'about' || entry.target.id === 'dashboard' || entry.target.id === 'commands') {
-                    // For general sections, apply delay to anim-items within them
-                    entry.target.querySelectorAll('.anim-item').forEach((item, index) => {
-                         item.style.transitionDelay = `${index * 0.05}s`;
-                    });
-                }
-                
-                // Unobserve once animated if it's a one-time animation
-                // observer.unobserve(entry.target); 
+                // Apply staggered animation to its anim-items
+                const animItems = entry.target.querySelectorAll('.anim-item');
+                animItems.forEach((item, index) => {
+                    item.style.transitionDelay = `${index * 0.08}s`; // Staggered delay for each anim-item
+                });
+
+                // Optional: Unobserve once animated if it's a one-time animation
+                // observer.unobserve(entry.target);
             } else {
                 // Optional: Remove 'in-view' class if you want animations to reset when element leaves viewport
                 // entry.target.classList.remove('in-view');
-                 if (entry.target.classList.contains('command-list')) {
-                    entry.target.querySelectorAll('.command-item').forEach((item, index) => {
-                        item.style.transitionDelay = `0s`; // Reset delay
-                    });
-                } else if (entry.target.classList.contains('dashboard-stats')) {
-                     entry.target.querySelectorAll('.stat-item').forEach((item, index) => {
-                        item.style.transitionDelay = `0s`;
-                    });
-                } else if (entry.target.id === 'home' || entry.target.id === 'about' || entry.target.id === 'dashboard' || entry.target.id === 'commands') {
-                    entry.target.querySelectorAll('.anim-item').forEach((item, index) => {
-                         item.style.transitionDelay = `0s`;
-                    });
-                }
+                // Reset transition delays if not in view (important if you re-observe)
+                entry.target.querySelectorAll('.anim-item').forEach(item => {
+                    item.style.transitionDelay = '0s';
+                });
             }
         });
     }, observerOptions);
 
+    // Observe all animation targets
     animTargets.forEach(target => {
         observer.observe(target);
     });
 
-    // Initialize header nav item delays
-    document.querySelectorAll('nav ul li').forEach((item, index) => {
-        item.style.setProperty('--i', index);
+    // Manually trigger initial observer check in case elements are already in view on load
+    // This often happens for the first section (hero)
+    observer.takeRecords().forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            const animItems = entry.target.querySelectorAll('.anim-item');
+            animItems.forEach((item, index) => {
+                item.style.transitionDelay = `${index * 0.08}s`;
+            });
+        }
     });
-    document.querySelector('.btn-invite').style.setProperty('--i', navItems.length); // For the invite button
-
 });
