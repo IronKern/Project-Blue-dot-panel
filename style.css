@@ -13,11 +13,11 @@
     --font-primary: 'Inter', sans-serif;
     --font-secondary: 'Montserrat', sans-serif;
 
-    --transition-duration-long: 1.5s; /* Längere Dauer für Hauptanimationen */
+    --transition-duration-long: 1.5s;
     --transition-duration-medium: 0.9s;
     --transition-duration-short: 0.4s;
     --transition-ease-extra-smooth: cubic-bezier(0.23, 1, 0.32, 1);
-    --animation-delay-step: 0.05s; /* Kürzere Verzögerung für schnelleren Start des Staggered-Effekts */
+    --animation-delay-step: 0.05s;
 }
 
 body {
@@ -296,9 +296,17 @@ section {
     line-height: 1;
 }
 
+/* Status colors */
 .stat-item .status-online {
     color: var(--accent-blue);
 }
+.stat-item .status-offline {
+    color: #ff0000; /* Red for Offline */
+}
+.stat-item .status-loading {
+    color: var(--text-secondary); /* Gray for Loading */
+}
+
 
 .last-updated {
     font-size: 0.9em;
@@ -421,6 +429,7 @@ footer {
                 transform var(--transition-duration-long) var(--transition-ease-extra-smooth);
 }
 
+/* Header specific animations to make them appear slightly delayed on load */
 header .logo,
 header nav ul li,
 header .btn-invite {
@@ -442,150 +451,153 @@ header .btn-invite { animation-delay: 0.9s; }
     to { opacity: 1; transform: translateY(0); }
 }
 
-body {
-    font-size: 1em;
-}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        font-size: 1em;
+    }
 
-.container {
-    padding: 0 20px;
-}
+    .container {
+        padding: 0 20px;
+    }
 
-header .container {
-    padding: 10px 20px;
-}
+    header .container {
+        padding: 10px 20px;
+    }
 
-.logo h1 {
-    font-size: 1.5em;
-}
+    .logo h1 {
+        font-size: 1.5em;
+    }
 
-.logo img {
-    height: 35px;
-    width: 35px;
-}
+    .logo img {
+        height: 35px;
+        width: 35px;
+    }
 
-.hamburger {
-    display: flex;
-}
+    .hamburger {
+        display: flex;
+    }
 
-nav ul {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    background-color: var(--bg-dark);
-    position: absolute;
-    top: 60px;
-    left: 0;
-    padding: 20px 0;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-    z-index: 999;
-    text-align: center;
-}
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--bg-dark);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 20px 0;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        z-index: 999;
+        text-align: center;
+    }
 
-nav ul.nav-active {
-    display: flex;
-    animation: fadeIn var(--transition-duration-short) var(--transition-ease-extra-smooth);
-}
+    nav ul.nav-active {
+        display: flex;
+        animation: fadeIn var(--transition-duration-short) var(--transition-ease-extra-smooth);
+    }
 
-nav ul li {
-    margin: 15px 0;
-    opacity: 1;
-    transform: translateY(0);
-    animation: none;
-}
+    nav ul li {
+        margin: 15px 0;
+        opacity: 1;
+        transform: translateY(0);
+        animation: none; /* Disable initial header animations on mobile menu */
+    }
 
-nav ul li a {
-    padding: 10px 0;
-    font-size: 1.1em;
-}
+    nav ul li a {
+        padding: 10px 0;
+        font-size: 1.1em;
+    }
 
-.btn-invite {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1em;
-    opacity: 1;
-    transform: translateY(0);
-    animation: none;
-}
+    .btn-invite {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1em;
+        opacity: 1;
+        transform: translateY(0);
+        animation: none; /* Disable initial header animations on mobile menu */
+    }
 
-.hamburger.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
 
-.hamburger.active .bar:nth-child(2) {
-    opacity: 0;
-}
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
 
-.hamburger.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
 
-.hero-section {
-    padding: 80px 20px;
-    min-height: 70vh;
-}
+    .hero-section {
+        padding: 80px 20px;
+        min-height: 70vh;
+    }
 
-.hero-section h2 {
-    font-size: 2.8em;
-}
+    .hero-section h2 {
+        font-size: 2.8em;
+    }
 
-.hero-section p {
-    font-size: 1.1em;
-}
+    .hero-section p {
+        font-size: 1.1em;
+    }
 
-.btn-primary {
-    font-size: 1.1em;
-    padding: 12px 25px;
-}
+    .btn-primary {
+        font-size: 1.1em;
+        padding: 12px 25px;
+    }
 
-.content-section {
-    padding: 60px 0;
-}
+    .content-section {
+        padding: 60px 0;
+    }
 
-.section-number {
-    font-size: 2.5em;
-}
+    .section-number {
+        font-size: 2.5em;
+    }
 
-.section-title {
-    font-size: 1.8em;
-}
+    .section-title {
+        font-size: 1.8em;
+    }
 
-.dashboard-stats {
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
 
-.stat-item {
-    padding: 20px;
-}
+    .stat-item {
+        padding: 20px;
+    }
 
-.stat-item .stat-value {
-    font-size: 2.2em;
-}
+    .stat-item .stat-value {
+        font-size: 2.2em;
+    }
 
-.search-bar input {
-    padding: 10px 15px;
-    font-size: 1em;
-}
+    .search-bar input {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
 
-.command-categories {
-    gap: 8px;
-}
+    .command-categories {
+        gap: 8px;
+    }
 
-.category-btn {
-    padding: 8px 15px;
-    font-size: 0.85em;
-}
+    .category-btn {
+        padding: 8px 15px;
+        font-size: 0.85em;
+    }
 
-.command-item h4 {
-    font-size: 1.2em;
-}
+    .command-item h4 {
+        font-size: 1.2em;
+    }
 
-.command-item p {
-    font-size: 0.9em;
-}
+    .command-item p {
+        font-size: 0.9em;
+    }
 
-footer {
-    padding: 40px 20px;
+    footer {
+        padding: 40px 20px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -687,12 +699,12 @@ footer {
     }
 
     .category-btn {
-        padding: 10px 20px;
+        padding: 8px 15px;
         font-size: 0.95em;
     }
 
     .command-item h4 {
-        font-size: 1.4em;
+        font-size: 1.2em;
     }
 
     .command-item p {
