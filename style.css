@@ -10,25 +10,25 @@
     --accent-blue-light: #66B2FF; /* Hellerer Blauton für Glow/Hover */
     --status-online: #4CAF50; /* Grün für Online */
     --status-offline: #F44336; /* Rot für Offline */
-    --shadow-dark: rgba(0, 0, 0, 0.6);
-    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.7); /* Etwas dunklerer Schatten */
+    --shadow-light: rgba(0, 0, 0, 0.4); /* Etwas dunklerer Schatten */
 
-    --transition-speed: 0.4s;
-    --transition-ease: cubic-bezier(0.25, 0.8, 0.25, 1); /* Elegante Ease-Funktion */
+    --transition-speed: 0.5s; /* Etwas längere, smoother Transitions */
+    --transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1); /* Elegante Ease-Funktion für flüssige Bewegungen */
 }
 
 /* Optional: Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@400;600;700&display=swap');
 
 body {
-    font-family: 'Roboto', sans-serif; /* Changed to Roboto for a cleaner look */
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--bg-dark);
     color: var(--text-primary);
     line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scroll from animations */
-    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -50,10 +50,10 @@ a:hover {
 /* --- Header --- */
 header {
     background-color: var(--bg-medium);
-    padding: 15px 0;
+    padding: 10px 0; /* Weniger Padding oben/unten */
     border-bottom: 1px solid var(--border-subtle);
     box-shadow: 0 4px 20px var(--shadow-dark);
-    position: sticky; /* Sticky header */
+    position: sticky;
     top: 0;
     z-index: 1000;
 }
@@ -63,33 +63,35 @@ header .container {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    padding: 10px 20px; /* Reduziertes Padding im Container selbst */
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px; /* Etwas kleinerer Abstand */
 }
 
 .logo img {
-    height: 55px;
-    width: 55px;
+    height: 50px; /* Etwas kleiner */
+    width: 50px; /* Etwas kleiner */
     border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0, 123, 255, 0.5); /* Stronger blue glow */
-    transition: transform 0.3s var(--transition-ease);
+    box-shadow: 0 0 18px rgba(0, 123, 255, 0.5);
+    transition: transform 0.3s var(--transition-ease), box-shadow 0.3s var(--transition-ease);
 }
 
 .logo img:hover {
-    transform: scale(1.08) rotate(5deg);
+    transform: scale(1.08) rotate(3deg);
+    box-shadow: 0 0 25px rgba(0, 123, 255, 0.7);
 }
 
 .logo h1 {
     margin: 0;
     color: var(--white);
-    font-size: 2.2em;
-    font-family: 'Montserrat', sans-serif; /* Modern, clean font for logo */
-    letter-spacing: 1.5px;
-    text-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+    font-size: 2em; /* Etwas kleiner */
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1.2px;
+    text-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
 }
 
 nav ul {
@@ -100,16 +102,16 @@ nav ul {
 }
 
 nav ul li {
-    margin-left: 30px;
+    margin-left: 25px; /* Etwas weniger Abstand */
 }
 
 nav ul li a {
     color: var(--text-primary);
     font-weight: 400;
-    padding: 10px 18px;
-    border-radius: 8px;
+    padding: 8px 15px; /* Weniger Padding */
+    border-radius: 6px; /* Kleinerer Radius */
     transition: background-color var(--transition-speed) var(--transition-ease), color var(--transition-speed) var(--transition-ease);
-    position: relative; /* For underline effect */
+    position: relative;
     overflow: hidden;
 }
 
@@ -117,53 +119,75 @@ nav ul li a::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: 50%; /* Start in der Mitte */
+    width: 0;
     height: 2px;
     background-color: var(--accent-blue-light);
-    transform: translateX(-100%);
-    transition: transform var(--transition-speed) var(--transition-ease);
+    transform: translateX(-50%); /* Zentriert halten */
+    transition: width var(--transition-speed) var(--transition-ease); /* Breite animieren */
 }
 
 nav ul li a:hover {
     color: var(--white);
-    background-color: rgba(0, 123, 255, 0.1);
+    background-color: rgba(0, 123, 255, 0.08); /* Dezenter */
 }
 
 nav ul li a:hover::after {
-    transform: translateX(0);
+    width: 100%; /* Auf volle Breite erweitern */
 }
 
 .btn-invite {
-    background-color: var(--accent-blue);
+    background: linear-gradient(45deg, var(--accent-blue), var(--accent-blue-light)); /* Sanfter Gradient */
     color: var(--white);
-    padding: 12px 25px;
-    border-radius: 8px;
+    padding: 10px 22px; /* Weniger Padding */
+    border-radius: 25px; /* Runder */
     font-weight: 600;
-    transition: background-color var(--transition-speed) var(--transition-ease), transform 0.3s var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
-    border: 1px solid var(--accent-blue);
+    transition: background-color var(--transition-speed) var(--transition-ease), transform 0.3s var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease), background 0.5s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3); /* Dezenterer Schatten */
+    border: none; /* Kein Rand, da Gradient */
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-invite::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.15); /* Hellerer Overlay für Hover-Effekt */
+    border-radius: 50%;
+    transition: all 0.6s var(--transition-ease);
+    transform: translate(-50%, -50%) scale(0);
+    z-index: -1;
+}
+
+.btn-invite:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
 }
 
 .btn-invite:hover {
-    background-color: var(--accent-blue-light);
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 8px 30px rgba(0, 123, 255, 0.6);
-    border-color: var(--white);
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5); /* Etwas stärker auf Hover */
+    color: var(--white); /* Sicherstellen, dass Text weiß bleibt */
 }
+
 
 /* --- Hamburger Menu (Mobile) --- */
 .hamburger {
     display: none;
     cursor: pointer;
     flex-direction: column;
-    gap: 7px;
+    gap: 6px;
     padding: 5px;
     transition: all var(--transition-speed) var(--transition-ease);
 }
 
 .hamburger .bar {
-    width: 32px;
+    width: 30px;
     height: 3px;
     background-color: var(--white);
     border-radius: 5px;
@@ -178,7 +202,7 @@ nav ul li a:hover::after {
     padding: 150px 20px;
     border-bottom: 1px solid var(--border-subtle);
     position: relative;
-    overflow: hidden; /* For particles or subtle background animations */
+    overflow: hidden;
 }
 
 .hero-section h2 {
@@ -200,7 +224,7 @@ nav ul li a:hover::after {
 }
 
 .btn-primary {
-    /* Styles inherited from .btn-invite, but can be customized further */
+    /* Styles inherited from .btn-invite for consistency */
     animation: fadeInPop 1s var(--transition-ease) 1s forwards;
     opacity: 0;
 }
@@ -225,8 +249,8 @@ nav ul li a:hover::after {
 
 .live-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Larger cards */
-    gap: 30px; /* Increased gap */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
     margin-top: 30px;
 }
 
@@ -237,7 +261,7 @@ nav ul li a:hover::after {
     box-shadow: 0 10px 40px var(--shadow-dark);
     border: 1px solid var(--border-subtle);
     transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease), border-color var(--transition-speed) var(--transition-ease);
-    backdrop-filter: blur(8px); /* Stronger glassmorphism */
+    backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     position: relative;
     overflow: hidden;
@@ -263,7 +287,7 @@ nav ul li a:hover::after {
 
 .stat-card:hover {
     transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 15px 50px var(--shadow-dark), 0 0 30px rgba(0, 123, 255, 0.7); /* Stronger glow on hover */
+    box-shadow: 0 15px 50px var(--shadow-dark), 0 0 30px rgba(0, 123, 255, 0.7);
     border-color: var(--accent-blue-light);
 }
 
@@ -272,7 +296,7 @@ nav ul li a:hover::after {
     color: var(--accent-blue-light);
     font-size: 1.6em;
     margin-bottom: 15px;
-    position: relative; /* For z-index over pseudo-element */
+    position: relative;
     z-index: 1;
 }
 
@@ -356,7 +380,7 @@ nav ul li a:hover::after {
 }
 
 .category-btn {
-    background-color: var(--bg-dark);
+    background: linear-gradient(45deg, transparent, rgba(0, 123, 255, 0.05), transparent); /* Sehr dezent */
     color: var(--text-secondary);
     border: 1px solid var(--border-subtle);
     padding: 15px 30px;
@@ -364,20 +388,20 @@ nav ul li a:hover::after {
     cursor: pointer;
     font-size: 1.05em;
     font-weight: 500;
-    transition: background-color var(--transition-speed) var(--transition-ease), color var(--transition-speed) var(--transition-ease), transform 0.3s var(--transition-ease), border-color var(--transition-speed) var(--transition-ease);
-    box-shadow: 0 5px 15px var(--shadow-light);
+    transition: background var(--transition-speed) var(--transition-ease), color var(--transition-speed) var(--transition-ease), transform 0.3s var(--transition-ease), border-color var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease);
+    box-shadow: 0 2px 10px var(--shadow-light); /* Sehr dezenter Schatten */
 }
 
 .category-btn:hover {
-    background-color: rgba(0, 123, 255, 0.25);
+    background: linear-gradient(45deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.2), rgba(0, 123, 255, 0.1));
     color: var(--white);
-    transform: translateY(-5px);
+    transform: translateY(-4px);
     border-color: var(--accent-blue-light);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
 }
 
 .category-btn.active {
-    background-color: var(--accent-blue);
+    background: linear-gradient(45deg, var(--accent-blue-light), var(--accent-blue)); /* Aktiver Button mit Gradient */
     color: var(--white);
     font-weight: 600;
     border-color: var(--white);
@@ -387,8 +411,8 @@ nav ul li a:hover::after {
 
 .command-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Larger command cards */
-    gap: 35px; /* Increased gap */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 35px;
 }
 
 .command-card {
@@ -409,23 +433,23 @@ nav ul li a:hover::after {
     position: absolute;
     top: -20px;
     right: -20px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--accent-blue);
+    width: 60px; /* Etwas größer */
+    height: 60px; /* Etwas größer */
+    background-color: var(--accent-blue-light); /* Hellerer Akzent */
     border-radius: 50%;
-    filter: blur(25px);
+    filter: blur(30px); /* Stärkerer Blur */
     opacity: 0;
     transition: opacity 0.5s var(--transition-ease);
     z-index: 0;
 }
 
 .command-card:hover::before {
-    opacity: 0.3;
+    opacity: 0.4; /* Etwas sichtbarer */
 }
 
 .command-card:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 50px var(--shadow-dark), 0 0 30px rgba(0, 123, 255, 0.4);
+    box-shadow: 0 15px 50px var(--shadow-dark), 0 0 35px rgba(0, 123, 255, 0.5); /* Stärkerer Glow */
     border-color: var(--accent-blue-light);
 }
 
@@ -435,7 +459,7 @@ nav ul li a:hover::after {
     font-size: 1.8em;
     margin-top: 0;
     margin-bottom: 12px;
-    text-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    text-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
     position: relative;
     z-index: 1;
 }
@@ -449,16 +473,17 @@ nav ul li a:hover::after {
 }
 
 .command-card code {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.08);
     color: var(--accent-blue-light);
     padding: 8px 15px;
     border-radius: 8px;
-    font-family: 'Fira Code', monospace; /* Fira Code, if installed, offers ligatures */
+    font-family: 'Fira Code', monospace;
     font-size: 0.95em;
     display: inline-block;
     border: 1px solid rgba(0, 123, 255, 0.3);
     position: relative;
     z-index: 1;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* --- Footer --- */
@@ -478,22 +503,22 @@ footer p {
 
 /* --- Keyframe Animations (Refined) --- */
 @keyframes fadeInScale {
-    from { opacity: 0; transform: scale(0.9); }
+    from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes fadeInSlideUp {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInPop {
-    from { opacity: 0; transform: scale(0.8); }
+    from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideInFromTop {
-    from { transform: translateY(-30px); opacity: 0; }
+    from { transform: translateY(-20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 
@@ -506,30 +531,28 @@ footer p {
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
     .logo h1 {
-        font-size: 1.8em;
+        font-size: 1.6em; /* Noch kleiner auf Mobil */
+    }
+
+    header .container {
+        padding: 5px 15px; /* Weniger Padding für Mobile Header */
+    }
+
+    .logo img {
+        height: 45px;
+        width: 45px;
     }
 
     nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: var(--bg-medium);
-        position: absolute;
-        top: 85px; /* Adjust based on header height */
-        left: 0;
-        padding: 20px 0;
-        box-shadow: 0 5px 20px var(--shadow-dark);
-        z-index: 999;
+        top: 75px; /* Angepasste Position für Mobile Menü */
     }
 
     nav ul.nav-active {
-        display: flex;
         animation: fadeIn 0.4s var(--transition-ease);
     }
 
     nav ul li {
-        margin: 15px 0;
-        text-align: center;
+        margin: 12px 0;
     }
 
     .hamburger {
@@ -537,7 +560,7 @@ footer p {
     }
 
     .hamburger.active .bar:nth-child(1) {
-        transform: translateY(10px) rotate(45deg);
+        transform: translateY(9px) rotate(45deg);
     }
 
     .hamburger.active .bar:nth-child(2) {
@@ -545,15 +568,15 @@ footer p {
     }
 
     .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-10px) rotate(-45deg);
+        transform: translateY(-9px) rotate(-45deg);
     }
 
     .hero-section {
-        padding: 100px 20px;
+        padding: 80px 20px;
     }
 
     .hero-section h2 {
-        font-size: 3em;
+        font-size: 2.5em;
     }
 
     .hero-section p {
@@ -561,7 +584,7 @@ footer p {
     }
 
     .panel-section h3, .commands-section h3 {
-        font-size: 2.5em;
+        font-size: 2.2em;
     }
 
     .live-stats-grid, .command-list {
@@ -579,7 +602,7 @@ footer p {
     }
 
     .category-btn {
-        width: 80%; /* Make buttons wider on mobile */
+        width: 80%;
         max-width: 300px;
     }
 }
