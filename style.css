@@ -13,9 +13,11 @@
     --font-primary: 'Inter', sans-serif;
     --font-secondary: 'Montserrat', sans-serif; /* For headings and bold elements */
 
-    --transition-duration: 0.8s; /* Longer, smoother transitions */
-    --transition-ease: cubic-bezier(0.2, 0.8, 0.2, 1); /* Elegant bezier curve */
-    --animation-delay-step: 0.1s; /* Standard delay step for staggered animations */
+    --transition-duration-long: 1.0s; /* Längere Dauer für Hauptanimationen */
+    --transition-duration-medium: 0.6s; /* Mittlere Dauer */
+    --transition-duration-short: 0.3s; /* Kurze Dauer für Hover etc. */
+    --transition-ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Neue, smoothe Ease-Funktion */
+    --animation-delay-step: 0.08s; /* Standard delay step for staggered animations */
 }
 
 /* --- Base Styles --- */
@@ -39,7 +41,7 @@ body {
 a {
     color: var(--text-primary);
     text-decoration: none;
-    transition: color var(--transition-duration) var(--transition-ease);
+    transition: color var(--transition-duration-short) var(--transition-ease-smooth);
 }
 
 a:hover {
@@ -67,10 +69,9 @@ header .container {
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Initial state, will animate on load for header */
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown 0.8s var(--transition-ease) forwards;
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smooth) forwards;
     animation-delay: 0.2s; /* Initial delay for logo */
 }
 
@@ -79,7 +80,7 @@ header .container {
     width: 45px;
     border-radius: 50%;
     box-shadow: 0 0 15px var(--logo-glow);
-    transition: transform 0.3s var(--transition-ease), box-shadow 0.3s var(--transition-ease);
+    transition: transform var(--transition-duration-short) var(--transition-ease-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-smooth);
 }
 
 .logo img:hover {
@@ -104,12 +105,10 @@ nav ul {
 
 nav ul li {
     margin-left: 30px;
-    /* Initial state for nav items, will animate on load */
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown 0.8s var(--transition-ease) forwards;
-    /* This delay will be set dynamically by JS for a staggered effect */
-    /* animation-delay: calc(0.3s + (var(--i) * 0.05s)); */
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smooth) forwards;
+    /* Delays set by JS for staggered effect */
 }
 
 nav ul li a {
@@ -130,7 +129,7 @@ nav ul li a::after {
     background-color: var(--text-highlight);
     transform: scaleX(0);
     transform-origin: bottom right;
-    transition: transform 0.4s var(--transition-ease);
+    transition: transform var(--transition-duration-medium) var(--transition-ease-smooth); /* Smoother underline transition */
 }
 
 nav ul li a:hover {
@@ -143,23 +142,23 @@ nav ul li a:hover::after {
 }
 
 .btn-invite {
-    background-color: var(--text-highlight); /* White background */
-    color: var(--bg-dark); /* Dark text */
+    background-color: transparent; /* Transparent background */
+    color: var(--text-highlight); /* White text */
     padding: 10px 22px;
-    border-radius: 30px; /* More rounded */
+    border-radius: 30px;
     font-weight: 600;
-    transition: background-color 0.3s var(--transition-ease), color 0.3s var(--transition-ease), transform 0.3s var(--transition-ease);
-    /* Initial state for button, will animate on load */
+    border: 1px solid var(--text-highlight); /* White border */
+    transition: background-color var(--transition-duration-short) var(--transition-ease-smooth), color var(--transition-duration-short) var(--transition-ease-smooth), transform var(--transition-duration-short) var(--transition-ease-smooth), border-color var(--transition-duration-short) var(--transition-ease-smooth);
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown 0.8s var(--transition-ease) forwards;
-    /* This delay will be set dynamically by JS */
-    /* animation-delay: calc(0.3s + (var(--i) * 0.05s) + 0.2s); */
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smooth) forwards;
+    /* Delay set by JS */
 }
 
 .btn-invite:hover {
     background-color: var(--accent-blue); /* Blue on hover */
     color: var(--text-highlight);
+    border-color: var(--accent-blue); /* Blue border on hover */
     transform: translateY(-2px);
 }
 
@@ -170,7 +169,7 @@ nav ul li a:hover::after {
     flex-direction: column;
     gap: 6px;
     padding: 5px;
-    transition: all 0.4s var(--transition-ease);
+    transition: all var(--transition-duration-medium) var(--transition-ease-smooth);
 }
 
 .hamburger .bar {
@@ -178,7 +177,7 @@ nav ul li a:hover::after {
     height: 2px; /* Thinner bars */
     background-color: var(--text-highlight);
     border-radius: 2px;
-    transition: all 0.4s var(--transition-ease);
+    transition: all var(--transition-duration-medium) var(--transition-ease-smooth);
 }
 
 /* --- Section General Styles --- */
@@ -315,7 +314,7 @@ section {
     color: var(--text-primary);
     font-size: 1.1em;
     outline: none;
-    transition: border-color 0.3s var(--transition-ease), box-shadow 0.3s var(--transition-ease);
+    transition: border-color var(--transition-duration-short) var(--transition-ease-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-smooth);
 }
 
 .search-bar input::placeholder {
@@ -344,7 +343,7 @@ section {
     cursor: pointer;
     font-size: 0.95em;
     font-weight: 500;
-    transition: background-color 0.3s var(--transition-ease), color 0.3s var(--transition-ease), border-color 0.3s var(--transition-ease);
+    transition: background-color var(--transition-duration-short) var(--transition-ease-smooth), color var(--transition-duration-short) var(--transition-ease-smooth), border-color var(--transition-duration-short) var(--transition-ease-smooth);
 }
 
 .category-btn:hover {
@@ -413,8 +412,8 @@ footer {
 .anim-target.in-view .anim-item {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity var(--transition-duration) var(--transition-ease),
-                transform var(--transition-duration) var(--transition-ease);
+    transition: opacity var(--transition-duration-long) var(--transition-ease-smooth),
+                transform var(--transition-duration-long) var(--transition-ease-smooth);
 }
 
 /* Special case for header items to animate on page load */
@@ -423,7 +422,7 @@ header nav ul li,
 header .btn-invite {
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown 0.8s var(--transition-ease) forwards;
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smooth) forwards;
 }
 
 header .logo { animation-delay: 0.2s; }
@@ -476,7 +475,7 @@ header .btn-invite { animation-delay: 0.9s; }
 
     nav ul.nav-active {
         display: flex;
-        animation: fadeIn 0.4s var(--transition-ease);
+        animation: fadeIn var(--transition-duration-short) var(--transition-ease-smooth);
     }
 
     nav ul li {
