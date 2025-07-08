@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Hamburger-Menü Funktionalität ---
+    // --- Hamburger Menu Functionality ---
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
@@ -17,8 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Bot Live-Statistiken Funktionalität ---
-    const BASE_API_URL = 'https://threadbaresurefootedtelevision-1.onrender.com/api'; // Basis-URL deiner Render-API
+    // --- Bot Live Statistics Functionality ---
+    // IMPORTANT: Make sure this URL is correct for your Render deployment
+    // e.g., 'https://your-render-app-name.onrender.com'
+    // Since your API is at '/api/stats', the base URL should just be your app's root.
+    const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com';
 
     const botStatus = document.getElementById('bot-status');
     const serverCount = document.getElementById('server-count');
@@ -27,67 +30,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const botUptime = document.getElementById('bot-uptime');
     const lastCommand = document.getElementById('last-command');
     const totalCommands = document.getElementById('total-commands');
-    const lastUpdatedTime = document.getElementById('last-updated-time');
-
+    const lastUpdatedTime = document.getElementById('last-updated-time'); // This will show the time of the last successful fetch
 
     async function fetchBotStats() {
         try {
-            // Gleichzeitiges Abrufen von Daten von allen relevanten Endpunkten
-            const [statsResponse, commandsResponse, uptimeResponse] = await Promise.all([
-                fetch(`${BASE_API_URL}/stats`),
-                fetch(`${BASE_API_URL}/commands`),
-                fetch(`${BASE_API_URL}/uptime`)
-            ]);
+            const response = await fetch(`${BASE_URL}/api/stats`);
 
-            // Überprüfen, ob alle Anfragen erfolgreich waren
-            if (!statsResponse.ok || !commandsResponse.ok || !uptimeResponse.ok) {
-                let errorMessage = "Fehler beim Abrufen der Bot-Statistiken: ";
-                if (!statsResponse.ok) errorMessage += `Stats-API (${statsResponse.status}) `;
-                if (!commandsResponse.ok) errorMessage += `Commands-API (${commandsResponse.status}) `;
-                if (!uptimeResponse.ok) errorMessage += `Uptime-API (${uptimeResponse.status}) `;
-                throw new Error(errorMessage);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
-            const statsData = await statsResponse.json();
-            const commandsData = await commandsResponse.json();
-            const uptimeData = await uptimeResponse.json();
+            const data = await response.json();
 
-            // Aktualisiere die Elemente mit den empfangenen Daten von /api/stats
-            botStatus.textContent = statsData.status;
-            botStatus.className = `stat-value status-${statsData.status.toLowerCase()}`;
-            serverCount.textContent = statsData.servers.toLocaleString(); // Verwende toLocaleString für Tausendertrennung
-            userCount.textContent = statsData.users.toLocaleString();
-            botPing.textContent = `${statsData.ping}ms`;
-            lastUpdatedTime.textContent = statsData.lastUpdated;
+            // Update elements with data from the single /api/stats endpoint
+            botStatus.textContent = data.status;
+            botStatus.className = `stat-value status-${data.status.toLowerCase()}`; // Set class for color (online/offline)
 
-            // Aktualisiere Uptime-Daten von /api/uptime
-            botUptime.textContent = uptimeData.uptime;
+            serverCount.textContent = data.server_count.toLocaleString(); // Format with thousands separator
+            userCount.textContent = data.member_count.toLocaleString();
+            botPing.textContent = `${data.latency}ms`;
+            botUptime.textContent = data.uptime_formatted;
+            totalCommands.textContent = data.command_count.toLocaleString();
 
-            // Aktualisiere Kommando-Daten von /api/commands
-            lastCommand.textContent = commandsData.lastCommand;
-            totalCommands.textContent = commandsData.totalCommands.toLocaleString(); // Verwende toLocaleString
+            // Handle last_commands array: get the most recent one
+            if (data.last_commands && data.last_commands.length > 0) {
+                lastCommand.textContent = data.last_commands[data.last_commands.length - 1]; // Get the last (most recent) command
+            } else {
+                lastCommand.textContent = 'N/A';
+            }
 
+            // Update the last updated time to current browser time
+            lastUpdatedTime.textContent = new Date().toLocaleTimeString();
 
         } catch (error) {
-            console.error("Fehler beim Abrufen der Bot-Statistiken:", error);
-            // Setze Fallback-Werte und Fehlerstatus bei Problemen
+            console.error("Error fetching bot statistics:", error);
+            // Set fallback values and error status on failure
             botStatus.textContent = 'Offline';
             botStatus.className = 'stat-value status-offline';
             serverCount.textContent = 'N/A';
             userCount.textContent = 'N/A';
             botPing.textContent = 'N/A';
             botUptime.textContent = 'N/A';
-            lastUpdatedTime.textContent = 'Fehler';
+            lastUpdatedTime.textContent = 'Failed to load';
             lastCommand.textContent = 'N/A';
             totalCommands.textContent = 'N/A';
         }
     }
 
-    // Statistiken sofort beim Laden und dann alle 10 Sekunden aktualisieren
+    // Fetch stats immediately on load and then every 10 seconds
     fetchBotStats();
-    setInterval(fetchBotStats, 10000);
+    setInterval(fetchBotStats, 10000); // Fetches data every 10 seconds
 
-    // --- Command-Suche und Filter Funktionalität ---
+    // --- Command Search and Filter Functionality ---
     const commandSearchInput = document.getElementById('command-search');
     const categoryButtons = document.querySelectorAll('.category-btn');
     const commandItems = document.querySelectorAll('.command-item');
@@ -122,37 +116,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Call initial filter to display all commands
     filterCommands();
 
-    // --- Intersection Observer für Animationen ---
+    // --- Intersection Observer for Animations ---
     const animTargets = document.querySelectorAll('.anim-target');
 
     const observerOptions = {
-        root: null,
+        root: null, // The viewport is the root
         rootMargin: '0px',
-        threshold: 0.05
+        threshold: 0.05 // Trigger when 5% of the element is visible
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('in-view');
+
                 const animItems = entry.target.querySelectorAll('.anim-item');
                 animItems.forEach((item, index) => {
                     item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
                 });
+                // Optional: Stop observing after the element has been seen to animate only once
+                // observer.unobserve(entry.target);
             } else {
+                // Optional: Reset animation if element leaves viewport
+                // entry.target.classList.remove('in-view');
                 entry.target.querySelectorAll('.anim-item').forEach(item => {
-                    item.style.transitionDelay = '0s';
+                    item.style.transitionDelay = '0s'; // Reset delay when out of view
                 });
             }
         });
     }, observerOptions);
 
+    // Observe all targets
     animTargets.forEach(target => {
         observer.observe(target);
     });
 
+    // Immediate check on load for elements already in view
     observer.takeRecords().forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
