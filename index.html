@@ -82,6 +82,10 @@
                         <span class="stat-label">Total Commands</span>
                         <p id="total-commands" class="stat-value">Loading...</p>
                     </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Development Status</span>
+                        <p id="development-status" class="stat-value status-wip">In Arbeit</p>
+                    </div>
                 </div>
                 <p class="anim-item last-updated">Last Updated: <span id="last-updated-time">Loading...</span></p>
             </div>
@@ -105,83 +109,144 @@
                     <button class="category-btn" data-category="info">Info</button>
                     <button class="category-btn" data-category="staff">Staff</button>
                     <button class="category-btn" data-category="timezone">Timezone</button>
-                </div>
+                    <button class="category-btn" data-category="ai">AI</button> <button class="category-btn" data-category="text">Text Tools</button> </div>
 
                 <div class="command-list">
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/bank</h4>
+                        <h4>:bank</h4>
                         <p>Check your account balance.</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/deposit &lt;amount&gt;</h4>
+                        <h4>:deposit &lt;amount&gt;</h4>
                         <p>Deposit money to your bank account.</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/withdraw &lt;amount&gt;</h4>
+                        <h4>:withdraw &lt;amount&gt;</h4>
                         <p>Withdraw money from your bank account.</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/gift &lt;user&gt; &lt;amount&gt;</h4>
+                        <h4>:gift &lt;user&gt; &lt;amount&gt;</h4>
                         <p>Gift money to a user.</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/daily</h4>
+                        <h4>:work</h4>
+                        <p>Work to earn money.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:daily</h4>
                         <p>Claim your daily reward.</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/leaderboard</h4>
+                        <h4>:leaderboard</h4>
                         <p>Show the richest users.</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/shop</h4>
+                        <h4>:shop</h4>
                         <p>Browse the shop.</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/steal &lt;user&gt;</h4>
+                        <h4>:steal &lt;user&gt;</h4>
                         <p>Attempt to steal from a user (risky!).</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
-                        <h4>/gamble &lt;amount&gt;</h4>
+                        <h4>:gamble &lt;amount&gt;</h4>
                         <p>Gamble money - 50/50 chance.</p>
                     </div>
 
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:ai &lt;message&gt;</h4>
+                        <p>Chat with AI.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:ask &lt;question&gt;</h4>
+                        <p>Ask AI a question.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:brainstorm &lt;topic&gt;</h4>
+                        <p>Brainstorm ideas.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:analyze &lt;text&gt;</h4>
+                        <p>Analyze text sentiment.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:generate &lt;type&gt;</h4>
+                        <p>Generate content.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:translate &lt;lang&gt; &lt;text&gt;</h4>
+                        <p>Translate text.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:wisdom</h4>
+                        <p>Get BigFlush's wisdom.</p>
+                    </div>
+
                     <div class="command-item anim-item" data-category="utility">
-                        <h4>/commands</h4>
+                        <h4>:commands</h4>
                         <p>Show this command menu.</p>
                     </div>
                     <div class="command-item anim-item" data-category="utility">
-                        <h4>/stats</h4>
-                        <p>Show your statistics.</p>
+                        <h4>:stats</h4>
+                        <p>Show your stats.</p>
                     </div>
-                     <div class="command-item anim-item" data-category="utility">
-                        <h4>/love &lt;user&gt;</h4>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:love &lt;user&gt;</h4>
                         <p>Calculate love percentage.</p>
                     </div>
                     <div class="command-item anim-item" data-category="utility">
-                        <h4>/password</h4>
+                        <h4>:password</h4>
                         <p>Generate a secure password.</p>
                     </div>
                     <div class="command-item anim-item" data-category="utility">
-                        <h4>/remind &lt;time&gt; &lt;message&gt;</h4>
+                        <h4>:remind &lt;time&gt; &lt;message&gt;</h4>
                         <p>Set a reminder.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:joke</h4>
+                        <p>Get a random joke.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:roast &lt;user&gt;</h4>
+                        <p>Friendly roast.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:compliment &lt;user&gt;</h4>
+                        <p>Give a compliment.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:fact</h4>
+                        <p>Get a fun fact.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:meme</h4>
+                        <p>Get a meme.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:willow</h4>
+                        <p>Amazing streaming website info.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:test</h4>
+                        <p>Test bot functionality.</p>
                     </div>
                     <div class="command-item anim-item" data-category="utility">
                         <h4>/userinfo</h4>
                         <p>Get information about a user.</p>
                     </div>
-                     <div class="command-item anim-item" data-category="utility">
+                    <div class="command-item anim-item" data-category="utility">
                         <h4>/serverinfo</h4>
                         <p>Get detailed server information.</p>
                     </div>
-                     <div class="command-item anim-item" data-category="utility">
+                    <div class="command-item anim-item" data-category="utility">
                         <h4>/avatar</h4>
                         <p>Get a user's avatar.</p>
                     </div>
-                     <div class="command-item anim-item" data-category="utility">
+                    <div class="command-item anim-item" data-category="utility">
                         <h4>/weather</h4>
                         <p>Get weather information for a city.</p>
                     </div>
-                     <div class="command-item anim-item" data-category="utility">
+                    <div class="command-item anim-item" data-category="utility">
                         <h4>/ping</h4>
                         <p>Check bot's latency and response time.</p>
                     </div>
@@ -201,24 +266,29 @@
                         <h4>/owner</h4>
                         <p>Find out who the almighty owner of this bot is.</p>
                     </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/ticket</h4>
+                        <p>Create a support ticket.</p>
+                    </div>
+
 
                     <div class="command-item anim-item" data-category="moderation staff">
                         <h4>/kick</h4>
                         <p>Kick a member. (Staff only)</p>
                     </div>
-                     <div class="command-item anim-item" data-category="moderation staff">
+                    <div class="command-item anim-item" data-category="moderation staff">
                         <h4>/timeout</h4>
                         <p>Timeout a member for a specified minute duration.</p>
                     </div>
-                     <div class="command-item anim-item" data-category="moderation staff">
+                    <div class="command-item anim-item" data-category="moderation staff">
                         <h4>/ban</h4>
                         <p>Ban a member. (Staff only)</p>
                     </div>
-                     <div class="command-item anim-item" data-category="moderation staff">
+                    <div class="command-item anim-item" data-category="moderation staff">
                         <h4>/clear</h4>
                         <p>Clear messages from the channel. (Staff only)</p>
                     </div>
-                     <div class="command-item anim-item" data-category="moderation staff">
+                    <div class="command-item anim-item" data-category="moderation staff">
                         <h4>/nuke</h4>
                         <p>Recreate a channel. (Staff only)</p>
                     </div>
@@ -247,27 +317,156 @@
                         <h4>/choose</h4>
                         <p>Choose between multiple options (separated by comma).</p>
                     </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/bam &lt;user&gt;</h4>
+                        <p>Fake ban with style.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/fakekick &lt;user&gt;</h4>
+                        <p>Dramatic fake kick.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/bonk &lt;user&gt;</h4>
+                        <p>Send to horny jail.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/yeet &lt;user&gt;</h4>
+                        <p>YEET into orbit.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/nuke_user &lt;user&gt;</h4>
+                        <p>Tactical nuke.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/hug &lt;user&gt;</h4>
+                        <p>Give a warm hug.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/highfive &lt;user&gt;</h4>
+                        <p>Epic high five.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/dance</h4>
+                        <p>Start dance party.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/pat &lt;user&gt;</h4>
+                        <p>Head pats.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/slap &lt;user&gt;</h4>
+                        <p>Playful slap.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/poke &lt;user&gt;</h4>
+                        <p>Get attention.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/tickle &lt;user&gt;</h4>
+                        <p>Tickle attack.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/facepalm</h4>
+                        <p>Express disappointment.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/celebrate &lt;reason&gt;</h4>
+                        <p>Celebrate something.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/cry</h4>
+                        <p>Express sadness.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/angry &lt;reason&gt;</h4>
+                        <p>Express anger.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/shocked</h4>
+                        <p>Express shock.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/shrug</h4>
+                        <p>Show confusion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/thinking</h4>
+                        <p>Deep thought.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/sleep</h4>
+                        <p>Time to sleep.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/applaud &lt;user&gt;</h4>
+                        <p>Give applause.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/fistbump &lt;user&gt;</h4>
+                        <p>Epic fist bump.</p>
+                    </div>
+
 
                     <div class="command-item anim-item" data-category="timezone">
-                        <h4>/timezone &lt;timezone&gt;</h4>
+                        <h4>:timezone &lt;timezone&gt;</h4>
                         <p>Set your timezone.</p>
                     </div>
                     <div class="command-item anim-item" data-category="timezone">
-                        <h4>/time</h4>
+                        <h4>:time</h4>
                         <p>Show your current time.</p>
                     </div>
                     <div class="command-item anim-item" data-category="timezone">
-                        <h4>/time &lt;user&gt;</h4>
+                        <h4>:time &lt;user&gt;</h4>
                         <p>Show someone's time.</p>
                     </div>
                     <div class="command-item anim-item" data-category="timezone">
-                        <h4>/timezones</h4>
+                        <h4>:timezones</h4>
                         <p>List all available timezones.</p>
                     </div>
 
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>/ticket</h4>
-                        <p>Create a support ticket.</p>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:ascii &lt;text&gt;</h4>
+                        <p>Convert text to ASCII art.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:color &lt;color&gt;</h4>
+                        <p>Show color information.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:flip &lt;text&gt;</h4>
+                        <p>Flip text upside down.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:reverse &lt;text&gt;</h4>
+                        <p>Reverse text.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:base64 &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Base64 conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:hash &lt;text&gt;</h4>
+                        <p>Generate MD5/SHA256 hashes.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:binary &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Binary conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:hex &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Hex conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:leetspeak &lt;text&gt;</h4>
+                        <p>Convert to leetspeak.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:fortune</h4>
+                        <p>Get your fortune.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:insult &lt;user&gt;</h4>
+                        <p>Playful insult (friendly!).</p>
                     </div>
                 </div>
             </div>
