@@ -306,6 +306,10 @@ section {
 .stat-item .status-loading {
     color: var(--text-secondary); /* Gray for Loading */
 }
+/* New style for "In Arbeit" */
+.stat-item .status-wip {
+    color: #FFA500; /* Orange for Work In Progress */
+}
 
 
 .last-updated {
