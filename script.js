@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const botUptime = document.getElementById('bot-uptime');
     const lastCommand = document.getElementById('last-command');
     const totalCommands = document.getElementById('total-commands');
+    const developmentStatus = document.getElementById('development-status'); // New element for development status
     const lastUpdatedTime = document.getElementById('last-updated-time'); // This will show the time of the last successful fetch
 
     async function fetchBotStats() {
@@ -59,6 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 lastCommand.textContent = 'N/A';
             }
 
+            // Set the "Development Status" - currently static as it's not in the API response
+            // If you add a 'development_status' field to your /api/stats endpoint, you can
+            // change this to: developmentStatus.textContent = data.development_status;
+            developmentStatus.textContent = 'In Arbeit'; // Currently static
+            developmentStatus.className = 'stat-value status-wip'; // Set appropriate class for styling
+
             // Update the last updated time to current browser time
             lastUpdatedTime.textContent = new Date().toLocaleTimeString();
 
@@ -74,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lastUpdatedTime.textContent = 'Failed to load';
             lastCommand.textContent = 'N/A';
             totalCommands.textContent = 'N/A';
+            developmentStatus.textContent = 'Fehler beim Laden'; // Set appropriate error message
+            developmentStatus.className = 'stat-value status-offline'; // Or another error class
         }
     }
 
