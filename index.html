@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Blue Dot Panel</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css"> </head>
 <body>
     <header>
         <div class="logo">
-            <img src="path/to/your/logo.png" alt="Project Blue Dot Logo">
-            <h1>Project Blue Dot</h1>
+            <img src="path/to/your/logo.png" alt="Project Blue Dot Logo"> <h1>Project Blue Dot</h1>
         </div>
         <nav>
             <div class="hamburger">
@@ -28,16 +26,8 @@
     </header>
 
     <main>
-        <section id="home" class="hero-section anim-target">
-            <div class="hero-content">
-                <h2 class="anim-item">Willkommen beim Project Blue Dot Panel</h2>
-                <p class="anim-item">Hier finden Sie Live-Statistiken über unseren Discord-Bot und eine umfassende Befehlsliste.</p>
-                <a href="#bot-stats" class="btn anim-item">Statistiken ansehen</a>
-            </div>
-        </section>
-
-        <section id="bot-stats" class="stats-section anim-target">
-            <h2 class="anim-item">Bot Statistiken</h2>
+        <section id="bot-stats" class="anim-target">
+            <h2>Bot Statistiken</h2>
             <div class="stats-grid">
                 <div class="stat-item anim-item">
                     <span class="stat-label">Status:</span>
@@ -60,20 +50,12 @@
                     <span class="stat-value" id="bot-uptime">Lade...</span>
                 </div>
                 <div class="stat-item anim-item">
+                    <span class="stat-label">Letzter Befehl:</span>
+                    <span class="stat-value" id="last-command">Lade...</span>
+                </div>
+                <div class="stat-item anim-item">
                     <span class="stat-label">Befehle Gesamt:</span>
                     <span class="stat-value" id="total-commands">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">CPU-Auslastung:</span>
-                    <span class="stat-value" id="cpu-usage">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Speicherauslastung:</span>
-                    <span class="stat-value" id="memory-usage">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Daten-Auslastung:</span>
-                    <span class="stat-value" id="disk-usage">Lade...</span>
                 </div>
                 <div class="stat-item anim-item">
                     <span class="stat-label">Python Version:</span>
@@ -94,63 +76,13 @@
             </div>
         </section>
 
-        <section id="commands" class="commands-section anim-target">
-            <h2 class="anim-item">Unsere Befehle</h2>
-            <div class="category-filters anim-item">
-                <button class="category-btn active" data-category="all">Alle</button>
-                <button class="category-btn" data-category="economy">Economy</button>
-                <button class="category-btn" data-category="ai">AI</button>
-                <button class="category-btn" data-category="utility">Utility</button>
-                <button class="category-btn" data-category="fun">Fun</button>
-                <button class="category-btn" data-category="moderation">Moderation</button>
-                </div>
-            <div class="command-list anim-item">
-                <div class="command-item" data-category="economy">
-                    <h3>:bank</h3>
-                    <p class="command-description">Überprüfen Sie Ihr Kontoguthaben.</p>
-                </div>
-                <div class="command-item" data-category="economy">
-                    <h3>:deposit &lt;amount&gt;</h3>
-                    <p class="command-description">Zahlen Sie Geld auf Ihr Bankkonto ein.</p>
-                </div>
-                <div class="command-item" data-category="ai">
-                    <h3>:ask &lt;question&gt;</h3>
-                    <p class="command-description">Stellen Sie dem Bot eine Frage (AI-gestützt).</p>
-                </div>
-                <div class="command-item" data-category="utility">
-                    <h3>:stats</h3>
-                    <p class="command-description">Zeigt detaillierte Bot-Statistiken an.</p>
-                </div>
-                <div class="command-item" data-category="fun">
-                    <h3>/coinflip</h3>
-                    <p class="command-description">Wirft eine Münze.</p>
-                </div>
-                <div class="command-item" data-category="moderation">
-                    <h3>/kick &lt;user&gt;</h3>
-                    <p class="command-description">Kickt einen Benutzer vom Server (nur für Staff).</p>
-                </div>
-                </div>
-        </section>
-
-        <section id="contact" class="contact-section anim-target">
-            <h2 class="anim-item">Kontakt</h2>
-            <p class="anim-item">Haben Sie Fragen oder Feedback? Kontaktieren Sie uns:</p>
-            <div class="contact-info anim-item">
-                <p>Discord: IhrDiscordTag#1234</p>
-                <p>E-Mail: <a href="mailto:ihremail@example.com">ihremail@example.com</a></p>
-            </div>
-            <p class="anim-item">Folgen Sie uns auf sozialen Medien (optional):</p>
-            <div class="social-links anim-item">
-                <a href="#" target="_blank">Discord Server</a>
-                <a href="#" target="_blank">Twitter</a>
-            </div>
-        </section>
+        <section id="commands" class="anim-target">
+            <h2>Befehle</h2>
+            </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 Project Blue Dot. Alle Rechte vorbehalten.</p>
-    </footer>
+        </footer>
 
-    <script src="script.js"></script>
-</body>
+    <script src="script.js"></script> </body>
 </html>
