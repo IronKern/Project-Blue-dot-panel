@@ -1,88 +1,508 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Blue Dot Panel</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Project Blue Dot - Your Discord Bot</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/applogo.png.heic" type="image/heic">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+</head>
 <body>
     <header>
-        <div class="logo">
-            <img src="path/to/your/logo.png" alt="Project Blue Dot Logo"> <h1>Project Blue Dot</h1>
-        </div>
-        <nav>
-            <div class="hamburger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/applogo.png.heic" alt="Project Blue Dot Logo">
+                <h1>Project Blue Dot</h1>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#bot-stats">Bot-Statistiken</a></li>
-                <li><a href="#commands">Befehle</a></li>
-                <li><a href="#contact">Kontakt</a></li>
-            </ul>
-        </nav>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#commands">Commands</a></li>
+                    <li><a href="YOUR_SUPPORT_DISCORD_LINK" target="_blank">Support</a></li> <li><a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_CLIENT_ID&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-invite">Invite Bot</a></li> </ul>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <section id="bot-stats" class="anim-target">
-            <h2>Bot Statistiken</h2>
-            <div class="stats-grid">
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Status:</span>
-                    <span class="stat-value" id="bot-status">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Server:</span>
-                    <span class="stat-value" id="server-count">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Nutzer:</span>
-                    <span class="stat-value" id="user-count">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Ping:</span>
-                    <span class="stat-value" id="bot-ping">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Uptime:</span>
-                    <span class="stat-value" id="bot-uptime">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Letzter Befehl:</span>
-                    <span class="stat-value" id="last-command">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Befehle Gesamt:</span>
-                    <span class="stat-value" id="total-commands">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Python Version:</span>
-                    <span class="stat-value" id="python-version">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Nextcord Version:</span>
-                    <span class="stat-value" id="nextcord-version">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Entwicklungsstatus:</span>
-                    <span class="stat-value" id="development-status">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Zuletzt aktualisiert:</span>
-                    <span class="stat-value" id="last-updated-time">Lade...</span>
-                </div>
+        <section id="home" class="hero-section anim-target">
+            <div class="container">
+                <h2 class="anim-item">Project Blue Dot.</h2>
+                <p class="anim-item">Your ultimate Discord companion for enhanced server management and interaction.</p>
+                <a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_CLIENT_ID&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-primary anim-item">Add Bot to Your Server</a> </div>
+        </section>
+
+        <section id="about" class="content-section anim-target">
+            <div class="container">
+                <h3 class="anim-item section-number">01.</h3>
+                <h4 class="anim-item section-title">About Project Blue Dot</h4>
+                <p class="anim-item">Project Blue Dot is designed to streamline your Discord experience. From robust moderation tools to engaging economy features and precise utility commands, our bot is built to adapt to your server's unique needs.</p>
+                <p class="anim-item">We focus on reliability, performance, and user-friendliness, ensuring a seamless integration into your community. Our goal is to empower server owners with powerful tools, while providing an enjoyable and interactive environment for all members.</p>
             </div>
         </section>
 
-        <section id="commands" class="anim-target">
-            <h2>Befehle</h2>
-            </section>
+        <section id="dashboard" class="content-section dashboard-section anim-target">
+            <div class="container">
+                <h3 class="anim-item section-number">02.</h3>
+                <h4 class="anim-item section-title">Live Bot Status</h4>
+
+                <div class="dashboard-stats">
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Status</span>
+                        <p id="bot-status" class="stat-value status-loading">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Servers</span>
+                        <p id="server-count" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Users</span>
+                        <p id="user-count" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Ping</span>
+                        <p id="bot-ping" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Uptime</span>
+                        <p id="bot-uptime" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Last Command</span>
+                        <p id="last-command" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Total Commands</span>
+                        <p id="total-commands" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Development Status</span>
+                        <p id="development-status" class="stat-value status-wip">Work in progress</p>
+                    </div>
+                </div>
+                <p class="anim-item last-updated">Last Updated: <span id="last-updated-time">Loading...</span></p>
+            </div>
+        </section>
+
+        <section id="commands" class="content-section commands-section anim-target">
+            <div class="container">
+                <h3 class="anim-item section-number">03.</h3>
+                <h4 class="anim-item section-title">Explore Commands</h4>
+
+                <div class="command-categories anim-item">
+                    <button class="category-btn active" data-category="all">All</button>
+                    <button class="category-btn" data-category="economy">Economy</button>
+                    <button class="category-btn" data-category="ai">AI</button>
+                    <button class="category-btn" data-category="staff">Staff & Moderation</button>
+                    <button class="category-btn" data-category="text">Text Tools</button>
+                    <button class="category-btn" data-category="utility">Utility</button>
+                    <button class="category-btn" data-category="fun">Fun</button>
+                    <button class="category-btn" data-category="timezone">Timezone</button>
+                </div>
+
+                <div class="command-list">
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:bank</h4>
+                        <p>Check your account balance.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:deposit &lt;amount&gt;</h4>
+                        <p>Deposit money to your bank account.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:withdraw &lt;amount&gt;</h4>
+                        <p>Withdraw money from your bank account.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:gift &lt;user&gt; &lt;amount&gt;</h4>
+                        <p>Gift money to a user.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:work</h4>
+                        <p>Work to earn money.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:daily</h4>
+                        <p>Claim your daily reward (12h cooldown).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:leaderboard</h4>
+                        <p>Show the richest users.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:shop</h4>
+                        <p>Browse the shop.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:steal &lt;user&gt;</h4>
+                        <p>Attempt to steal from a user (risky!).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:gamble &lt;amount&gt;</h4>
+                        <p>Gamble money - 50/50 chance.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:poker &lt;amount&gt;</h4>
+                        <p>Play poker.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:blackjack &lt;amount&gt;</h4>
+                        <p>Play blackjack.</p>
+                    </div>
+
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:ai &lt;message&gt;</h4>
+                        <p>Chat with AI.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:ask &lt;question&gt;</h4>
+                        <p>Ask AI a question.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:brainstorm &lt;topic&gt;</h4>
+                        <p>Brainstorm ideas.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:analyze &lt;text&gt;</h4>
+                        <p>Analyze text sentiment.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:generate &lt;type&gt;</h4>
+                        <p>Generate content.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:translate &lt;lang&gt; &lt;text&gt;</h4>
+                        <p>Translate text.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="ai">
+                        <h4>:wisdom</h4>
+                        <p>Get BigFlush's wisdom.</p>
+                    </div>
+
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:honeypot</h4>
+                        <p>Create honeypot channel (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:automodon</h4>
+                        <p>Enable automod (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:automodoff</h4>
+                        <p>Disable automod (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:tksetup [text]</h4>
+                        <p>Setup ticket system (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:clear &lt;amount&gt;</h4>
+                        <p>Clear messages from the channel (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/automodsetup</h4>
+                        <p>Configure automod (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/ban &lt;user&gt;</h4>
+                        <p>Ban a member (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/kick &lt;user&gt;</h4>
+                        <p>Kick a member (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/timeout &lt;user&gt; &lt;minutes&gt;</h4>
+                        <p>Timeout a member for a specified duration (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/announce</h4>
+                        <p>Create an announcement (Staff only).</p>
+                    </div>
+
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:ascii &lt;text&gt;</h4>
+                        <p>Convert text to ASCII art.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:color &lt;color&gt;</h4>
+                        <p>Show color information.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:flip &lt;text&gt;</h4>
+                        <p>Flip text upside down.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:reverse &lt;text&gt;</h4>
+                        <p>Reverse text.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:base64 &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Base64 conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:hash &lt;text&gt;</h4>
+                        <p>Generate MD5/SHA256 hashes.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:binary &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Binary conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:hex &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Hex conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:leetspeak &lt;text&gt;</h4>
+                        <p>Convert to leetspeak.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:fortune</h4>
+                        <p>Get your fortune.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:insult &lt;user&gt;</h4>
+                        <p>Playful insult (friendly!).</p>
+                    </div>
+
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:commands</h4>
+                        <p>Show this command menu.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:sleep</h4>
+                        <p>Enter sleep mode.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:wake</h4>
+                        <p>Wake up from sleep mode.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:stats (Prefix)</h4>
+                        <p>Show your stats.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:password</h4>
+                        <p>Generate a secure password.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/userinfo</h4>
+                        <p>Get information about a user.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/serverinfo</h4>
+                        <p>Get detailed server information.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/avatar</h4>
+                        <p>Get a user's avatar.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/weather</h4>
+                        <p>Get weather information for a city.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/ping</h4>
+                        <p>Check bot's latency and response time.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/math</h4>
+                        <p>Calculate a mathematical expression.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/random_number</h4>
+                        <p>Generate a random number between two values.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/stats (Slash Command)</h4>
+                        <p>Show bot statistics.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/owner</h4>
+                        <p>Find out who the almighty owner of this bot is.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>/ticket</h4>
+                        <p>Create a support ticket.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:willow</h4>
+                        <p>Amazing streaming website info.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:test</h4>
+                        <p>Test bot functionality.</p>
+                    </div>
+
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/bam &lt;user&gt;</h4>
+                        <p>Fake ban with style.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/angry &lt;reason&gt;</h4>
+                        <p>Express anger.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/shocked</h4>
+                        <p>Express shock.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:love &lt;user&gt;</h4>
+                        <p>Calculate love percentage.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:remind &lt;time&gt; &lt;message&gt;</h4>
+                        <p>Set a reminder.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:joke</h4>
+                        <p>Get a random joke.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:roast &lt;user&gt;</h4>
+                        <p>Friendly roast.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:compliment &lt;user&gt;</h4>
+                        <p>Give a compliment.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:fact</h4>
+                        <p>Get a fun fact.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:meme</h4>
+                        <p>Get a meme.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/coinflip</h4>
+                        <p>Flip a coin.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/eightball</h4>
+                        <p>Ask the magic 8-ball a question.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/roll</h4>
+                        <p>Roll a dice with a specified number of sides.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/quote</h4>
+                        <p>Get an inspirational quote.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/choose</h4>
+                        <p>Choose between multiple options (separated by comma).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/fakekick &lt;user&gt;</h4>
+                        <p>Dramatic fake kick.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/bonk &lt;user&gt;</h4>
+                        <p>Send to horny jail.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/yeet &lt;user&gt;</h4>
+                        <p>YEET into orbit.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/nuke_user &lt;user&gt;</h4>
+                        <p>Tactical nuke.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/hug &lt;user&gt;</h4>
+                        <p>Give a warm hug.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/highfive &lt;user&gt;</h4>
+                        <p>Epic high five.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/dance</h4>
+                        <p>Start dance party.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/pat &lt;user&gt;</h4>
+                        <p>Head pats.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/slap &lt;user&gt;</h4>
+                        <p>Playful slap.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/poke &lt;user&gt;</h4>
+                        <p>Get attention.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/tickle &lt;user&gt;</h4>
+                        <p>Tickle attack.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/facepalm</h4>
+                        <p>Express disappointment.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/celebrate &lt;reason&gt;</h4>
+                        <p>Celebrate something.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/cry</h4>
+                        <p>Express sadness.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/shrug</h4>
+                        <p>Show confusion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/thinking</h4>
+                        <p>Deep thought.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/applaud &lt;user&gt;</h4>
+                        <p>Give applause.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/fistbump &lt;user&gt;</h4>
+                        <p>Epic fist bump.</p>
+                    </div>
+
+
+                    <div class="command-item anim-item" data-category="timezone">
+                        <h4>:timezone &lt;timezone&gt;</h4>
+                        <p>Set your timezone.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="timezone">
+                        <h4>:time</h4>
+                        <p>Show your current time.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="timezone">
+                        <h4>:time &lt;user&gt;</h4>
+                        <p>Show someone's time.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="timezone">
+                        <h4>:timezones</h4>
+                        <p>List all available timezones.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
-        </footer>
+        <div class="container">
+            <p>&copy; 2025 Project Blue Dot. All rights reserved.</p>
+            <p>Made with ❤️ by BigFlush</p>
+        </div>
+    </footer>
 
-    <script src="script.js"></script> </body>
+    <script src="script.js"></script>
+</body>
 </html>
