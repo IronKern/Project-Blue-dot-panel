@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Bot Live Statistics Functionality ---
-    // IMPORTANT: Make sure this URL is correct for your Render deployment
     const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com';
 
     const botStatus = document.getElementById('bot-status');
@@ -30,6 +29,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalCommands = document.getElementById('total-commands');
     const developmentStatus = document.getElementById('development-status');
     const lastUpdatedTime = document.getElementById('last-updated-time');
+
+    // Function to format uptime from seconds to a human-readable string
+    function formatUptime(seconds) {
+        if (seconds === undefined || seconds === null) {
+            return 'N/A';
+        }
+        const days = Math.floor(seconds / (3600 * 24));
+        seconds %= (3600 * 24);
+        const hours = Math.floor(seconds / 3600);
+        seconds %= 3600;
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+
+        let uptimeString = [];
+        if (days > 0) uptimeString.push(`${days}d`);
+        if (hours > 0) uptimeString.push(`${hours}h`);
+        if (minutes > 0) uptimeString.push(`${minutes}m`);
+        // Only show seconds if less than 1 minute to keep it concise
+        if (uptimeString.length === 0 || secs > 0) {
+             uptimeString.push(`${secs}s`);
+        }
+
+        return uptimeString.join(' ');
+    }
+
 
     // Function to save data to localStorage
     function saveBotStatsToLocalStorage(data) {
@@ -74,9 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (infoData) {
             userCount.textContent = infoData.users ? infoData.users.toLocaleString() : 'N/A';
-            // FIX: Use infoData.latency_ms as per the network request screenshot
             botPing.textContent = infoData.latency_ms !== undefined && infoData.latency_ms !== null ? `${infoData.latency_ms}ms` : 'N/A';
-            botUptime.textContent = infoData.uptime_formatted || 'N/A';
+            // FIX: Use uptime_seconds and format it
+            botUptime.textContent = formatUptime(infoData.uptime_seconds);
         } else {
             // Fallback for infoData if not available
             userCount.textContent = 'N/A';
