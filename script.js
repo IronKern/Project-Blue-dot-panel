@@ -1,25 +1,17 @@
+// script.js - Überarbeitete Version für Project Blue Dot Panel
+
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Hamburger Menu Functionality ---
+
+    // --- Konfiguration ---
+    const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com'; // Ihre Bot-API-Basis-URL
+    const FETCH_INTERVAL = 10000; // Daten alle 10 Sekunden abrufen (10000 ms)
+
+    // --- DOM-Elemente abrufen ---
+    // Navigation
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        hamburger.classList.toggle('active');
-    });
-
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks.classList.contains('nav-active')) {
-                navLinks.classList.remove('nav-active');
-                hamburger.classList.remove('active');
-            }
-        });
-    });
-
-    // --- Bot Live Statistics Functionality ---
-    const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com';
-
+    // Bot Statistiken
     const botStatus = document.getElementById('bot-status');
     const serverCount = document.getElementById('server-count');
     const userCount = document.getElementById('user-count');
@@ -29,165 +21,228 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalCommands = document.getElementById('total-commands');
     const developmentStatus = document.getElementById('development-status');
     const lastUpdatedTime = document.getElementById('last-updated-time');
-    // Neue Elemente für Python und Nextcord Versionen
     const pythonVersion = document.getElementById('python-version');
     const nextcordVersion = document.getElementById('nextcord-version');
 
+    // Befehlsfilter
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const commandItems = document.querySelectorAll('.command-item');
 
-    // Function to format uptime from seconds to a human-readable string
-    function formatUptime(seconds) {
-        if (seconds === undefined || seconds === null) {
+    // Animations-Elemente
+    const animTargets = document.querySelectorAll('.anim-target');
+
+    // --- Hilfsfunktionen ---
+
+    /**
+     * Formatiert die Uptime von Sekunden in ein menschenlesbares Format (Tage, Stunden, Minuten, Sekunden).
+     * @param {number} totalSeconds - Die Gesamtzahl der Sekunden.
+     * @returns {string} Formatierte Uptime-Zeichenkette.
+     */
+    function formatUptime(totalSeconds) {
+        if (totalSeconds === undefined || totalSeconds === null || isNaN(totalSeconds)) {
             return 'N/A';
         }
-        const days = Math.floor(seconds / (3600 * 24));
-        seconds %= (3600 * 24);
-        const hours = Math.floor(seconds / 3600);
-        seconds %= 3600;
-        const minutes = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
 
-        let uptimeString = [];
-        if (days > 0) uptimeString.push(`${days}d`);
-        if (hours > 0) uptimeString.push(`${hours}h`);
-        if (minutes > 0) uptimeString.push(`${minutes}m`);
-        // Only show seconds if less than 1 minute to keep it concise, or if nothing else is shown
-        if (uptimeString.length === 0 || (uptimeString.length === 1 && secs > 0 && days === 0 && hours === 0 && minutes === 0)) { // This condition needs refinement if only seconds are to be shown for very short uptimes
-             uptimeString.push(`${secs}s`);
-        } else if (uptimeString.length === 0) { // Fallback if somehow nothing was added
-             uptimeString.push(`${secs}s`);
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        totalSeconds %= (3600 * 24);
+        const hours = Math.floor(totalSeconds / 3600);
+        totalSeconds %= 3600;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+
+        const parts = [];
+        if (days > 0) parts.push(`${days}d`);
+        if (hours > 0) parts.push(`${hours}h`);
+        if (minutes > 0) parts.push(`${minutes}m`);
+        // Zeigt Sekunden immer an, es sei denn, es ist eine sehr lange Uptime und Sekunden sind 0
+        if (parts.length === 0 || seconds > 0 || (days === 0 && hours === 0 && minutes === 0 && seconds === 0)) {
+            parts.push(`${seconds}s`);
         }
 
-
-        return uptimeString.join(' ');
+        return parts.join(' ') || '0s'; // Stellt sicher, dass bei 0 Sekunden '0s' angezeigt wird
     }
 
-
-    // Function to save data to localStorage
+    /**
+     * Speichert Bot-Statistikdaten im Local Storage.
+     * @param {object} data - Das zu speichernde Datenobjekt.
+     */
     function saveBotStatsToLocalStorage(data) {
         try {
             localStorage.setItem('botStatsCache', JSON.stringify(data));
+            localStorage.setItem('lastUpdatedTime', Date.now().toString());
         } catch (e) {
             console.error('Error saving to localStorage:', e);
         }
     }
 
-    // Function to load data from localStorage
+    /**
+     * Lädt Bot-Statistikdaten aus dem Local Storage.
+     * @returns {object|null} Das geladene Datenobjekt oder null, wenn nichts gefunden wurde.
+     */
     function loadBotStatsFromLocalStorage() {
         try {
             const cachedData = localStorage.getItem('botStatsCache');
-            return cachedData ? JSON.parse(cachedData) : null;
+            const lastUpdateTime = localStorage.getItem('lastUpdatedTime');
+            return cachedData ? { ...JSON.parse(cachedData), timestamp: lastUpdateTime ? parseInt(lastUpdateTime) : Date.now() } : null;
         } catch (e) {
             console.error('Error loading from localStorage:', e);
             return null;
         }
     }
 
-    // Function to display data on the page
+    /**
+     * Zeigt die Bot-Statistiken auf der Webseite an.
+     * @param {object|null} statsData - Daten vom /api/stats Endpunkt.
+     * @param {object|null} infoData - Daten vom /api/bot/info Endpunkt.
+     * @param {boolean} isCached - Gibt an, ob die angezeigten Daten aus dem Cache stammen.
+     */
     function displayBotStats(statsData, infoData, isCached = false) {
-        if (statsData) {
-            botStatus.textContent = statsData.status;
-            botStatus.className = `stat-value status-${statsData.status.toLowerCase()}`;
-            serverCount.textContent = statsData.server_count ? statsData.server_count.toLocaleString() : 'N/A';
-            totalCommands.textContent = statsData.command_count ? statsData.command_count.toLocaleString() : 'N/A';
-            if (statsData.last_commands && statsData.last_commands.length > 0) {
-                lastCommand.textContent = statsData.last_commands[statsData.last_commands.length - 1];
-            } else {
-                lastCommand.textContent = 'N/A';
-            }
-        } else {
-            // Fallback for statsData if not available
-            botStatus.textContent = 'Offline';
-            botStatus.className = 'stat-value status-offline';
-            serverCount.textContent = 'N/A';
-            totalCommands.textContent = 'N/A';
-            lastCommand.textContent = 'N/A';
+        // Status und allgemeine Statistiken
+        if (botStatus) { // Prüfen, ob Element existiert
+            botStatus.textContent = statsData?.status || 'Offline';
+            botStatus.className = `stat-value status-${(statsData?.status || 'offline').toLowerCase()}`;
+        }
+        if (serverCount) {
+            serverCount.textContent = statsData?.server_count?.toLocaleString() || 'N/A';
+        }
+        if (totalCommands) {
+            totalCommands.textContent = statsData?.command_count?.toLocaleString() || 'N/A';
+        }
+        if (lastCommand) {
+            lastCommand.textContent = (statsData?.last_commands && statsData.last_commands.length > 0) ? statsData.last_commands[statsData.last_commands.length - 1] : 'N/A';
         }
 
-        if (infoData) {
-            userCount.textContent = infoData.users ? infoData.users.toLocaleString() : 'N/A';
-            botPing.textContent = infoData.latency_ms !== undefined && infoData.latency_ms !== null ? `${infoData.latency_ms}ms` : 'N/A';
-            botUptime.textContent = formatUptime(infoData.uptime_seconds);
-            pythonVersion.textContent = infoData.python_version || 'N/A'; // Zeigt Python Version an
-            nextcordVersion.textContent = infoData.nextcord_version || 'N/A'; // Zeigt Nextcord Version an
-
-        } else {
-            // Fallback for infoData if not available
-            userCount.textContent = 'N/A';
-            botPing.textContent = 'N/A';
-            botUptime.textContent = 'N/A';
-            pythonVersion.textContent = 'N/A'; // Fallback für Python Version
-            nextcordVersion.textContent = 'N/A'; // Fallback für Nextcord Version
+        // Detaillierte Bot-Informationen
+        if (userCount) {
+            userCount.textContent = infoData?.users?.toLocaleString() || 'N/A';
+        }
+        if (botPing) { //
+            // Ping-Fix: Nutzt 'latency_ms' wie im Screenshot der Netzwerkanfrage gezeigt
+            botPing.textContent = (infoData?.latency_ms !== undefined && infoData?.latency_ms !== null) ? `${infoData.latency_ms}ms` : 'N/A';
+        }
+        if (botUptime) { //
+            // Uptime-Fix: Nutzt 'uptime_seconds' und formatiert es
+            botUptime.textContent = formatUptime(infoData?.uptime_seconds);
+        }
+        if (pythonVersion) { //
+            pythonVersion.textContent = infoData?.python_version || 'N/A';
+        }
+        if (nextcordVersion) { //
+            nextcordVersion.textContent = infoData?.nextcord_version || 'N/A';
         }
 
-        developmentStatus.textContent = 'Work in progress'; // Bleibt statisch, wenn keine andere Logik vorgesehen ist
-        developmentStatus.className = 'stat-value status-wip';
-        lastUpdatedTime.textContent = isCached ? `Cached: ${new Date(localStorage.getItem('lastUpdatedTime') || Date.now()).toLocaleTimeString()}` : new Date().toLocaleTimeString();
+        // Statischer Entwicklungsstatus
+        if (developmentStatus) {
+            developmentStatus.textContent = 'Work in progress';
+            developmentStatus.className = 'stat-value status-wip';
+        }
+
+        // Letzte Aktualisierungszeit
+        if (lastUpdatedTime) {
+            const time = isCached ? new Date(localStorage.getItem('lastUpdatedTime') || Date.now()) : new Date();
+            lastUpdatedTime.textContent = isCached ? `Cached: ${time.toLocaleTimeString()}` : time.toLocaleTimeString();
+        }
     }
 
+    /**
+     * Holt Bot-Statistiken und -Informationen von den API-Endpunkten.
+     * Bei Erfolg werden die Daten angezeigt und im Local Storage gespeichert.
+     * Bei Fehler werden Daten aus dem Local Storage geladen und angezeigt.
+     */
     async function fetchBotStatsAndInfo() {
         let statsData = null;
         let infoData = null;
-        let success = false;
 
         try {
-            // Fetch from /api/stats
-            const statsResponse = await fetch(`${BASE_URL}/api/stats`);
+            // Gleichzeitiger Abruf beider Endpunkte für bessere Performance
+            const [statsResponse, infoResponse] = await Promise.all([
+                fetch(`${BASE_URL}/api/stats`),
+                fetch(`${BASE_URL}/api/bot/info`)
+            ]);
+
             if (!statsResponse.ok) {
-                throw new Error(`HTTP error from /api/stats! Status: ${statsResponse.status}`);
+                console.warn(`HTTP error from /api/stats! Status: ${statsResponse.status}`);
+                // Trotzdem versuchen, die Info-Daten zu parsen, falls statsResponse der einzige Fehler war
+                statsData = null; // Setze explizit auf null bei Fehler
+            } else {
+                statsData = await statsResponse.json();
             }
-            statsData = await statsResponse.json();
 
-            // Fetch from /api/bot/info
-            const infoResponse = await fetch(`${BASE_URL}/api/bot/info`);
             if (!infoResponse.ok) {
-                throw new Error(`HTTP error from /api/bot/info! Status: ${infoResponse.status}`);
+                console.warn(`HTTP error from /api/bot/info! Status: ${infoResponse.status}`);
+                // Trotzdem versuchen, die Stats-Daten zu parsen, falls infoResponse der einzige Fehler war
+                infoData = null; // Setze explizit auf null bei Fehler
+            } else {
+                infoData = await infoResponse.json();
             }
-            infoData = await infoResponse.json();
 
-            // If both successful, display and save
-            displayBotStats(statsData, infoData);
-            saveBotStatsToLocalStorage({ stats: statsData, info: infoData, timestamp: Date.now() });
-            localStorage.setItem('lastUpdatedTime', Date.now()); // Store update time
-            success = true;
+            // Wenn mindestens ein Datensatz erfolgreich war, oder beide, anzeigen und speichern
+            if (statsData || infoData) {
+                displayBotStats(statsData, infoData);
+                saveBotStatsToLocalStorage({ stats: statsData, info: infoData });
+            } else {
+                // Wenn beide fehlschlagen, versuchen, aus dem Cache zu laden
+                throw new Error("Both API endpoints failed to return valid data.");
+            }
 
         } catch (error) {
             console.error("Error fetching bot statistics or info:", error);
-            // On error, try to load from cache
+            // Bei jedem Fehler: versuchen, aus dem Cache zu laden
             const cached = loadBotStatsFromLocalStorage();
-            if (cached && cached.stats && cached.info) {
-                console.log('Displaying cached data.');
+            if (cached && (cached.stats || cached.info)) { // Prüfen, ob überhaupt Daten im Cache sind
+                console.log('Displaying cached data due to fetch error.');
                 displayBotStats(cached.stats, cached.info, true);
             } else {
-                // If no cache or cache is empty/corrupt, display default N/A values
-                console.log('No cached data available. Displaying N/A.');
-                displayBotStats(null, null); // Displaying N/A for all fields
+                console.log('No live data and no cached data available. Displaying N/A.');
+                displayBotStats(null, null); // Alle Felder auf N/A setzen
             }
         }
     }
 
-    // Initial load: Try to display cached data first, then fetch live data
+    // --- Initialisierung & Event Listener ---
+
+    // Initiales Laden: Zuerst Cache prüfen, dann Live-Daten abrufen
     const initialCachedData = loadBotStatsFromLocalStorage();
-    if (initialCachedData && initialCachedData.stats && initialCachedData.info) {
+    if (initialCachedData && (initialCachedData.stats || initialCachedData.info)) {
         console.log('Initial load: Displaying cached data.');
         displayBotStats(initialCachedData.stats, initialCachedData.info, true);
     } else {
-        console.log('Initial load: No cached data. Fetching live data.');
-        displayBotStats(null, null); // Display N/A until live data is fetched
+        console.log('Initial load: No cached data. Displaying "Lade..." or N/A.');
+        // Optional: Hier könnten Sie initial 'Lade...' in alle Felder setzen,
+        // was aber bereits durch die HTML-Platzhalter abgedeckt sein sollte.
+        displayBotStats(null, null); // Setzt alles auf N/A bis Daten kommen
     }
-    fetchBotStatsAndInfo(); // Always attempt to fetch live data
+    fetchBotStatsAndInfo(); // Immer versuchen, Live-Daten abzurufen
 
-    // Fetch stats periodically
-    setInterval(fetchBotStatsAndInfo, 10000); // Fetches data every 10 seconds
+    // Periodischer Abruf der Statistiken
+    setInterval(fetchBotStatsAndInfo, FETCH_INTERVAL);
 
-    // --- Command Filter Functionality (remains the same) ---
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    const commandItems = document.querySelectorAll('.command-item');
+    // Hamburger Menü Funktionalität
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            hamburger.classList.toggle('active');
+        });
 
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('nav-active')) {
+                    navLinks.classList.remove('nav-active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        });
+    }
+
+
+    // Befehlsfilter Funktionalität
     function filterCommandsByCategory() {
-        const activeCategory = document.querySelector('.category-btn.active').dataset.category;
+        const activeCategory = document.querySelector('.category-btn.active')?.dataset.category; // Optional Chaining
+
+        if (!activeCategory) return; // Frühzeitiger Exit, wenn kein aktiver Button gefunden
 
         commandItems.forEach(item => {
-            const itemCategories = item.dataset.category.split(' ');
+            const itemCategories = item.dataset.category?.split(' ') || []; // Optional Chaining und Fallback zu leerem Array
 
             const matchesCategory = activeCategory === 'all' || itemCategories.includes(activeCategory);
 
@@ -199,60 +254,59 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            document.querySelector('.category-btn.active').classList.remove('active');
-            button.classList.add('active');
-            filterCommandsByCategory();
+    if (categoryButtons.length > 0) {
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Entferne 'active' von allen Buttons und füge es dem geklickten hinzu
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterCommandsByCategory();
+            });
         });
-    });
+        // Initialer Filter, um alle Befehle anzuzeigen (oder die Standardkategorie)
+        filterCommandsByCategory();
+    }
 
-    // Call initial filter to display all commands
-    filterCommandsByCategory();
 
-    // --- Intersection Observer for Animations (remains the same) ---
-    const animTargets = document.querySelectorAll('.anim-target');
-
+    // Intersection Observer für Animationen
     const observerOptions = {
-        root: null, // The viewport is the root
+        root: null, // Der Viewport ist die Wurzel
         rootMargin: '0px',
-        threshold: 0.05 // Trigger when 5% of the element is visible
+        threshold: 0.05 // Auslösen, wenn 5% des Elements sichtbar sind
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('in-view');
-
                 const animItems = entry.target.querySelectorAll('.anim-item');
                 animItems.forEach((item, index) => {
                     item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
                 });
-                // Optional: Stop observing after the element has been seen to animate only once
-                // observer.unobserve(entry.target);
             } else {
-                // Optional: Reset animation if element leaves viewport
+                // Optional: Animation zurücksetzen, wenn Element den Viewport verlässt
                 // entry.target.classList.remove('in-view');
                 entry.target.querySelectorAll('.anim-item').forEach(item => {
-                    item.style.transitionDelay = '0s'; // Reset delay when out of view
+                    item.style.transitionDelay = '0s'; // Delay zurücksetzen
                 });
             }
         });
     }, observerOptions);
 
-    // Observe all targets
-    animTargets.forEach(target => {
-        observer.observe(target);
-    });
+    if (animTargets.length > 0) {
+        animTargets.forEach(target => {
+            observer.observe(target);
+        });
 
-    // Immediate check on load for elements already in view
-    observer.takeRecords().forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            const animItems = entry.target.querySelectorAll('.anim-item');
-            animItems.forEach((item, index) => {
-                item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
-            });
-        }
-    });
+        // Sofortige Prüfung beim Laden für Elemente, die bereits im Viewport sind
+        observer.takeRecords().forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                const animItems = entry.target.querySelectorAll('.anim-item');
+                animItems.forEach((item, index) => {
+                    item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
+                });
+            }
+        });
+    }
 });
