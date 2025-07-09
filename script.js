@@ -19,47 +19,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Bot Live Statistics Functionality ---
     // IMPORTANT: Make sure this URL is correct for your Render deployment
-    // It should be your app's root URL on Render.
-    const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com'; // Corrected BASE_URL as per your instruction
+    // It should be your app's root URL on Render, as specified in your last instruction.
+    const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com';
 
     const botStatus = document.getElementById('bot-status');
     const serverCount = document.getElementById('server-count');
     const userCount = document.getElementById('user-count');
     const botPing = document.getElementById('bot-ping');
     const botUptime = document.getElementById('bot-uptime');
-    const lastCommand = document.getElementById('last-command');
-    const totalCommands = document.getElementById('total-commands');
+    const lastCommand = document.getElementById('last-command'); // This still expects data from /api/stats
+    const totalCommands = document.getElementById('total-commands'); // This still expects data from /api/stats
     const developmentStatus = document.getElementById('development-status');
     const lastUpdatedTime = document.getElementById('last-updated-time');
 
-    async function fetchBotStats() {
+    async function fetchBotStatsAndInfo() {
         try {
-            const response = await fetch(`${BASE_URL}/api/stats`); // Use the corrected BASE_URL
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+            // Fetch from /api/stats
+            const statsResponse = await fetch(`${BASE_URL}/api/stats`);
+            if (!statsResponse.ok) {
+                throw new Error(`HTTP error from /api/stats! Status: ${statsResponse.status}`);
             }
+            const statsData = await statsResponse.json();
 
-            const data = await response.json();
+            // Fetch from /api/bot/info
+            const infoResponse = await fetch(`${BASE_URL}/api/bot/info`);
+            if (!infoResponse.ok) {
+                throw new Error(`HTTP error from /api/bot/info! Status: ${infoResponse.status}`);
+            }
+            const infoData = await infoResponse.json();
 
-            // Update elements with data from the single /api/stats endpoint
-            botStatus.textContent = data.status;
-            botStatus.className = `stat-value status-${data.status.toLowerCase()}`; // Set class for color (online/offline)
+            // Update elements with data from /api/stats
+            botStatus.textContent = statsData.status;
+            botStatus.className = `stat-value status-${statsData.status.toLowerCase()}`; // Set class for color (online/offline)
 
-            serverCount.textContent = data.server_count.toLocaleString();
-            userCount.textContent = data.member_count.toLocaleString();
-            botPing.textContent = `${data.latency}ms`;
-            botUptime.textContent = data.uptime_formatted;
-            totalCommands.textContent = data.command_count.toLocaleString();
+            serverCount.textContent = statsData.server_count.toLocaleString();
+            // userCount.textContent = statsData.member_count.toLocaleString(); // Assuming member_count is in /api/stats
+
+            totalCommands.textContent = statsData.command_count.toLocaleString();
 
             // Handle last_commands array: get the most recent one
-            if (data.last_commands && data.last_commands.length > 0) {
-                lastCommand.textContent = data.last_commands[data.last_commands.length - 1]; // Get the last (most recent) command
+            if (statsData.last_commands && statsData.last_commands.length > 0) {
+                lastCommand.textContent = statsData.last_commands[statsData.last_commands.length - 1]; // Get the last (most recent) command
             } else {
                 lastCommand.textContent = 'N/A';
             }
+            
+            // Update elements with data from /api/bot/info
+            userCount.textContent = infoData.users.toLocaleString(); // 'users' from /api/bot/info
+            botPing.textContent = `${infoData.latency}ms`; // 'latency' from /api/bot/info
+            botUptime.textContent = infoData.uptime_formatted; // 'uptime_formatted' from /api/bot/info
 
-            // Set the "Development Status" - currently static as it's not in the API response
+            // Set the "Development Status" (still static as not in API response)
             developmentStatus.textContent = 'Work in progress';
             developmentStatus.className = 'stat-value status-wip';
 
@@ -67,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lastUpdatedTime.textContent = new Date().toLocaleTimeString();
 
         } catch (error) {
-            console.error("Error fetching bot statistics:", error);
+            console.error("Error fetching bot statistics or info:", error);
             // Set fallback values and error status on failure
             botStatus.textContent = 'Offline';
             botStatus.className = 'stat-value status-offline';
@@ -84,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fetch stats immediately on load and then every 10 seconds
-    fetchBotStats();
-    setInterval(fetchBotStats, 10000); // Fetches data every 10 seconds
+    fetchBotStatsAndInfo();
+    setInterval(fetchBotStatsAndInfo, 10000); // Fetches data every 10 seconds
 
-    // --- Command Filter Functionality ---
+    // --- Command Filter Functionality (remains the same) ---
     const categoryButtons = document.querySelectorAll('.category-btn');
     const commandItems = document.querySelectorAll('.command-item');
 
@@ -118,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Call initial filter to display all commands
     filterCommandsByCategory();
 
-    // --- Intersection Observer for Animations ---
+    // --- Intersection Observer for Animations (remains the same) ---
     const animTargets = document.querySelectorAll('.anim-target');
 
     const observerOptions = {
