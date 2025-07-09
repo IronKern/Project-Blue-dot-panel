@@ -1,465 +1,212 @@
-:root {
-    --primary-color: #556BFF;
-    --secondary-color: #7A8DFF;
-    --background-color: #1a1a2e;
-    --card-background: #20203a;
-    --text-color: #e0e0e0;
-    --heading-color: #ffffff;
-    --border-color: #33334d;
-    --accent-color: #00bcd4;
-    --transition-speed: 0.3s ease;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-}
-
-header {
-    background-color: var(--background-color);
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-}
-
-.logo img {
-    height: 40px;
-    margin-right: 10px;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.logo h1 {
-    margin: 0;
-    color: var(--heading-color);
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-}
-
-nav .nav-links {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-
-nav .nav-links li {
-    margin-left: 25px;
-}
-
-nav .nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color var(--transition-speed), color var(--transition-speed);
-}
-
-nav .nav-links a:hover {
-    background-color: var(--primary-color);
-    color: var(--heading-color);
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    z-index: 1001;
-}
-
-.hamburger div {
-    width: 30px;
-    height: 3px;
-    background-color: var(--text-color);
-    border-radius: 5px;
-    transition: all var(--transition-speed);
-}
-
-main {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-section {
-    padding: 60px 0;
-    margin-bottom: 40px;
-    background-color: var(--card-background);
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-    text-align: center;
-    border: 1px solid var(--border-color);
-}
-
-section h2 {
-    color: var(--heading-color);
-    font-size: 2.8rem;
-    margin-bottom: 30px;
-    font-weight: 700;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-section h2::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background-color: var(--primary-color);
-    border-radius: 2px;
-}
-
-.hero-section {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x900/?galaxy,stars');
-    background-size: cover;
-    background-position: center;
-    color: var(--heading-color);
-    padding: 100px 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-}
-
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.hero-content h2 {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    text-shadow: 0 0 15px rgba(85, 107, 255, 0.7);
-}
-
-.hero-content p {
-    font-size: 1.5rem;
-    margin-bottom: 40px;
-    opacity: 0.9;
-}
-
-.btn {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--heading-color);
-    padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.btn:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-3px);
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 50px;
-    padding: 0 20px;
-}
-
-.stat-item {
-    background-color: var(--background-color);
-    padding: 25px;
-    border-radius: 10px;
-    text-align: left;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.stat-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.stat-label {
-    font-size: 1.1rem;
-    color: var(--secondary-color);
-    font-weight: 600;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.stat-value {
-    font-size: 1.8rem;
-    color: var(--heading-color);
-    font-weight: 700;
-}
-
-.commands-section {
-    padding-top: 60px;
-}
-
-.category-filters {
-    margin-bottom: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    padding: 0 20px;
-}
-
-.category-btn {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    border: 1px solid var(--border-color);
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color var(--transition-speed), color var(--transition-speed), border-color var(--transition-speed);
-    outline: none;
-}
-
-.category-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--heading-color);
-    border-color: var(--primary-color);
-}
-
-.category-btn.active {
-    background-color: var(--accent-color);
-    color: var(--heading-color);
-    border-color: var(--accent-color);
-    font-weight: bold;
-}
-
-.command-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    padding: 0 20px;
-}
-
-.command-item {
-    background-color: var(--background-color);
-    padding: 25px;
-    border-radius: 10px;
-    text-align: left;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-color);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.command-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.command-item h3 {
-    color: var(--primary-color);
-    font-size: 1.6rem;
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-.command-item p {
-    font-size: 1rem;
-    color: var(--text-color);
-    opacity: 0.8;
-}
-
-.contact-section {
-    padding-top: 60px;
-}
-
-.contact-info {
-    margin-top: 30px;
-    font-size: 1.1rem;
-}
-
-.contact-info p {
-    margin-bottom: 10px;
-}
-
-.contact-info a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color var(--transition-speed);
-}
-
-.contact-info a:hover {
-    color: var(--primary-color);
-}
-
-.social-links {
-    margin-top: 20px;
-}
-
-.social-links a {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--heading-color);
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 0 10px;
-    font-weight: 500;
-    transition: background-color var(--transition-speed), transform var(--transition-speed);
-}
-
-.social-links a:hover {
-    background-color: var(--secondary-color);
-    transform: translateY(-2px);
-}
-
-footer {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    text-align: center;
-    padding: 1.5rem;
-    margin-top: 40px;
-    border-top: 1px solid var(--border-color);
-    font-size: 0.9rem;
-}
-
-.anim-target {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-
-.anim-target.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.anim-item {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.anim-item.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.hero-content h2.anim-item {
-    transition-delay: 0.1s;
-}
-
-.hero-content p.anim-item {
-    transition-delay: 0.2s;
-}
-
-.hero-content .btn.anim-item {
-    transition-delay: 0.3s;
-}
-
-.stats-grid .stat-item.anim-item {
-    transition-delay: 0.1s;
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 1rem 1.5rem;
-    }
-
-    .logo h1 {
-        font-size: 1.5rem;
-    }
-
-    nav .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        background-color: var(--background-color);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        padding: 1rem 0;
-        border-radius: 0 0 10px 10px;
-    }
-
-    nav .nav-links.active {
-        display: flex;
-    }
-
-    nav .nav-links li {
-        margin: 0;
-        text-align: center;
-        padding: 10px 0;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .hero-content h2 {
-        font-size: 3rem;
-    }
-
-    .hero-content p {
-        font-size: 1.2rem;
-    }
-
-    section h2 {
-        font-size: 2.2rem;
-    }
-
-    .stats-grid, .command-list {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    main {
-        padding: 1rem;
-    }
-
-    section {
-        padding: 40px 15px;
-    }
-
-    .hero-content h2 {
-        font-size: 2.5rem;
-    }
-
-    .hero-content p {
-        font-size: 1rem;
-    }
-
-    .btn {
-        padding: 12px 25px;
-        font-size: 1rem;
-    }
-
-    .category-btn {
-        font-size: 0.9rem;
-        padding: 8px 15px;
-    }
-}
-
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Blue Dot Panel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="Assets/applogo.jpg" alt="Project Blue Dot Logo">
+            <h1>Project Blue Dot</h1>
+        </div>
+        <nav>
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#bot-stats">Bot-Statistiken</a></li>
+                <li><a href="#commands">Befehle</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section anim-target">
+            <div class="hero-content">
+                <h2>Willkommen beim Project Blue Dot Panel</h2>
+                <p>Hier finden Sie Live-Statistiken über unseren Discord-Bot und eine umfassende Befehlsliste.</p>
+                <a href="#bot-stats" class="btn">Statistiken ansehen</a>
+            </div>
+        </section>
+
+        <section id="bot-stats" class="stats-section anim-target">
+            <h2>Bot Statistiken</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Status:</span>
+                    <span class="stat-value" id="bot-status">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Server:</span>
+                    <span class="stat-value" id="server-count">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Nutzer:</span>
+                    <span class="stat-value" id="user-count">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Ping:</span>
+                    <span class="stat-value" id="bot-ping">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Uptime:</span>
+                    <span class="stat-value" id="bot-uptime">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Befehle Gesamt:</span>
+                    <span class="stat-value" id="total-commands">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">CPU-Auslastung:</span>
+                    <span class="stat-value" id="cpu-usage">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Speicherauslastung:</span>
+                    <span class="stat-value" id="memory-usage">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Daten-Auslastung:</span>
+                    <span class="stat-value" id="disk-usage">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Python Version:</span>
+                    <span class="stat-value" id="python-version">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Nextcord Version:</span>
+                    <span class="stat-value" id="nextcord-version">Lade...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Zuletzt aktualisiert:</span>
+                    <span class="stat-value" id="last-updated-time">Lade...</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="commands" class="commands-section anim-target">
+            <h2>Unsere Befehle</h2>
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">Alle</button>
+                <button class="category-btn" data-category="economy">Economy</button>
+                <button class="category-btn" data-category="moderation">Moderation</button>
+                <button class="category-btn" data-category="utility">Utility</button>
+                <button class="category-btn" data-category="fun">Fun</button>
+                <button class="category-btn" data-category="ai">AI</button>
+                <button class="category-btn" data-category="leveling">Leveling</button>
+                <button class="category-btn" data-category="settings">Einstellungen</button>
+                <button class="category-btn" data-category="tickets">Tickets</button>
+                <button class="category-btn" data-category="custom">Eigene Befehle</button>
+            </div>
+            <div class="command-list">
+                <div class="command-item" data-category="economy"><h3>:balance</h3><p class="command-description">Zeigt Ihr aktuelles Guthaben an.</p></div>
+                <div class="command-item" data-category="economy"><h3>:bank</h3><p class="command-description">Zeigt Ihr Bankguthaben an.</p></div>
+                <div class="command-item" data-category="economy"><h3>:deposit &lt;amount&gt;</h3><p class="command-description">Zahlt Geld auf Ihr Bankkonto ein.</p></div>
+                <div class="command-item" data-category="economy"><h3>:withdraw &lt;amount&gt;</h3><p class="command-description">Hebt Geld von Ihrem Bankkonto ab.</p></div>
+                <div class="command-item" data-category="economy"><h3>:daily</h3><p class="command-description">Fordern Sie Ihr tägliches Einkommen ein.</p></div>
+                <div class="command-item" data-category="economy"><h3>:hourly</h3><p class="command-description">Fordern Sie Ihr stündliches Einkommen ein.</p></div>
+                <div class="command-item" data-category="economy"><h3>:weekly</h3><p class="command-description">Fordern Sie Ihr wöchentliches Einkommen ein.</p></div>
+                <div class="command-item" data-category="economy"><h3>:monthly</h3><p class="command-description">Fordern Sie Ihr monatliches Einkommen ein.</p></div>
+                <div class="command-item" data-category="economy"><h3>:leaderboard</h3><p class="command-description">Zeigt die reichsten Benutzer an.</p></div>
+                <div class="command-item" data-category="economy"><h3>:work</h3><p class="command-description">Arbeiten Sie für Belohnungen.</p></div>
+                <div class="command-item" data-category="economy"><h3>:fish</h3><p class="command-description">Gehen Sie fischen und verdienen Sie Geld.</p></div>
+                <div class="command-item" data-category="economy"><h3>:mine</h3><p class="command-description">Gehen Sie minen und finden Sie Schätze.</p></div>
+                <div class="command-item" data-category="economy"><h3>:shop</h3><p class="command-description">Zeigt verfügbare Gegenstände zum Kauf an.</p></div>
+                <div class="command-item" data-category="economy"><h3>:buy &lt;item&gt;</h3><p class="command-description">Kaufen Sie einen Gegenstand aus dem Shop.</p></div>
+                <div class="command-item" data-category="economy"><h3>:inventory</h3><p class="command-description">Zeigt Ihre gekauften Gegenstände an.</p></div>
+                <div class="command-item" data-category="economy"><h3>:use &lt;item&gt;</h3><p class="command-description">Benutzen Sie einen Gegenstand aus Ihrem Inventar.</p></div>
+                <div class="command-item" data-category="economy"><h3>:gamble &lt;amount&gt;</h3><p class="command-description">Wetzen Sie Ihr Glück.</p></div>
+                <div class="command-item" data-category="economy"><h3>:crime</h3><p class="command-description">Begehen Sie ein Verbrechen für eine Chance auf Belohnung oder Strafe.</p></div>
+                <div class="command-item" data-category="economy"><h3>:pay &lt;user&gt; &lt;amount&gt;</h3><p class="command-description">Überweist Geld an einen anderen Benutzer.</p></div>
+
+                <div class="command-item" data-category="moderation"><h3>/warn &lt;user&gt; &lt;reason&gt;</h3><p class="command-description">Verwarnt einen Benutzer.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/kick &lt;user&gt; &lt;reason&gt;</h3><p class="command-description">Kickt einen Benutzer vom Server.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/ban &lt;user&gt; &lt;reason&gt;</h3><p class="command-description">Bannt einen Benutzer vom Server.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/mute &lt;user&gt; &lt;time&gt; &lt;reason&gt;</h3><p class="command-description">Stellt einen Benutzer stumm.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/unmute &lt;user&gt;</h3><p class="command-description">Hebt die Stummschaltung eines Benutzers auf.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/purge &lt;amount&gt;</h3><p class="command-description">Löscht eine bestimmte Anzahl von Nachrichten.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/lock &lt;channel&gt;</h3><p class="command-description">Sperrt einen Kanal.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/unlock &lt;channel&gt;</h3><p class="command-description">Entsperrt einen Kanal.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/addrole &lt;user&gt; &lt;role&gt;</h3><p class="command-description">Fügt einem Benutzer eine Rolle hinzu.</p></div>
+                <div class="command-item" data-category="moderation"><h3>/removerole &lt;user&gt; &lt;role&gt;</h3><p class="command-description">Entfernt eine Rolle von einem Benutzer.</p></div>
+
+                <div class="command-item" data-category="utility"><h3>/ping</h3><p class="command-description">Zeigt die Latenz des Bots an.</p></div>
+                <div class="command-item" data-category="utility"><h3>/help [command]</h3><p class="command-description">Zeigt Hilfe für Befehle an.</p></div>
+                <div class="command-item" data-category="utility"><h3>/botinfo</h3><p class="command-description">Zeigt detaillierte Informationen über den Bot an.</p></div>
+                <div class="command-item" data-category="utility"><h3>/uptime</h3><p class="command-description">Zeigt die Betriebszeit des Bots an.</p></div>
+                <div class="command-item" data-category="utility"><h3>/serverinfo</h3><p class="command-description">Zeigt Informationen über den Server an.</p></div>
+                <div class="command-item" data-category="utility"><h3>/userinfo [user]</h3><p class="command-description">Zeigt Informationen über einen Benutzer an.</p></div>
+                <div class="command-item" data-category="utility"><h3>/avatar [user]</h3><p class="command-description">Zeigt das Avatarbild eines Benutzers an.</p></div>
+                <div class="command-item" data-category="utility"><h3>/stats</h3><p class="command-description">Zeigt Leistungsstatistiken des Bots an (CPU, RAM).</p></div>
+                <div class="command-item" data-category="utility"><h3>/translate &lt;lang&gt; &lt;text&gt;</h3><p class="command-description">Übersetzt Text in eine andere Sprache.</p></div>
+                <div class="command-item" data-category="utility"><h3>/google &lt;query&gt;</h3><p class="command-description">Führt eine Google-Suft durch.</p></div>
+                <div class="command-item" data-category="utility"><h3>/wikipedia &lt;query&gt;</h3><p class="command-description">Sucht nach Informationen auf Wikipedia.</p></div>
+                <div class="command-item" data-category="utility"><h3>/weather &lt;location&gt;</h3><p class="command-description">Zeigt das Wetter für einen bestimmten Ort an.</p></div>
+                <div class="command-item" data-category="utility"><h3>/time &lt;location&gt;</h3><p class="command-description">Zeigt die aktuelle Uhrzeit für einen bestimmten Ort an.</p></div>
+
+                <div class="command-item" data-category="fun"><h3>/image &lt;query&gt;</h3><p class="command-description">Sucht nach einem Bild.</p></div>
+                <div class="command-item" data-category="fun"><h3>/meme</h3><p class="command-description">Zeigt ein zufälliges Meme an.</p></div>
+                <div class="command-item" data-category="fun"><h3>/8ball &lt;question&gt;</h3><p class="command-description">Stellt dem magischen 8-Ball eine Frage.</p></div>
+                <div class="command-item" data-category="fun"><h3>/roll [max]</h3><p class="command-description">Würfelt eine Zahl.</p></div>
+                <div class="command-item" data-category="fun"><h3>/howgay [user]</h3><p class="command-description">Misst den "Gay-Level" (nur zum Spaß).</p></div>
+                <div class="command-item" data-category="fun"><h3>/punch &lt;user&gt;</h3><p class="command-description">Schlägt einen Benutzer (Interaktion).</p></div>
+                <div class="command-item" data-category="fun"><h3>/rate &lt;something&gt;</h3><p class="command-description">Bewertet etwas auf einer Skala von 1-10.</p></div>
+                <div class="command-item" data-category="fun"><h3>/kill &lt;user&gt;</h3><p class="command-description">Simuliert das Töten eines Benutzers (Interaktion).</p></div>
+                <div class="command-item" data-category="fun"><h3>/hug &lt;user&gt;</h3><p class="command-description">Umarnt einen Benutzer (Interaktion).</p></div>
+                <div class="command-item" data-category="fun"><h3>/pat &lt;user&gt;</h3><p class="command-description">Streichelt einen Benutzer (Interaktion).</p></div>
+                <div class="command-item" data-category="fun"><h3>/slap &lt;user&gt;</h3><p class="command-description">Ohrfeigt einen Benutzer (Interaktion).</p></div>
+                <div class="command-item" data-category="fun"><h3>/kiss &lt;user&gt;</h3><p class="command-description">Küsst einen Benutzer (Interaktion).</p></div>
+                <div class="command-item" data-category="fun"><h3>/marry &lt;user&gt;</h3><p class="command-description">Heiratet einen Benutzer (Interaktion).</p></div>
+                <div class="command-item" data-category="fun"><h3>/divorce &lt;user&gt;</h3><p class="command-description">Lässt sich von einem Benutzer scheiden.</p></div>
+                <div class="command-item" data-category="fun"><h3>/profile [user]</h3><p class="command-description">Zeigt das Profil eines Benutzers an.</p></div>
+
+                <div class="command-item" data-category="ai"><h3>/ask &lt;question&gt;</h3><p class="command-description">Stellen Sie dem Bot eine Frage (AI-gestützt).</p></div>
+
+                <div class="command-item" data-category="leveling"><h3>/rank [user]</h3><p class="command-description">Zeigt den Rang eines Benutzers an.</p></div>
+                <div class="command-item" data-category="leveling"><h3>/top</h3><p class="command-description">Zeigt die Top-Level-Benutzer an.</p></div>
+
+                <div class="command-item" data-category="settings"><h3>/setprefix &lt;new_prefix&gt;</h3><p class="command-description">Ändert den Bot-Präfix für den Server.</p></div>
+                <div class="command-item" data-category="settings"><h3>/welcomechannel &lt;channel&gt;</h3><p class="command-description">Setzt den Kanal für Willkommensnachrichten.</p></div>
+                <div class="command-item" data-category="settings"><h3>/leavechannel &lt;channel&gt;</h3><p class="command-description">Setzt den Kanal für Abschiedsnachrichten.</p></div>
+                <div class="command-item" data-category="settings"><h3>/modlog &lt;channel&gt;</h3><p class="command-description">Setzt den Kanal für Moderationsprotokolle.</p></div>
+                <div class="command-item" data-category="settings"><h3>/autorole &lt;role&gt;</h3><p class="command-description">Weist neuen Mitgliedern automatisch eine Rolle zu.</p></div>
+
+                <div class="command-item" data-category="tickets"><h3>/ticketsetup</h3><p class="command-description">Richtet das Ticket-System ein.</p></div>
+                <div class="command-item" data-category="tickets"><h3>/ticketadd &lt;user&gt;</h3><p class="command-description">Fügt einem Ticket einen Benutzer hinzu.</p></div>
+                <div class="command-item" data-category="tickets"><h3>/ticketremove &lt;user&gt;</h3><p class="command-description">Entfernt einen Benutzer von einem Ticket.</p></div>
+                <div class="command-item" data-category="tickets"><h3>/ticketclose</h3><p class="command-description">Schließt das aktuelle Ticket.</p></div>
+
+                <div class="command-item" data-category="custom"><h3>/addcommand &lt;name&gt; &lt;response&gt;</h3><p class="command-description">Erstellt einen benutzerdefinierten Befehl.</p></div>
+                <div class="command-item" data-category="custom"><h3>/removecommand &lt;name&gt;</h3><p class="command-description">Entfernt einen benutzerdefinierten Befehl.</p></div>
+                <div class="command-item" data-category="custom"><h3>/setresponse &lt;name&gt; &lt;new_response&gt;</h3><p class="command-description">Ändert die Antwort eines benutzerdefinierten Befehls.</p></div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section anim-target">
+            <h2>Kontakt</h2>
+            <p>Haben Sie Fragen oder Feedback? Kontaktieren Sie uns:</p>
+            <div class="contact-info">
+                <p>Discord: IhrDiscordTag#1234</p>
+                <p>E-Mail: <a href="mailto:ihremail@example.com">ihremail@example.com</a></p>
+            </div>
+            <p>Folgen Sie uns auf sozialen Medien (optional):</p>
+            <div class="social-links">
+                <a href="#" target="_blank">Discord Server</a>
+                <a href="#" target="_blank">Twitter</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Project Blue Dot. Alle Rechte vorbehalten.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
