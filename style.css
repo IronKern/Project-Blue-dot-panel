@@ -1,28 +1,25 @@
-/* --- Global Styles & Variables --- */
 :root {
-    --bg-dark: #0A0A0A; /* Deepest black background */
-    --bg-light: #1A1A1A; /* Slightly lighter for content areas */
-    --text-primary: #E0E0E0; /* Main text color, soft white */
-    --text-secondary: #808080; /* Secondary text, lighter grey */
-    --text-highlight: #FFFFFF; /* Pure white for strong highlights */
-    --accent-blue: #007BFF; /* Primary blue accent */
-    --dark-blue: #0047AB; /* Dunkleres Blau für Text des Buttons */
-    --logo-glow: rgba(0, 123, 255, 0.7); /* Stronger blue glow for logo */
+    --bg-dark: #0A0A0A;
+    --bg-light: #1A1A1A;
+    --text-primary: #E0E0E0;
+    --text-secondary: #808080;
+    --text-highlight: #FFFFFF;
+    --accent-blue: #007BFF;
+    --dark-blue: #0047AB;
+    --logo-glow: rgba(0, 123, 255, 0.7);
 
-    --border-color: #333333; /* Subtle border for elements */
+    --border-color: #333333;
 
     --font-primary: 'Inter', sans-serif;
-    --font-secondary: 'Montserrat', sans-serif; /* For headings and bold elements */
+    --font-secondary: 'Montserrat', sans-serif;
 
-    --transition-duration-long: 1.2s; /* Längere Dauer für Hauptanimationen */
-    --transition-duration-medium: 0.7s; /* Mittlere Dauer */
-    --transition-duration-short: 0.4s; /* Kurze Dauer für Hover etc. */
-    /* Noch geschmeidigere Ease-Funktion für natürliche Bewegung */
-    --transition-ease-extra-smooth: cubic-bezier(0.23, 1, 0.32, 1); /* Ease-Out-Back-ähnlich */
-    --animation-delay-step: 0.08s; /* Feinerer Delay-Schritt für gestaffelte Animationen */
+    --transition-duration-long: 1.5s; /* Längere Dauer für Hauptanimationen */
+    --transition-duration-medium: 0.9s;
+    --transition-duration-short: 0.4s;
+    --transition-ease-extra-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+    --animation-delay-step: 0.05s; /* Kürzere Verzögerung für schnelleren Start des Staggered-Effekts */
 }
 
-/* --- Base Styles --- */
 body {
     font-family: var(--font-primary);
     margin: 0;
@@ -30,8 +27,8 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-primary);
     line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scroll from animations */
-    scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 .container {
@@ -50,7 +47,6 @@ a:hover {
     color: var(--text-highlight);
 }
 
-/* --- Header --- */
 header {
     background-color: var(--bg-dark);
     padding: 15px 0;
@@ -110,7 +106,6 @@ nav ul li {
     opacity: 0;
     transform: translateY(-10px);
     animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
-    /* Delays werden von JS gesetzt */
 }
 
 nav ul li a {
@@ -143,12 +138,11 @@ nav ul li a:hover::after {
     transform-origin: bottom left;
 }
 
-/* Base styles for both primary and invite buttons */
 .btn-invite, .btn-primary {
     padding: 12px 28px;
     border-radius: 30px;
     font-weight: 700;
-    border: 1px solid; /* Solid border, color specified later */
+    border: 1px solid;
     transition: background-color var(--transition-duration-short) var(--transition-ease-extra-smooth),
                 color var(--transition-duration-short) var(--transition-ease-extra-smooth),
                 transform var(--transition-duration-short) var(--transition-ease-extra-smooth),
@@ -158,11 +152,10 @@ nav ul li a:hover::after {
     animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
 }
 
-/* Styles for "Invite Bot" button in header */
 .btn-invite {
     background-color: transparent;
-    color: var(--text-highlight); /* White text */
-    border-color: var(--text-highlight); /* White border */
+    color: var(--text-highlight);
+    border-color: var(--text-highlight);
 }
 
 .btn-invite:hover {
@@ -172,15 +165,14 @@ nav ul li a:hover::after {
     transform: translateY(-2px);
 }
 
-/* Styles for "Add Bot to Your Server" button in hero section */
 .btn-primary {
-    background-color: var(--text-highlight); /* White background */
-    color: var(--dark-blue); /* Dunkelblaue Schriftfarbe */
-    border-color: var(--text-highlight); /* White border */
-    font-size: 1.2em; /* Bigger font size */
-    padding: 15px 35px; /* Even larger padding */
-    font-weight: 900; /* Noch fetter */
-    letter-spacing: 0.5px; /* Minimaler Buchstabenabstand */
+    background-color: var(--text-highlight);
+    color: var(--dark-blue);
+    border-color: var(--text-highlight);
+    font-size: 1.2em;
+    padding: 15px 35px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
@@ -189,9 +181,8 @@ nav ul li a:hover::after {
     border-color: var(--accent-blue);
 }
 
-/* --- Hamburger Menu (Mobile) --- */
 .hamburger {
-    display: none; /* Hidden by default for desktop */
+    display: none;
     cursor: pointer;
     flex-direction: column;
     gap: 6px;
@@ -207,7 +198,6 @@ nav ul li a:hover::after {
     transition: all var(--transition-duration-medium) var(--transition-ease-extra-smooth);
 }
 
-/* --- Section General Styles --- */
 section {
     padding: 100px 0;
     position: relative;
@@ -241,7 +231,6 @@ section {
     line-height: 1.2;
 }
 
-/* --- Hero Section --- */
 .hero-section {
     min-height: 100vh;
     display: flex;
@@ -270,7 +259,6 @@ section {
     margin-bottom: 50px;
 }
 
-/* --- Dashboard Section --- */
 .dashboard-section {
     background-color: var(--bg-light);
     text-align: left;
@@ -309,13 +297,8 @@ section {
 }
 
 .stat-item .status-online {
-    color: var(--accent-blue); /* Using accent-blue for online status */
+    color: var(--accent-blue);
 }
-
-/* Fallback for status-offline if needed, though not directly used now */
-/* .stat-item .status-offline {
-    color: #FF6347;
-} */
 
 .last-updated {
     font-size: 0.9em;
@@ -323,7 +306,6 @@ section {
     margin-top: 40px;
 }
 
-/* --- Commands Section --- */
 .commands-section {
     background-color: var(--bg-dark);
 }
@@ -417,7 +399,6 @@ section {
     margin-bottom: 0;
 }
 
-/* --- Footer --- */
 footer {
     background-color: var(--bg-dark);
     color: var(--text-secondary);
@@ -428,7 +409,6 @@ footer {
     opacity: 0.8;
 }
 
-/* --- Animation Classes (Controlled by JavaScript) --- */
 .anim-item {
     opacity: 0;
     transform: translateY(20px);
@@ -441,7 +421,6 @@ footer {
                 transform var(--transition-duration-long) var(--transition-ease-extra-smooth);
 }
 
-/* Special case for header items to animate on page load */
 header .logo,
 header nav ul li,
 header .btn-invite {
@@ -458,20 +437,17 @@ header nav ul li:nth-child(4) { animation-delay: 0.7s; }
 header nav ul li:nth-child(5) { animation-delay: 0.8s; }
 header .btn-invite { animation-delay: 0.9s; }
 
-/* Keyframe for initial header animation */
 @keyframes fadeInSlideDown {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Responsive Design (Mobile First Approach) --- */
-/* Mobile (default styles, no @media for basic small screens) */
 body {
-    font-size: 1em; /* Base font size for mobile */
+    font-size: 1em;
 }
 
 .container {
-    padding: 0 20px; /* Reduced padding for mobile */
+    padding: 0 20px;
 }
 
 header .container {
@@ -483,22 +459,21 @@ header .container {
 }
 
 .logo img {
-    height: 35px; /* Slightly smaller logo for mobile */
+    height: 35px;
     width: 35px;
 }
 
-/* Hamburger Menu active on mobile */
 .hamburger {
-    display: flex; /* Show hamburger on mobile */
+    display: flex;
 }
 
 nav ul {
-    display: none; /* Hide nav links by default on mobile */
+    display: none;
     flex-direction: column;
     width: 100%;
     background-color: var(--bg-dark);
     position: absolute;
-    top: 60px; /* Adjust based on header height */
+    top: 60px;
     left: 0;
     padding: 20px 0;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
@@ -507,13 +482,13 @@ nav ul {
 }
 
 nav ul.nav-active {
-    display: flex; /* Show nav links when active */
+    display: flex;
     animation: fadeIn var(--transition-duration-short) var(--transition-ease-extra-smooth);
 }
 
 nav ul li {
     margin: 15px 0;
-    opacity: 1; /* Reset animation for mobile menu items */
+    opacity: 1;
     transform: translateY(0);
     animation: none;
 }
@@ -525,7 +500,7 @@ nav ul li a {
 
 .btn-invite {
     margin-top: 20px;
-    padding: 10px 20px; /* Adjust padding for mobile invite button */
+    padding: 10px 20px;
     font-size: 1em;
     opacity: 1;
     transform: translateY(0);
@@ -546,11 +521,11 @@ nav ul li a {
 
 .hero-section {
     padding: 80px 20px;
-    min-height: 70vh; /* Adjust min-height for better mobile fit */
+    min-height: 70vh;
 }
 
 .hero-section h2 {
-    font-size: 2.8em; /* Smaller on mobile */
+    font-size: 2.8em;
 }
 
 .hero-section p {
@@ -559,41 +534,41 @@ nav ul li a {
 
 .btn-primary {
     font-size: 1.1em;
-    padding: 12px 25px; /* Adjusted padding for mobile hero button */
+    padding: 12px 25px;
 }
 
 .content-section {
-    padding: 60px 0; /* Reduced padding for mobile sections */
+    padding: 60px 0;
 }
 
 .section-number {
-    font-size: 2.5em; /* Smaller on mobile */
+    font-size: 2.5em;
 }
 
 .section-title {
-    font-size: 1.8em; /* Smaller on mobile */
+    font-size: 1.8em;
 }
 
 .dashboard-stats {
-    grid-template-columns: 1fr; /* Single column on mobile */
+    grid-template-columns: 1fr;
     gap: 20px;
 }
 
 .stat-item {
-    padding: 20px; /* Smaller padding for stat items */
+    padding: 20px;
 }
 
 .stat-item .stat-value {
-    font-size: 2.2em; /* Smaller font for stats on mobile */
+    font-size: 2.2em;
 }
 
 .search-bar input {
-    padding: 10px 15px; /* Smaller search bar input */
+    padding: 10px 15px;
     font-size: 1em;
 }
 
 .command-categories {
-    gap: 8px; /* Smaller gap for category buttons */
+    gap: 8px;
 }
 
 .category-btn {
@@ -610,14 +585,12 @@ nav ul li a {
 }
 
 footer {
-    padding: 40px 20px; /* Reduced footer padding */
+    padding: 40px 20px;
 }
 
-
-/* Desktop & Larger Tablets (>= 768px) */
 @media (min-width: 768px) {
     .container {
-        padding: 0 40px; /* Standard desktop padding */
+        padding: 0 40px;
     }
 
     header .container {
@@ -634,13 +607,13 @@ footer {
     }
 
     .hamburger {
-        display: none; /* Hide hamburger on desktop */
+        display: none;
     }
 
     nav ul {
-        display: flex; /* Show nav links on desktop */
+        display: flex;
         flex-direction: row;
-        position: static; /* Reset positioning */
+        position: static;
         width: auto;
         background-color: transparent;
         box-shadow: none;
@@ -649,7 +622,6 @@ footer {
 
     nav ul li {
         margin-left: 30px;
-        /* Animation delays handled by initial CSS animation */
     }
 
     nav ul li a {
@@ -657,13 +629,13 @@ footer {
     }
 
     .btn-invite {
-        margin-top: 0; /* Reset margin for desktop */
-        padding: 10px 22px; /* Standard desktop padding */
+        margin-top: 0;
+        padding: 10px 22px;
         font-size: 1em;
     }
 
     .hero-section {
-        min-height: 100vh; /* Full height on desktop */
+        min-height: 100vh;
         padding: 100px 0;
     }
 
@@ -681,7 +653,7 @@ footer {
     }
 
     .content-section {
-        padding: 100px 0; /* Standard desktop padding */
+        padding: 100px 0;
     }
 
     .section-number {
@@ -693,7 +665,7 @@ footer {
     }
 
     .dashboard-stats {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Multiple columns on desktop */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 30px;
     }
 
