@@ -99,13 +99,12 @@
                 <div class="command-categories anim-item">
                     <button class="category-btn active" data-category="all">All</button>
                     <button class="category-btn" data-category="economy">Economy</button>
-                    <button class="category-btn" data-category="utility">Utility</button>
-                    <button class="category-btn" data-category="moderation">Moderation</button>
-                    <button class="category-btn" data-category="fun">Fun</button>
-                    <button class="category-btn" data-category="staff">Staff</button>
-                    <button class="category-btn" data-category="timezone">Timezone</button>
                     <button class="category-btn" data-category="ai">AI</button>
+                    <button class="category-btn" data-category="staff">Staff & Moderation</button>
                     <button class="category-btn" data-category="text">Text Tools</button>
+                    <button class="category-btn" data-category="utility">Utility</button>
+                    <button class="category-btn" data-category="fun">Fun</button>
+                    <button class="category-btn" data-category="timezone">Timezone</button>
                 </div>
 
                 <div class="command-list">
@@ -131,7 +130,7 @@
                     </div>
                     <div class="command-item anim-item" data-category="economy">
                         <h4>:daily</h4>
-                        <p>Claim your daily reward.</p>
+                        <p>Claim your daily reward (12h cooldown).</p>
                     </div>
                     <div class="command-item anim-item" data-category="economy">
                         <h4>:leaderboard</h4>
@@ -148,6 +147,14 @@
                     <div class="command-item anim-item" data-category="economy">
                         <h4>:gamble &lt;amount&gt;</h4>
                         <p>Gamble money - 50/50 chance.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:poker &lt;amount&gt;</h4>
+                        <p>Play poker.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="economy">
+                        <h4>:blackjack &lt;amount&gt;</h4>
+                        <p>Play blackjack.</p>
                     </div>
 
                     <div class="command-item anim-item" data-category="ai">
@@ -179,53 +186,111 @@
                         <p>Get BigFlush's wisdom.</p>
                     </div>
 
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:honeypot</h4>
+                        <p>Create honeypot channel (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:automodon</h4>
+                        <p>Enable automod (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:automodoff</h4>
+                        <p>Disable automod (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:tksetup [text]</h4>
+                        <p>Setup ticket system (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>:clear &lt;amount&gt;</h4>
+                        <p>Clear messages from the channel (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/automodsetup</h4>
+                        <p>Configure automod (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/ban &lt;user&gt;</h4>
+                        <p>Ban a member (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/kick &lt;user&gt;</h4>
+                        <p>Kick a member (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/timeout &lt;user&gt; &lt;minutes&gt;</h4>
+                        <p>Timeout a member for a specified duration (Staff only).</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="staff moderation">
+                        <h4>/announce</h4>
+                        <p>Create an announcement (Staff only).</p>
+                    </div>
+
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:ascii &lt;text&gt;</h4>
+                        <p>Convert text to ASCII art.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:color &lt;color&gt;</h4>
+                        <p>Show color information.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:flip &lt;text&gt;</h4>
+                        <p>Flip text upside down.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:reverse &lt;text&gt;</h4>
+                        <p>Reverse text.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:base64 &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Base64 conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:hash &lt;text&gt;</h4>
+                        <p>Generate MD5/SHA256 hashes.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:binary &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Binary conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:hex &lt;encode/decode&gt; &lt;text&gt;</h4>
+                        <p>Hex conversion.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:leetspeak &lt;text&gt;</h4>
+                        <p>Convert to leetspeak.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:fortune</h4>
+                        <p>Get your fortune.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="text">
+                        <h4>:insult &lt;user&gt;</h4>
+                        <p>Playful insult (friendly!).</p>
+                    </div>
+
                     <div class="command-item anim-item" data-category="utility">
                         <h4>:commands</h4>
                         <p>Show this command menu.</p>
                     </div>
                     <div class="command-item anim-item" data-category="utility">
-                        <h4>:stats</h4>
-                        <p>Show your stats.</p>
+                        <h4>:sleep</h4>
+                        <p>Enter sleep mode.</p>
                     </div>
                     <div class="command-item anim-item" data-category="utility">
-                        <h4>:love &lt;user&gt;</h4>
-                        <p>Calculate love percentage.</p>
+                        <h4>:wake</h4>
+                        <p>Wake up from sleep mode.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:stats (Prefix)</h4>
+                        <p>Show your stats.</p>
                     </div>
                     <div class="command-item anim-item" data-category="utility">
                         <h4>:password</h4>
                         <p>Generate a secure password.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>:remind &lt;time&gt; &lt;message&gt;</h4>
-                        <p>Set a reminder.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>:joke</h4>
-                        <p>Get a random joke.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>:roast &lt;user&gt;</h4>
-                        <p>Friendly roast.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>:compliment &lt;user&gt;</h4>
-                        <p>Give a compliment.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>:fact</h4>
-                        <p>Get a fun fact.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>:meme</h4>
-                        <p>Get a meme.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>:willow</h4>
-                        <p>Amazing streaming website info.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="utility">
-                        <h4>:test</h4>
-                        <p>Test bot functionality.</p>
                     </div>
                     <div class="command-item anim-item" data-category="utility">
                         <h4>/userinfo</h4>
@@ -267,33 +332,55 @@
                         <h4>/ticket</h4>
                         <p>Create a support ticket.</p>
                     </div>
-
-
-                    <div class="command-item anim-item" data-category="moderation staff">
-                        <h4>/kick</h4>
-                        <p>Kick a member. (Staff only)</p>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:willow</h4>
+                        <p>Amazing streaming website info.</p>
                     </div>
-                    <div class="command-item anim-item" data-category="moderation staff">
-                        <h4>/timeout</h4>
-                        <p>Timeout a member for a specified minute duration.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="moderation staff">
-                        <h4>/ban</h4>
-                        <p>Ban a member. (Staff only)</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="moderation staff">
-                        <h4>/clear</h4>
-                        <p>Clear messages from the channel. (Staff only)</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="moderation staff">
-                        <h4>/nuke</h4>
-                        <p>Recreate a channel. (Staff only)</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="moderation staff">
-                        <h4>/announce</h4>
-                        <p>Create an announcement. (Staff only)</p>
+                    <div class="command-item anim-item" data-category="utility">
+                        <h4>:test</h4>
+                        <p>Test bot functionality.</p>
                     </div>
 
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/bam &lt;user&gt;</h4>
+                        <p>Fake ban with style.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/angry &lt;reason&gt;</h4>
+                        <p>Express anger.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>/shocked</h4>
+                        <p>Express shock.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:love &lt;user&gt;</h4>
+                        <p>Calculate love percentage.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:remind &lt;time&gt; &lt;message&gt;</h4>
+                        <p>Set a reminder.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:joke</h4>
+                        <p>Get a random joke.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:roast &lt;user&gt;</h4>
+                        <p>Friendly roast.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:compliment &lt;user&gt;</h4>
+                        <p>Give a compliment.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:fact</h4>
+                        <p>Get a fun fact.</p>
+                    </div>
+                    <div class="command-item anim-item" data-category="fun">
+                        <h4>:meme</h4>
+                        <p>Get a meme.</p>
+                    </div>
                     <div class="command-item anim-item" data-category="fun">
                         <h4>/coinflip</h4>
                         <p>Flip a coin.</p>
@@ -313,10 +400,6 @@
                     <div class="command-item anim-item" data-category="fun">
                         <h4>/choose</h4>
                         <p>Choose between multiple options (separated by comma).</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="fun">
-                        <h4>/bam &lt;user&gt;</h4>
-                        <p>Fake ban with style.</p>
                     </div>
                     <div class="command-item anim-item" data-category="fun">
                         <h4>/fakekick &lt;user&gt;</h4>
@@ -375,24 +458,12 @@
                         <p>Express sadness.</p>
                     </div>
                     <div class="command-item anim-item" data-category="fun">
-                        <h4>/angry &lt;reason&gt;</h4>
-                        <p>Express anger.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="fun">
-                        <h4>/shocked</h4>
-                        <p>Express shock.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="fun">
                         <h4>/shrug</h4>
                         <p>Show confusion.</p>
                     </div>
                     <div class="command-item anim-item" data-category="fun">
                         <h4>/thinking</h4>
                         <p>Deep thought.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="fun">
-                        <h4>/sleep</h4>
-                        <p>Time to sleep.</p>
                     </div>
                     <div class="command-item anim-item" data-category="fun">
                         <h4>/applaud &lt;user&gt;</h4>
@@ -419,51 +490,6 @@
                     <div class="command-item anim-item" data-category="timezone">
                         <h4>:timezones</h4>
                         <p>List all available timezones.</p>
-                    </div>
-
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:ascii &lt;text&gt;</h4>
-                        <p>Convert text to ASCII art.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:color &lt;color&gt;</h4>
-                        <p>Show color information.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:flip &lt;text&gt;</h4>
-                        <p>Flip text upside down.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:reverse &lt;text&gt;</h4>
-                        <p>Reverse text.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:base64 &lt;encode/decode&gt; &lt;text&gt;</h4>
-                        <p>Base64 conversion.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:hash &lt;text&gt;</h4>
-                        <p>Generate MD5/SHA256 hashes.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:binary &lt;encode/decode&gt; &lt;text&gt;</h4>
-                        <p>Binary conversion.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:hex &lt;encode/decode&gt; &lt;text&gt;</h4>
-                        <p>Hex conversion.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:leetspeak &lt;text&gt;</h4>
-                        <p>Convert to leetspeak.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:fortune</h4>
-                        <p>Get your fortune.</p>
-                    </div>
-                    <div class="command-item anim-item" data-category="text">
-                        <h4>:insult &lt;user&gt;</h4>
-                        <p>Playful insult (friendly!).</p>
                     </div>
                 </div>
             </div>
