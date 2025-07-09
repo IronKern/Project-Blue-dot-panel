@@ -1,12 +1,12 @@
 :root {
-    --primary-color: #556BFF;
-    --secondary-color: #7A8DFF;
-    --background-color: #1a1a2e;
-    --card-background: #20203a;
-    --text-color: #e0e0e0;
-    --heading-color: #ffffff;
-    --border-color: #33334d;
-    --accent-color: #00bcd4;
+    --primary-color: #007BFF; /* Ein klares, strahlendes Blau */
+    --secondary-color: #66B2FF; /* Ein helleres Blau */
+    --background-color: #121212; /* Sehr dunkles Grau, fast Schwarz */
+    --card-background: #1E1E1E; /* Etwas helleres Dunkelgrau für Karten */
+    --text-color: #E0E0E0; /* Helles Grau für den Text */
+    --heading-color: #FFFFFF; /* Reines Weiß für Überschriften */
+    --border-color: #333333; /* Dunkelgrau für Ränder */
+    --accent-color: #00BCD4; /* Ein schönes Türkis/Cyan für Akzente */
     --transition-speed: 0.3s ease;
 }
 
@@ -153,7 +153,7 @@ section h2::after {
 .hero-content h2 {
     font-size: 4rem;
     margin-bottom: 20px;
-    text-shadow: 0 0 15px rgba(85, 107, 255, 0.7);
+    text-shadow: 0 0 15px rgba(0, 123, 255, 0.7); /* Schattenfarbe auf Blau angepasst */
 }
 
 .hero-content p {
