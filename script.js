@@ -17,9 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const userCount = document.getElementById('user-count');
     const botPing = document.getElementById('bot-ping');
     const botUptime = document.getElementById('bot-uptime');
-    // const lastCommand = document.getElementById('last-command'); // ENTFERNT
     const totalCommands = document.getElementById('total-commands');
-    // const developmentStatus = document.getElementById('development-status'); // ENTFERNT
+    const cpuUsage = document.getElementById('cpu-usage'); // Neu
+    const ramUsage = document.getElementById('ram-usage');   // Neu
+    const storageUsage = document.getElementById('storage-usage'); // Neu
     const lastUpdatedTime = document.getElementById('last-updated-time');
     const pythonVersion = document.getElementById('python-version');
     const nextcordVersion = document.getElementById('nextcord-version');
@@ -108,9 +109,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (totalCommands) {
             totalCommands.textContent = statsData?.command_count?.toLocaleString() || 'N/A';
         }
-        // if (lastCommand) { // ENTFERNT
-        //     lastCommand.textContent = (statsData?.last_commands && statsData.last_commands.length > 0) ? statsData.last_commands[statsData.last_commands.length - 1] : 'N/A';
-        // }
+        // Neue Felder für CPU, RAM, Storage (aus infoData und statsData)
+        if (cpuUsage) {
+            cpuUsage.textContent = (statsData?.cpu_usage !== undefined && statsData?.cpu_usage !== null) ? `${statsData.cpu_usage}%` : 'N/A';
+        }
+        if (ramUsage) {
+            ramUsage.textContent = (statsData?.memory_usage !== undefined && statsData?.memory_usage !== null) ? `${statsData.memory_usage}MB` : 'N/A';
+        }
+        if (storageUsage) {
+            storageUsage.textContent = (statsData?.disk_usage !== undefined && statsData?.disk_usage !== null) ? `${statsData.disk_usage}GB` : 'N/A';
+        }
+
 
         // Detaillierte Bot-Informationen
         if (userCount) {
@@ -130,12 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (nextcordVersion) { //
             nextcordVersion.textContent = infoData?.nextcord_version || 'N/A';
         }
-
-        // Statischer Entwicklungsstatus - ENTFERNT
-        // if (developmentStatus) {
-        //     developmentStatus.textContent = 'Work in progress';
-        //     developmentStatus.className = 'stat-value status-wip';
-        // }
 
         // Letzte Aktualisierungszeit
         if (lastUpdatedTime) {
