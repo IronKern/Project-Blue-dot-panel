@@ -306,11 +306,6 @@ section {
 .stat-item .status-loading {
     color: var(--text-secondary); /* Gray for Loading */
 }
-/* New style for "In Arbeit" */
-.stat-item .status-wip {
-    color: #FFA500; /* Orange for Work In Progress */
-}
-
 
 .last-updated {
     font-size: 0.9em;
@@ -321,8 +316,6 @@ section {
 .commands-section {
     background-color: var(--bg-dark);
 }
-
-/* .search-bar was here, now removed */
 
 .command-categories {
     text-align: left;
@@ -553,8 +546,6 @@ header .btn-invite { animation-delay: 0.9s; }
         font-size: 2.2em;
     }
 
-    /* .search-bar input styles were here, now removed */
-
     .command-categories {
         gap: 8px;
     }
@@ -666,8 +657,6 @@ header .btn-invite { animation-delay: 0.9s; }
         font-size: 2.8em;
     }
 
-    /* .search-bar input styles were here, now removed */
-
     .command-categories {
         gap: 10px;
     }
@@ -688,3 +677,4 @@ header .btn-invite { animation-delay: 0.9s; }
     footer {
         padding: 60px 20px;
     }
+}
