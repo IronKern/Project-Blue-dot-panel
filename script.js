@@ -42,24 +42,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const statsResponse = await fetch(`${API_URL}/stats`);
             const stats = await statsResponse.json();
 
-            document.getElementById('bot-status').textContent = botInfo.status ? 'Online' : 'Offline';
-            document.getElementById('server-count').textContent = botInfo.guilds;
-            document.getElementById('user-count').textContent = botInfo.users;
-            document.getElementById('bot-ping').textContent = `${botInfo.latency_ms}ms`;
-            document.getElementById('bot-uptime').textContent = stats.uptime_formatted;
-            document.getElementById('total-commands').textContent = stats.command_count;
+            // Hilfsfunktion, um Werte sicher abzurufen oder Standardwert zu setzen
+            const getSafeValue = (obj, key, defaultValue = 'N/A') => obj && obj[key] !== undefined ? obj[key] : defaultValue;
 
-            document.getElementById('cpu-usage').textContent = `${stats.cpu_usage}%`;
-            document.getElementById('memory-usage').textContent = `${stats.memory_usage}MB`;
-            document.getElementById('disk-usage').textContent = `${stats.disk_usage}%`;
-            document.getElementById('python-version').textContent = stats.python_version;
-            document.getElementById('nextcord-version').textContent = stats.nextcord_version;
+            document.getElementById('bot-status').textContent = getSafeValue(botInfo, 'status') ? 'Online' : 'Offline';
+            document.getElementById('server-count').textContent = getSafeValue(botInfo, 'guilds');
+            document.getElementById('user-count').textContent = getSafeValue(botInfo, 'users');
+            document.getElementById('bot-ping').textContent = `${getSafeValue(botInfo, 'latency_ms')}ms`;
+            
+            // Für Uptime, CPU etc., die von der /stats API kommen
+            document.getElementById('bot-uptime').textContent = getSafeValue(stats, 'uptime_formatted');
+            document.getElementById('total-commands').textContent = getSafeValue(stats, 'command_count');
+            document.getElementById('cpu-usage').textContent = `${getSafeValue(stats, 'cpu_usage')}%`;
+            document.getElementById('memory-usage').textContent = `${getSafeValue(stats, 'memory_usage')}MB`;
+            document.getElementById('disk-usage').textContent = `${getSafeValue(stats, 'disk_usage')}%`;
+            document.getElementById('python-version').textContent = getSafeValue(stats, 'python_version');
+            document.getElementById('nextcord-version').textContent = getSafeValue(stats, 'nextcord_version');
 
             const now = new Date();
             document.getElementById('last-updated-time').textContent = now.toLocaleTimeString('de-DE');
 
         } catch (error) {
             console.error('Fehler beim Abrufen der Bot-Statistiken:', error);
+            // Setze auf N/A bei Fehlern, damit der Benutzer Feedback erhält
             document.getElementById('bot-status').textContent = 'Fehler';
             document.getElementById('server-count').textContent = 'N/A';
             document.getElementById('user-count').textContent = 'N/A';
@@ -84,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                // Füge Verzögerung zu einzelnen Elementen hinzu, falls vorhanden
                 entry.target.querySelectorAll('.anim-item').forEach((item, index) => {
                     item.style.transitionDelay = `${index * 0.1}s`;
                     item.classList.add('visible');
