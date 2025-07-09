@@ -14,12 +14,12 @@
     --font-primary: 'Inter', sans-serif;
     --font-secondary: 'Montserrat', sans-serif; /* For headings and bold elements */
 
-    --transition-duration-long: 1.2s; /* Noch längere Dauer für Hauptanimationen */
+    --transition-duration-long: 1.2s; /* Längere Dauer für Hauptanimationen */
     --transition-duration-medium: 0.7s; /* Mittlere Dauer */
     --transition-duration-short: 0.4s; /* Kurze Dauer für Hover etc. */
-    /* Neuere, geschmeidigere Ease-Funktion */
-    --transition-ease-smoother: cubic-bezier(0.2, 0.8, 0.2, 1);
-    --animation-delay-step: 0.1s; /* Standard delay step for staggered animations */
+    /* Noch geschmeidigere Ease-Funktion für natürliche Bewegung */
+    --transition-ease-extra-smooth: cubic-bezier(0.23, 1, 0.32, 1); /* Ease-Out-Back-ähnlich */
+    --animation-delay-step: 0.08s; /* Feinerer Delay-Schritt für gestaffelte Animationen */
 }
 
 /* --- Base Styles --- */
@@ -35,15 +35,15 @@ body {
 }
 
 .container {
-    max-width: 1000px; /* Slightly narrower for focus */
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 40px; /* More horizontal padding for cleanliness */
+    padding: 0 40px;
 }
 
 a {
     color: var(--text-primary);
     text-decoration: none;
-    transition: color var(--transition-duration-short) var(--transition-ease-smoother);
+    transition: color var(--transition-duration-short) var(--transition-ease-extra-smooth);
 }
 
 a:hover {
@@ -52,8 +52,8 @@ a:hover {
 
 /* --- Header --- */
 header {
-    background-color: var(--bg-dark); /* Blends with body */
-    padding: 15px 0; /* Slightly reduced vertical padding */
+    background-color: var(--bg-dark);
+    padding: 15px 0;
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -64,7 +64,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px; /* Consistent with main container */
+    padding: 0 40px;
 }
 
 .logo {
@@ -73,16 +73,16 @@ header .container {
     gap: 10px;
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smoother) forwards;
-    animation-delay: 0.2s; /* Initial delay for logo */
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
+    animation-delay: 0.2s;
 }
 
 .logo img {
-    height: 45px; /* Smaller logo */
+    height: 45px;
     width: 45px;
     border-radius: 50%;
     box-shadow: 0 0 15px var(--logo-glow);
-    transition: transform var(--transition-duration-short) var(--transition-ease-smoother), box-shadow var(--transition-duration-short) var(--transition-ease-smoother);
+    transition: transform var(--transition-duration-short) var(--transition-ease-extra-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-extra-smooth);
 }
 
 .logo img:hover {
@@ -93,7 +93,7 @@ header .container {
 .logo h1 {
     margin: 0;
     color: var(--text-highlight);
-    font-size: 1.8em; /* Smaller font size */
+    font-size: 1.8em;
     font-family: var(--font-secondary);
     letter-spacing: 0.5px;
 }
@@ -109,14 +109,14 @@ nav ul li {
     margin-left: 30px;
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smoother) forwards;
-    /* Delays set by JS for staggered effect */
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
+    /* Delays werden von JS gesetzt */
 }
 
 nav ul li a {
     color: var(--text-secondary);
     font-weight: 500;
-    padding: 5px 0; /* Minimal padding for underline focus */
+    padding: 5px 0;
     position: relative;
     overflow: hidden;
 }
@@ -131,7 +131,7 @@ nav ul li a::after {
     background-color: var(--text-highlight);
     transform: scaleX(0);
     transform-origin: bottom right;
-    transition: transform var(--transition-duration-medium) var(--transition-ease-smoother); /* Smoother underline transition */
+    transition: transform var(--transition-duration-medium) var(--transition-ease-extra-smooth);
 }
 
 nav ul li a:hover {
@@ -143,72 +143,73 @@ nav ul li a:hover::after {
     transform-origin: bottom left;
 }
 
-.btn-invite, .btn-primary { /* Both buttons share these core styles */
-    background-color: transparent; /* Transparent background by default */
-    color: var(--text-highlight); /* White text */
-    padding: 12px 28px; /* Slightly larger padding */
+/* Base styles for both primary and invite buttons */
+.btn-invite, .btn-primary {
+    padding: 12px 28px;
     border-radius: 30px;
-    font-weight: 700; /* Fetter für "Add Bot to Your Server" */
-    border: 1px solid var(--text-highlight); /* White border */
-    transition: background-color var(--transition-duration-short) var(--transition-ease-smoother),
-                color var(--transition-duration-short) var(--transition-ease-smoother),
-                transform var(--transition-duration-short) var(--transition-ease-smoother),
-                border-color var(--transition-duration-short) var(--transition-ease-smoother);
+    font-weight: 700;
+    border: 1px solid; /* Solid border, color specified later */
+    transition: background-color var(--transition-duration-short) var(--transition-ease-extra-smooth),
+                color var(--transition-duration-short) var(--transition-ease-extra-smooth),
+                transform var(--transition-duration-short) var(--transition-ease-extra-smooth),
+                border-color var(--transition-duration-short) var(--transition-ease-extra-smooth);
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smoother) forwards;
-    /* Delay set by JS */
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
 }
 
-/* Specific styling for btn-invite (Header button) */
+/* Styles for "Invite Bot" button in header */
 .btn-invite {
-    /* Animation delay handled by JS for header items */
-}
-
-/* Specific styling for btn-primary (Hero button) */
-.btn-primary {
-    color: var(--bg-dark); /* Dark text on white background initially */
-    background-color: var(--text-highlight); /* White background */
+    background-color: transparent;
+    color: var(--text-highlight); /* White text */
     border-color: var(--text-highlight); /* White border */
-    font-size: 1.2em; /* Bigger font size for prominence */
-    padding: 15px 35px; /* Even larger padding for hero button */
-    font-weight: 800; /* Noch fetter */
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-blue); /* Blue on hover */
-    color: var(--text-highlight); /* White text on hover */
-    border-color: var(--accent-blue); /* Blue border on hover */
 }
 
 .btn-invite:hover {
-    background-color: var(--accent-blue); /* Blue on hover */
-    color: var(--text-highlight); /* White text on hover */
-    border-color: var(--accent-blue); /* Blue border on hover */
+    background-color: var(--accent-blue);
+    color: var(--text-highlight);
+    border-color: var(--accent-blue);
     transform: translateY(-2px);
+}
+
+/* Styles for "Add Bot to Your Server" button in hero section */
+.btn-primary {
+    background-color: var(--text-highlight); /* White background */
+    color: var(--dark-blue); /* Dunkelblaue Schriftfarbe */
+    border-color: var(--text-highlight); /* White border */
+    font-size: 1.2em; /* Bigger font size */
+    padding: 15px 35px; /* Even larger padding */
+    font-weight: 900; /* Noch fetter */
+    letter-spacing: 0.5px; /* Minimaler Buchstabenabstand */
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-blue);
+    color: var(--text-highlight);
+    border-color: var(--accent-blue);
 }
 
 /* --- Hamburger Menu (Mobile) --- */
 .hamburger {
-    display: none;
+    display: none; /* Hidden by default for desktop */
     cursor: pointer;
     flex-direction: column;
     gap: 6px;
     padding: 5px;
-    transition: all var(--transition-duration-medium) var(--transition-ease-smoother);
+    transition: all var(--transition-duration-medium) var(--transition-ease-extra-smooth);
 }
 
 .hamburger .bar {
     width: 30px;
-    height: 2px; /* Thinner bars */
+    height: 2px;
     background-color: var(--text-highlight);
     border-radius: 2px;
-    transition: all var(--transition-duration-medium) var(--transition-ease-smoother);
+    transition: all var(--transition-duration-medium) var(--transition-ease-extra-smooth);
 }
 
 /* --- Section General Styles --- */
 section {
-    padding: 100px 0; /* Generous vertical padding */
+    padding: 100px 0;
     position: relative;
 }
 
@@ -217,14 +218,14 @@ section {
 }
 
 .content-section .container {
-    max-width: 800px; /* Even narrower for core content */
+    max-width: 800px;
     padding: 0 20px;
-    text-align: left; /* Aligned left, as in video */
+    text-align: left;
 }
 
 .section-number {
     font-family: var(--font-primary);
-    font-size: 4em; /* Large number */
+    font-size: 4em;
     font-weight: 300;
     color: var(--text-secondary);
     margin-bottom: 20px;
@@ -233,7 +234,7 @@ section {
 
 .section-title {
     font-family: var(--font-secondary);
-    font-size: 2.5em; /* Large, bold title */
+    font-size: 2.5em;
     font-weight: 700;
     color: var(--text-highlight);
     margin-bottom: 40px;
@@ -242,12 +243,12 @@ section {
 
 /* --- Hero Section --- */
 .hero-section {
-    min-height: 100vh; /* Full viewport height */
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at center, rgba(0, 123, 255, 0.1) 0%, transparent 70%), var(--bg-dark); /* Subtle radial gradient */
-    border-bottom: none; /* No border for hero */
+    background: radial-gradient(circle at center, rgba(0, 123, 255, 0.1) 0%, transparent 70%), var(--bg-dark);
+    border-bottom: none;
 }
 
 .hero-section .container {
@@ -255,7 +256,7 @@ section {
 }
 
 .hero-section h2 {
-    font-size: 5em; /* Very large heading */
+    font-size: 5em;
     font-weight: 800;
     color: var(--text-highlight);
     margin-bottom: 20px;
@@ -269,9 +270,9 @@ section {
     margin-bottom: 50px;
 }
 
-/* --- Dashboard Section (Reimagined for Cleanliness) --- */
+/* --- Dashboard Section --- */
 .dashboard-section {
-    background-color: var(--bg-light); /* Lighter background for distinction */
+    background-color: var(--bg-light);
     text-align: left;
 }
 
@@ -308,12 +309,13 @@ section {
 }
 
 .stat-item .status-online {
-    color: var(--status-online);
+    color: var(--accent-blue); /* Using accent-blue for online status */
 }
 
-.stat-item .status-offline {
-    color: var(--status-offline);
-}
+/* Fallback for status-offline if needed, though not directly used now */
+/* .stat-item .status-offline {
+    color: #FF6347;
+} */
 
 .last-updated {
     font-size: 0.9em;
@@ -321,26 +323,26 @@ section {
     margin-top: 40px;
 }
 
-/* --- Commands Section (Reimagined for Cleanliness) --- */
+/* --- Commands Section --- */
 .commands-section {
     background-color: var(--bg-dark);
 }
 
 .search-bar {
-    text-align: left; /* Align search left */
+    text-align: left;
     margin-bottom: 40px;
 }
 
 .search-bar input {
-    width: 100%; /* Full width within container */
+    width: 100%;
     padding: 15px 25px;
-    border-radius: 5px; /* Less rounded for clean look */
+    border-radius: 5px;
     border: 1px solid var(--border-color);
     background-color: var(--bg-light);
     color: var(--text-primary);
     font-size: 1.1em;
     outline: none;
-    transition: border-color var(--transition-duration-short) var(--transition-ease-smoother), box-shadow var(--transition-duration-short) var(--transition-ease-smoother);
+    transition: border-color var(--transition-duration-short) var(--transition-ease-extra-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-extra-smooth);
 }
 
 .search-bar input::placeholder {
@@ -353,53 +355,52 @@ section {
 }
 
 .command-categories {
-    text-align: left; /* Align categories left */
+    text-align: left;
     margin-bottom: 50px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Smaller gap */
+    gap: 10px;
 }
 
 .category-btn {
-    background-color: transparent; /* No background by default */
+    background-color: transparent;
     color: var(--text-secondary);
     border: 1px solid var(--border-color);
     padding: 10px 20px;
-    border-radius: 5px; /* Less rounded */
+    border-radius: 5px;
     cursor: pointer;
     font-size: 0.95em;
     font-weight: 500;
-    transition: background-color var(--transition-duration-short) var(--transition-ease-smoother), color var(--transition-duration-short) var(--transition-ease-smoother), border-color var(--transition-duration-short) var(--transition-ease-smoother);
+    transition: background-color var(--transition-duration-short) var(--transition-ease-extra-smooth), color var(--transition-duration-short) var(--transition-ease-extra-smooth), border-color var(--transition-duration-short) var(--transition-ease-extra-smooth);
 }
 
 .category-btn:hover {
-    background-color: rgba(255, 255, 255, 0.05); /* Subtle grey background */
+    background-color: rgba(255, 255, 255, 0.05);
     color: var(--text-primary);
     border-color: var(--text-primary);
 }
 
 .category-btn.active {
-    background-color: var(--text-highlight); /* White active state */
-    color: var(--bg-dark); /* Dark text on active */
+    background-color: var(--text-highlight);
+    color: var(--bg-dark);
     border-color: var(--text-highlight);
     font-weight: 600;
 }
 
-
 .command-list {
     display: grid;
-    grid-template-columns: 1fr; /* Single column for simplicity */
-    gap: 20px; /* Gap between command items */
+    grid-template-columns: 1fr;
+    gap: 20px;
 }
 
 .command-item {
-    border-bottom: 1px solid var(--border-color); /* Subtle separator */
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 20px;
     margin-bottom: 20px;
 }
 
 .command-item:last-child {
-    border-bottom: none; /* No border for the last item */
+    border-bottom: none;
 }
 
 .command-item h4 {
@@ -428,18 +429,16 @@ footer {
 }
 
 /* --- Animation Classes (Controlled by JavaScript) --- */
-/* Initial hidden state for animatable items */
 .anim-item {
     opacity: 0;
     transform: translateY(20px);
 }
 
-/* Final visible state when 'in-view' class is added by JS */
 .anim-target.in-view .anim-item {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity var(--transition-duration-long) var(--transition-ease-smoother),
-                transform var(--transition-duration-long) var(--transition-ease-smoother);
+    transition: opacity var(--transition-duration-long) var(--transition-ease-extra-smooth),
+                transform var(--transition-duration-long) var(--transition-ease-extra-smooth);
 }
 
 /* Special case for header items to animate on page load */
@@ -448,7 +447,7 @@ header nav ul li,
 header .btn-invite {
     opacity: 0;
     transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-smoother) forwards;
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
 }
 
 header .logo { animation-delay: 0.2s; }
@@ -459,126 +458,276 @@ header nav ul li:nth-child(4) { animation-delay: 0.7s; }
 header nav ul li:nth-child(5) { animation-delay: 0.8s; }
 header .btn-invite { animation-delay: 0.9s; }
 
-
-/* --- Keyframe Animations (Specific) --- */
+/* Keyframe for initial header animation */
 @keyframes fadeInSlideDown {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Responsive Design --- */
-@media (max-width: 768px) {
+/* --- Responsive Design (Mobile First Approach) --- */
+/* Mobile (default styles, no @media for basic small screens) */
+body {
+    font-size: 1em; /* Base font size for mobile */
+}
+
+.container {
+    padding: 0 20px; /* Reduced padding for mobile */
+}
+
+header .container {
+    padding: 10px 20px;
+}
+
+.logo h1 {
+    font-size: 1.5em;
+}
+
+.logo img {
+    height: 35px; /* Slightly smaller logo for mobile */
+    width: 35px;
+}
+
+/* Hamburger Menu active on mobile */
+.hamburger {
+    display: flex; /* Show hamburger on mobile */
+}
+
+nav ul {
+    display: none; /* Hide nav links by default on mobile */
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--bg-dark);
+    position: absolute;
+    top: 60px; /* Adjust based on header height */
+    left: 0;
+    padding: 20px 0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    z-index: 999;
+    text-align: center;
+}
+
+nav ul.nav-active {
+    display: flex; /* Show nav links when active */
+    animation: fadeIn var(--transition-duration-short) var(--transition-ease-extra-smooth);
+}
+
+nav ul li {
+    margin: 15px 0;
+    opacity: 1; /* Reset animation for mobile menu items */
+    transform: translateY(0);
+    animation: none;
+}
+
+nav ul li a {
+    padding: 10px 0;
+    font-size: 1.1em;
+}
+
+.btn-invite {
+    margin-top: 20px;
+    padding: 10px 20px; /* Adjust padding for mobile invite button */
+    font-size: 1em;
+    opacity: 1;
+    transform: translateY(0);
+    animation: none;
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.hero-section {
+    padding: 80px 20px;
+    min-height: 70vh; /* Adjust min-height for better mobile fit */
+}
+
+.hero-section h2 {
+    font-size: 2.8em; /* Smaller on mobile */
+}
+
+.hero-section p {
+    font-size: 1.1em;
+}
+
+.btn-primary {
+    font-size: 1.1em;
+    padding: 12px 25px; /* Adjusted padding for mobile hero button */
+}
+
+.content-section {
+    padding: 60px 0; /* Reduced padding for mobile sections */
+}
+
+.section-number {
+    font-size: 2.5em; /* Smaller on mobile */
+}
+
+.section-title {
+    font-size: 1.8em; /* Smaller on mobile */
+}
+
+.dashboard-stats {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 20px;
+}
+
+.stat-item {
+    padding: 20px; /* Smaller padding for stat items */
+}
+
+.stat-item .stat-value {
+    font-size: 2.2em; /* Smaller font for stats on mobile */
+}
+
+.search-bar input {
+    padding: 10px 15px; /* Smaller search bar input */
+    font-size: 1em;
+}
+
+.command-categories {
+    gap: 8px; /* Smaller gap for category buttons */
+}
+
+.category-btn {
+    padding: 8px 15px;
+    font-size: 0.85em;
+}
+
+.command-item h4 {
+    font-size: 1.2em;
+}
+
+.command-item p {
+    font-size: 0.9em;
+}
+
+footer {
+    padding: 40px 20px; /* Reduced footer padding */
+}
+
+
+/* Desktop & Larger Tablets (>= 768px) */
+@media (min-width: 768px) {
     .container {
-        padding: 0 20px;
+        padding: 0 40px; /* Standard desktop padding */
     }
 
     header .container {
-        padding: 10px 20px;
+        padding: 15px 40px;
     }
 
     .logo h1 {
-        font-size: 1.5em;
+        font-size: 1.8em;
     }
 
     .logo img {
-        height: 40px;
-        width: 40px;
-    }
-
-    nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: var(--bg-dark);
-        position: absolute;
-        top: 65px; /* Adjust based on header height */
-        left: 0;
-        padding: 20px 0;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.5); /* Use rgba for shadow */
-        z-index: 999;
-        text-align: center;
-    }
-
-    nav ul.nav-active {
-        display: flex;
-        animation: fadeIn var(--transition-duration-short) var(--transition-ease-smoother);
-    }
-
-    nav ul li {
-        margin: 15px 0;
-        /* Reset animation for mobile menu as it's controlled by JS toggle */
-        opacity: 1;
-        transform: translateY(0);
-        animation: none;
-    }
-
-    nav ul li a {
-        padding: 10px 0;
-    }
-
-    nav ul li a::after {
-        bottom: -5px; /* Adjust for mobile padding */
-    }
-
-    .btn-invite {
-        margin-top: 20px; /* Push invite button down in mobile menu */
-        /* Reset animation for mobile menu */
-        opacity: 1;
-        transform: translateY(0);
-        animation: none;
+        height: 45px;
+        width: 45px;
     }
 
     .hamburger {
-        display: flex;
+        display: none; /* Hide hamburger on desktop */
     }
 
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
+    nav ul {
+        display: flex; /* Show nav links on desktop */
+        flex-direction: row;
+        position: static; /* Reset positioning */
+        width: auto;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
     }
 
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
+    nav ul li {
+        margin-left: 30px;
+        /* Animation delays handled by initial CSS animation */
     }
 
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
+    nav ul li a {
+        font-size: 1em;
+    }
+
+    .btn-invite {
+        margin-top: 0; /* Reset margin for desktop */
+        padding: 10px 22px; /* Standard desktop padding */
+        font-size: 1em;
     }
 
     .hero-section {
-        padding: 80px 20px;
-        min-height: 80vh; /* Adjust for mobile */
+        min-height: 100vh; /* Full height on desktop */
+        padding: 100px 0;
     }
 
     .hero-section h2 {
-        font-size: 3em;
+        font-size: 5em;
     }
 
     .hero-section p {
+        font-size: 1.6em;
+    }
+
+    .btn-primary {
         font-size: 1.2em;
+        padding: 15px 35px;
     }
 
     .content-section {
-        padding: 80px 0;
+        padding: 100px 0; /* Standard desktop padding */
     }
 
     .section-number {
-        font-size: 3em;
+        font-size: 4em;
     }
 
     .section-title {
-        font-size: 2em;
+        font-size: 2.5em;
     }
 
     .dashboard-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Multiple columns on desktop */
+        gap: 30px;
+    }
+
+    .stat-item {
+        padding: 30px;
+    }
+
+    .stat-item .stat-value {
+        font-size: 2.8em;
     }
 
     .search-bar input {
-        padding: 12px 20px;
+        padding: 15px 25px;
+        font-size: 1.1em;
+    }
+
+    .command-categories {
+        gap: 10px;
     }
 
     .category-btn {
-        padding: 8px 15px;
-        font-size: 0.9em;
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+
+    .command-item h4 {
+        font-size: 1.4em;
+    }
+
+    .command-item p {
+        font-size: 0.95em;
+    }
+
+    footer {
+        padding: 60px 20px;
     }
 }
