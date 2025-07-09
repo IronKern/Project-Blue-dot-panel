@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalCommands = document.getElementById('total-commands');
     const developmentStatus = document.getElementById('development-status');
     const lastUpdatedTime = document.getElementById('last-updated-time');
+    // Neue Elemente für Python und Nextcord Versionen
+    const pythonVersion = document.getElementById('python-version');
+    const nextcordVersion = document.getElementById('nextcord-version');
+
 
     // Function to format uptime from seconds to a human-readable string
     function formatUptime(seconds) {
@@ -46,10 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (days > 0) uptimeString.push(`${days}d`);
         if (hours > 0) uptimeString.push(`${hours}h`);
         if (minutes > 0) uptimeString.push(`${minutes}m`);
-        // Only show seconds if less than 1 minute to keep it concise
-        if (uptimeString.length === 0 || secs > 0) {
+        // Only show seconds if less than 1 minute to keep it concise, or if nothing else is shown
+        if (uptimeString.length === 0 || (uptimeString.length === 1 && secs > 0 && days === 0 && hours === 0 && minutes === 0)) { // This condition needs refinement if only seconds are to be shown for very short uptimes
+             uptimeString.push(`${secs}s`);
+        } else if (uptimeString.length === 0) { // Fallback if somehow nothing was added
              uptimeString.push(`${secs}s`);
         }
+
 
         return uptimeString.join(' ');
     }
@@ -99,16 +106,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (infoData) {
             userCount.textContent = infoData.users ? infoData.users.toLocaleString() : 'N/A';
             botPing.textContent = infoData.latency_ms !== undefined && infoData.latency_ms !== null ? `${infoData.latency_ms}ms` : 'N/A';
-            // FIX: Use uptime_seconds and format it
             botUptime.textContent = formatUptime(infoData.uptime_seconds);
+            pythonVersion.textContent = infoData.python_version || 'N/A'; // Zeigt Python Version an
+            nextcordVersion.textContent = infoData.nextcord_version || 'N/A'; // Zeigt Nextcord Version an
+
         } else {
             // Fallback for infoData if not available
             userCount.textContent = 'N/A';
             botPing.textContent = 'N/A';
             botUptime.textContent = 'N/A';
+            pythonVersion.textContent = 'N/A'; // Fallback für Python Version
+            nextcordVersion.textContent = 'N/A'; // Fallback für Nextcord Version
         }
 
-        developmentStatus.textContent = 'Work in progress';
+        developmentStatus.textContent = 'Work in progress'; // Bleibt statisch, wenn keine andere Logik vorgesehen ist
         developmentStatus.className = 'stat-value status-wip';
         lastUpdatedTime.textContent = isCached ? `Cached: ${new Date(localStorage.getItem('lastUpdatedTime') || Date.now()).toLocaleTimeString()}` : new Date().toLocaleTimeString();
     }
