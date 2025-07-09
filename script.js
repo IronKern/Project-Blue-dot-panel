@@ -1,165 +1,717 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- Hamburger-Menü Funktionalität ---
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
+:root {
+    --bg-dark: #0A0A0A;
+    --bg-light: #1A1A1A;
+    --text-primary: #E0E0E0;
+    --text-secondary: #808080;
+    --text-highlight: #FFFFFF;
+    --accent-blue: #007BFF;
+    --dark-blue: #0047AB;
+    --logo-glow: rgba(0, 123, 255, 0.7);
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        hamburger.classList.toggle('active');
-    });
+    --border-color: #333333;
 
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks.classList.contains('nav-active')) {
-                navLinks.classList.remove('nav-active');
-                hamburger.classList.remove('active');
-            }
-        });
-    });
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
 
-    // --- Bot Live-Statistiken Funktionalität ---
-    const BASE_API_URL = 'https://threadbaresurefootedtelevision-1.onrender.com/api'; // Basis-URL deiner Render-API
+    --transition-duration-long: 1.5s;
+    --transition-duration-medium: 0.9s;
+    --transition-duration-short: 0.4s;
+    --transition-ease-extra-smooth: cubic-bezier(0.23, 1, 0.32, 1);
+    --animation-delay-step: 0.05s;
+}
 
-    const botStatus = document.getElementById('bot-status');
-    const serverCount = document.getElementById('server-count');
-    const userCount = document.getElementById('user-count');
-    const botPing = document.getElementById('bot-ping');
-    const botUptime = document.getElementById('bot-uptime');
-    const lastCommand = document.getElementById('last-command');
-    const totalCommands = document.getElementById('total-commands');
-    const lastUpdatedTime = document.getElementById('last-updated-time');
+body {
+    font-family: var(--font-primary);
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-duration-short) var(--transition-ease-extra-smooth);
+}
+
+a:hover {
+    color: var(--text-highlight);
+}
+
+header {
+    background-color: var(--bg-dark);
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
+    animation-delay: 0.2s;
+}
+
+.logo img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--logo-glow);
+    transition: transform var(--transition-duration-short) var(--transition-ease-extra-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-extra-smooth);
+}
+
+.logo img:hover {
+    transform: scale(1.05) rotate(3deg);
+    box-shadow: 0 0 25px var(--logo-glow);
+}
+
+.logo h1 {
+    margin: 0;
+    color: var(--text-highlight);
+    font-size: 1.8em;
+    font-family: var(--font-secondary);
+    letter-spacing: 0.5px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 30px;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
+}
+
+nav ul li a {
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-highlight);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform var(--transition-duration-medium) var(--transition-ease-extra-smooth);
+}
+
+nav ul li a:hover {
+    color: var(--text-highlight);
+}
+
+nav ul li a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.btn-invite, .btn-primary {
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 700;
+    border: 1px solid;
+    transition: background-color var(--transition-duration-short) var(--transition-ease-extra-smooth),
+                color var(--transition-duration-short) var(--transition-ease-extra-smooth),
+                transform var(--transition-duration-short) var(--transition-ease-extra-smooth),
+                border-color var(--transition-duration-short) var(--transition-ease-extra-smooth);
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
+}
+
+.btn-invite {
+    background-color: transparent;
+    color: var(--text-highlight);
+    border-color: var(--text-highlight);
+}
+
+.btn-invite:hover {
+    background-color: var(--accent-blue);
+    color: var(--text-highlight);
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--text-highlight);
+    color: var(--dark-blue);
+    border-color: var(--text-highlight);
+    font-size: 1.2em;
+    padding: 15px 35px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-blue);
+    color: var(--text-highlight);
+    border-color: var(--accent-blue);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    padding: 5px;
+    transition: all var(--transition-duration-medium) var(--transition-ease-extra-smooth);
+}
+
+.hamburger .bar {
+    width: 30px;
+    height: 2px;
+    background-color: var(--text-highlight);
+    border-radius: 2px;
+    transition: all var(--transition-duration-medium) var(--transition-ease-extra-smooth);
+}
+
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.content-section {
+    background-color: var(--bg-dark);
+}
+
+.content-section .container {
+    max-width: 800px;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.section-number {
+    font-family: var(--font-primary);
+    font-size: 4em;
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.section-title {
+    font-family: var(--font-secondary);
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--text-highlight);
+    margin-bottom: 40px;
+    line-height: 1.2;
+}
+
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, rgba(0, 123, 255, 0.1) 0%, transparent 70%), var(--bg-dark);
+    border-bottom: none;
+}
+
+.hero-section .container {
+    text-align: center;
+}
+
+.hero-section h2 {
+    font-size: 5em;
+    font-weight: 800;
+    color: var(--text-highlight);
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.hero-section p {
+    font-size: 1.6em;
+    font-weight: 300;
+    color: var(--text-primary);
+    margin-bottom: 50px;
+}
+
+.dashboard-section {
+    background-color: var(--bg-light);
+    text-align: left;
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.stat-item {
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.stat-item .stat-label {
+    font-family: var(--font-primary);
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.stat-item .stat-value {
+    font-family: var(--font-secondary);
+    font-size: 2.8em;
+    font-weight: 700;
+    color: var(--text-highlight);
+    line-height: 1;
+}
+
+/* Status colors */
+.stat-item .status-online {
+    color: var(--accent-blue);
+}
+.stat-item .status-offline {
+    color: #ff0000; /* Red for Offline */
+}
+.stat-item .status-loading {
+    color: var(--text-secondary); /* Gray for Loading */
+}
 
 
-    async function fetchBotStats() {
-        try {
-            // Gleichzeitiges Abrufen von Daten von allen relevanten Endpunkten
-            const [statsResponse, commandsResponse, uptimeResponse] = await Promise.all([
-                fetch(`${BASE_API_URL}/stats`),
-                fetch(`${BASE_API_URL}/commands`),
-                fetch(`${BASE_API_URL}/uptime`)
-            ]);
+.last-updated {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-top: 40px;
+}
 
-            // Überprüfen, ob alle Anfragen erfolgreich waren
-            if (!statsResponse.ok || !commandsResponse.ok || !uptimeResponse.ok) {
-                let errorMessage = "Fehler beim Abrufen der Bot-Statistiken: ";
-                if (!statsResponse.ok) errorMessage += `Stats-API (${statsResponse.status}) `;
-                if (!commandsResponse.ok) errorMessage += `Commands-API (${commandsResponse.status}) `;
-                if (!uptimeResponse.ok) errorMessage += `Uptime-API (${uptimeResponse.status}) `;
-                throw new Error(errorMessage);
-            }
+.commands-section {
+    background-color: var(--bg-dark);
+}
 
-            const statsData = await statsResponse.json();
-            const commandsData = await commandsResponse.json();
-            const uptimeData = await uptimeResponse.json();
+.search-bar {
+    text-align: left;
+    margin-bottom: 40px;
+}
 
-            // Aktualisiere die Elemente mit den empfangenen Daten von /api/stats
-            botStatus.textContent = statsData.status;
-            botStatus.className = `stat-value status-${statsData.status.toLowerCase()}`;
-            serverCount.textContent = statsData.servers.toLocaleString(); // Verwende toLocaleString für Tausendertrennung
-            userCount.textContent = statsData.users.toLocaleString();
-            botPing.textContent = `${statsData.ping}ms`;
-            lastUpdatedTime.textContent = statsData.lastUpdated;
+.search-bar input {
+    width: 100%;
+    padding: 15px 25px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-light);
+    color: var(--text-primary);
+    font-size: 1.1em;
+    outline: none;
+    transition: border-color var(--transition-duration-short) var(--transition-ease-extra-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-extra-smooth);
+}
 
-            // Aktualisiere Uptime-Daten von /api/uptime
-            botUptime.textContent = uptimeData.uptime;
+.search-bar input::placeholder {
+    color: var(--text-secondary);
+}
 
-            // Aktualisiere Kommando-Daten von /api/commands
-            lastCommand.textContent = commandsData.lastCommand;
-            totalCommands.textContent = commandsData.totalCommands.toLocaleString(); // Verwende toLocaleString
+.search-bar input:focus {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
 
+.command-categories {
+    text-align: left;
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
-        } catch (error) {
-            console.error("Fehler beim Abrufen der Bot-Statistiken:", error);
-            // Setze Fallback-Werte und Fehlerstatus bei Problemen
-            botStatus.textContent = 'Offline';
-            botStatus.className = 'stat-value status-offline';
-            serverCount.textContent = 'N/A';
-            userCount.textContent = 'N/A';
-            botPing.textContent = 'N/A';
-            botUptime.textContent = 'N/A';
-            lastUpdatedTime.textContent = 'Fehler';
-            lastCommand.textContent = 'N/A';
-            totalCommands.textContent = 'N/A';
-        }
+.category-btn {
+    background-color: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: 500;
+    transition: background-color var(--transition-duration-short) var(--transition-ease-extra-smooth), color var(--transition-duration-short) var(--transition-ease-extra-smooth), border-color var(--transition-duration-short) var(--transition-ease-extra-smooth);
+}
+
+.category-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+.category-btn.active {
+    background-color: var(--text-highlight);
+    color: var(--bg-dark);
+    border-color: var(--text-highlight);
+    font-weight: 600;
+}
+
+.command-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.command-item {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.command-item:last-child {
+    border-bottom: none;
+}
+
+.command-item h4 {
+    font-family: var(--font-primary);
+    color: var(--text-highlight);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.command-item p {
+    font-size: 0.95em;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+footer {
+    background-color: var(--bg-dark);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 0.9em;
+    border-top: 1px solid var(--border-color);
+    opacity: 0.8;
+}
+
+.anim-item {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.anim-target.in-view .anim-item {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity var(--transition-duration-long) var(--transition-ease-extra-smooth),
+                transform var(--transition-duration-long) var(--transition-ease-extra-smooth);
+}
+
+/* Header specific animations to make them appear slightly delayed on load */
+header .logo,
+header nav ul li,
+header .btn-invite {
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
+}
+
+header .logo { animation-delay: 0.2s; }
+header nav ul li:nth-child(1) { animation-delay: 0.4s; }
+header nav ul li:nth-child(2) { animation-delay: 0.5s; }
+header nav ul li:nth-child(3) { animation-delay: 0.6s; }
+header nav ul li:nth-child(4) { animation-delay: 0.7s; }
+header nav ul li:nth-child(5) { animation-delay: 0.8s; }
+header .btn-invite { animation-delay: 0.9s; }
+
+@keyframes fadeInSlideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        font-size: 1em;
     }
 
-    // Statistiken sofort beim Laden und dann alle 10 Sekunden aktualisieren
-    fetchBotStats();
-    setInterval(fetchBotStats, 10000);
-
-    // --- Command-Suche und Filter Funktionalität ---
-    const commandSearchInput = document.getElementById('command-search');
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    const commandItems = document.querySelectorAll('.command-item');
-
-    function filterCommands() {
-        const searchTerm = commandSearchInput.value.toLowerCase();
-        const activeCategory = document.querySelector('.category-btn.active').dataset.category;
-
-        commandItems.forEach(item => {
-            const commandName = item.querySelector('h4').textContent.toLowerCase();
-            const commandDescription = item.querySelector('p').textContent.toLowerCase();
-            const itemCategories = item.dataset.category.split(' ');
-
-            const matchesSearch = commandName.includes(searchTerm) || commandDescription.includes(searchTerm);
-            const matchesCategory = activeCategory === 'all' || itemCategories.includes(activeCategory);
-
-            if (matchesSearch && matchesCategory) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
+    .container {
+        padding: 0 20px;
     }
 
-    commandSearchInput.addEventListener('keyup', filterCommands);
+    header .container {
+        padding: 10px 20px;
+    }
 
-    categoryButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            document.querySelector('.category-btn.active').classList.remove('active');
-            button.classList.add('active');
-            filterCommands();
-        });
-    });
+    .logo h1 {
+        font-size: 1.5em;
+    }
 
-    filterCommands();
+    .logo img {
+        height: 35px;
+        width: 35px;
+    }
 
-    // --- Intersection Observer für Animationen ---
-    const animTargets = document.querySelectorAll('.anim-target');
+    .hamburger {
+        display: flex;
+    }
 
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.05
-    };
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--bg-dark);
+        position: absolute;
+        top: 60px;
+        left: 0;
+        padding: 20px 0;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        z-index: 999;
+        text-align: center;
+    }
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-                const animItems = entry.target.querySelectorAll('.anim-item');
-                animItems.forEach((item, index) => {
-                    item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
-                });
-            } else {
-                entry.target.querySelectorAll('.anim-item').forEach(item => {
-                    item.style.transitionDelay = '0s';
-                });
-            }
-        });
-    }, observerOptions);
+    nav ul.nav-active {
+        display: flex;
+        animation: fadeIn var(--transition-duration-short) var(--transition-ease-extra-smooth);
+    }
 
-    animTargets.forEach(target => {
-        observer.observe(target);
-    });
+    nav ul li {
+        margin: 15px 0;
+        opacity: 1;
+        transform: translateY(0);
+        animation: none; /* Disable initial header animations on mobile menu */
+    }
 
-    observer.takeRecords().forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            const animItems = entry.target.querySelectorAll('.anim-item');
-            animItems.forEach((item, index) => {
-                item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
-            });
-        }
-    });
-});
+    nav ul li a {
+        padding: 10px 0;
+        font-size: 1.1em;
+    }
+
+    .btn-invite {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1em;
+        opacity: 1;
+        transform: translateY(0);
+        animation: none; /* Disable initial header animations on mobile menu */
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .hero-section {
+        padding: 80px 20px;
+        min-height: 70vh;
+    }
+
+    .hero-section h2 {
+        font-size: 2.8em;
+    }
+
+    .hero-section p {
+        font-size: 1.1em;
+    }
+
+    .btn-primary {
+        font-size: 1.1em;
+        padding: 12px 25px;
+    }
+
+    .content-section {
+        padding: 60px 0;
+    }
+
+    .section-number {
+        font-size: 2.5em;
+    }
+
+    .section-title {
+        font-size: 1.8em;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .stat-item {
+        padding: 20px;
+    }
+
+    .stat-item .stat-value {
+        font-size: 2.2em;
+    }
+
+    .search-bar input {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+
+    .command-categories {
+        gap: 8px;
+    }
+
+    .category-btn {
+        padding: 8px 15px;
+        font-size: 0.85em;
+    }
+
+    .command-item h4 {
+        font-size: 1.2em;
+    }
+
+    .command-item p {
+        font-size: 0.9em;
+    }
+
+    footer {
+        padding: 40px 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 0 40px;
+    }
+
+    header .container {
+        padding: 15px 40px;
+    }
+
+    .logo h1 {
+        font-size: 1.8em;
+    }
+
+    .logo img {
+        height: 45px;
+        width: 45px;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    nav ul li {
+        margin-left: 30px;
+    }
+
+    nav ul li a {
+        font-size: 1em;
+    }
+
+    .btn-invite {
+        margin-top: 0;
+        padding: 10px 22px;
+        font-size: 1em;
+    }
+
+    .hero-section {
+        min-height: 100vh;
+        padding: 100px 0;
+    }
+
+    .hero-section h2 {
+        font-size: 5em;
+    }
+
+    .hero-section p {
+        font-size: 1.6em;
+    }
+
+    .btn-primary {
+        font-size: 1.2em;
+        padding: 15px 35px;
+    }
+
+    .content-section {
+        padding: 100px 0;
+    }
+
+    .section-number {
+        font-size: 4em;
+    }
+
+    .section-title {
+        font-size: 2.5em;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .stat-item {
+        padding: 30px;
+    }
+
+    .stat-item .stat-value {
+        font-size: 2.8em;
+    }
+
+    .search-bar input {
+        padding: 15px 25px;
+        font-size: 1.1em;
+    }
+
+    .command-categories {
+        gap: 10px;
+    }
+
+    .category-btn {
+        padding: 8px 15px;
+        font-size: 0.95em;
+    }
+
+    .command-item h4 {
+        font-size: 1.2em;
+    }
+
+    .command-item p {
+        font-size: 0.95em;
+    }
+
+    footer {
+        padding: 60px 20px;
+    }
+}
