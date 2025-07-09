@@ -306,6 +306,10 @@ section {
 .stat-item .status-loading {
     color: var(--text-secondary); /* Gray for Loading */
 }
+/* New style for "In Arbeit" */
+.stat-item .status-wip {
+    color: #FFA500; /* Orange for Work In Progress */
+}
 
 
 .last-updated {
@@ -318,31 +322,7 @@ section {
     background-color: var(--bg-dark);
 }
 
-.search-bar {
-    text-align: left;
-    margin-bottom: 40px;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 15px 25px;
-    border-radius: 5px;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-light);
-    color: var(--text-primary);
-    font-size: 1.1em;
-    outline: none;
-    transition: border-color var(--transition-duration-short) var(--transition-ease-extra-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-extra-smooth);
-}
-
-.search-bar input::placeholder {
-    color: var(--text-secondary);
-}
-
-.search-bar input:focus {
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-}
+/* .search-bar was here, now removed */
 
 .command-categories {
     text-align: left;
@@ -573,10 +553,7 @@ header .btn-invite { animation-delay: 0.9s; }
         font-size: 2.2em;
     }
 
-    .search-bar input {
-        padding: 10px 15px;
-        font-size: 1em;
-    }
+    /* .search-bar input styles were here, now removed */
 
     .command-categories {
         gap: 8px;
@@ -689,10 +666,7 @@ header .btn-invite { animation-delay: 0.9s; }
         font-size: 2.8em;
     }
 
-    .search-bar input {
-        padding: 15px 25px;
-        font-size: 1.1em;
-    }
+    /* .search-bar input styles were here, now removed */
 
     .command-categories {
         gap: 10px;
@@ -714,4 +688,3 @@ header .btn-invite { animation-delay: 0.9s; }
     footer {
         padding: 60px 20px;
     }
-}
