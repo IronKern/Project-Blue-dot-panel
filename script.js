@@ -19,9 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Bot Live Statistics Functionality ---
     // IMPORTANT: Make sure this URL is correct for your Render deployment
-    // e.g., 'https://your-render-app-name.onrender.com'
-    // Since your API is at '/api/stats', the base URL should just be your app's root.
-    const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com';
+    // It should be your app's root URL on Render.
+    const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com'; // Corrected BASE_URL as per your instruction
 
     const botStatus = document.getElementById('bot-status');
     const serverCount = document.getElementById('server-count');
@@ -30,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const botUptime = document.getElementById('bot-uptime');
     const lastCommand = document.getElementById('last-command');
     const totalCommands = document.getElementById('total-commands');
-    const developmentStatus = document.getElementById('development-status'); // New element for development status
-    const lastUpdatedTime = document.getElementById('last-updated-time'); // This will show the time of the last successful fetch
+    const developmentStatus = document.getElementById('development-status');
+    const lastUpdatedTime = document.getElementById('last-updated-time');
 
     async function fetchBotStats() {
         try {
-            const response = await fetch(`${BASE_URL}/api/stats`);
+            const response = await fetch(`${BASE_URL}/api/stats`); // Use the corrected BASE_URL
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             botStatus.textContent = data.status;
             botStatus.className = `stat-value status-${data.status.toLowerCase()}`; // Set class for color (online/offline)
 
-            serverCount.textContent = data.server_count.toLocaleString(); // Format with thousands separator
+            serverCount.textContent = data.server_count.toLocaleString();
             userCount.textContent = data.member_count.toLocaleString();
             botPing.textContent = `${data.latency}ms`;
             botUptime.textContent = data.uptime_formatted;
@@ -61,10 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Set the "Development Status" - currently static as it's not in the API response
-            // If you add a 'development_status' field to your /api/stats endpoint, you can
-            // change this to: developmentStatus.textContent = data.development_status;
-            developmentStatus.textContent = 'Work in progress'; // Static for now, as requested
-            developmentStatus.className = 'stat-value status-wip'; // Set appropriate class for styling
+            developmentStatus.textContent = 'Work in progress';
+            developmentStatus.className = 'stat-value status-wip';
 
             // Update the last updated time to current browser time
             lastUpdatedTime.textContent = new Date().toLocaleTimeString();
@@ -81,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lastUpdatedTime.textContent = 'Failed to load';
             lastCommand.textContent = 'N/A';
             totalCommands.textContent = 'N/A';
-            developmentStatus.textContent = 'Error loading'; // Changed to English
+            developmentStatus.textContent = 'Error loading';
             developmentStatus.className = 'stat-value status-offline';
         }
     }
@@ -90,8 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchBotStats();
     setInterval(fetchBotStats, 10000); // Fetches data every 10 seconds
 
-    // --- Command Filter Functionality (Simplified after removing search bar) ---
-    // The search input no longer exists, but we keep category filtering.
+    // --- Command Filter Functionality ---
     const categoryButtons = document.querySelectorAll('.category-btn');
     const commandItems = document.querySelectorAll('.command-item');
 
@@ -115,12 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             document.querySelector('.category-btn.active').classList.remove('active');
             button.classList.add('active');
-            filterCommandsByCategory(); // Use the simplified function
+            filterCommandsByCategory();
         });
     });
 
     // Call initial filter to display all commands
-    filterCommandsByCategory(); // Use the simplified function
+    filterCommandsByCategory();
 
     // --- Intersection Observer for Animations ---
     const animTargets = document.querySelectorAll('.anim-target');
