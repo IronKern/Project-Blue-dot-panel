@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hamburger.classList.toggle('active');
     });
 
-    document.querySelectorAll('nav-links a').forEach(link => {
+    document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
             hamburger.classList.remove('active');
@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('bot-ping').textContent = `${botInfo.latency_ms}ms`;
             document.getElementById('bot-uptime').textContent = stats.uptime_formatted;
             document.getElementById('total-commands').textContent = stats.command_count;
+
             document.getElementById('cpu-usage').textContent = `${stats.cpu_usage}%`;
             document.getElementById('memory-usage').textContent = `${stats.memory_usage}MB`;
             document.getElementById('disk-usage').textContent = `${stats.disk_usage}%`;
