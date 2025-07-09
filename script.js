@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const userCount = document.getElementById('user-count');
     const botPing = document.getElementById('bot-ping');
     const botUptime = document.getElementById('bot-uptime');
-    const lastCommand = document.getElementById('last-command');
+    // const lastCommand = document.getElementById('last-command'); // ENTFERNT
     const totalCommands = document.getElementById('total-commands');
-    const developmentStatus = document.getElementById('development-status');
+    // const developmentStatus = document.getElementById('development-status'); // ENTFERNT
     const lastUpdatedTime = document.getElementById('last-updated-time');
     const pythonVersion = document.getElementById('python-version');
     const nextcordVersion = document.getElementById('nextcord-version');
@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (totalCommands) {
             totalCommands.textContent = statsData?.command_count?.toLocaleString() || 'N/A';
         }
-        if (lastCommand) {
-            lastCommand.textContent = (statsData?.last_commands && statsData.last_commands.length > 0) ? statsData.last_commands[statsData.last_commands.length - 1] : 'N/A';
-        }
+        // if (lastCommand) { // ENTFERNT
+        //     lastCommand.textContent = (statsData?.last_commands && statsData.last_commands.length > 0) ? statsData.last_commands[statsData.last_commands.length - 1] : 'N/A';
+        // }
 
         // Detaillierte Bot-Informationen
         if (userCount) {
@@ -131,11 +131,11 @@ document.addEventListener('DOMContentLoaded', () => {
             nextcordVersion.textContent = infoData?.nextcord_version || 'N/A';
         }
 
-        // Statischer Entwicklungsstatus
-        if (developmentStatus) {
-            developmentStatus.textContent = 'Work in progress';
-            developmentStatus.className = 'stat-value status-wip';
-        }
+        // Statischer Entwicklungsstatus - ENTFERNT
+        // if (developmentStatus) {
+        //     developmentStatus.textContent = 'Work in progress';
+        //     developmentStatus.className = 'stat-value status-wip';
+        // }
 
         // Letzte Aktualisierungszeit
         if (lastUpdatedTime) {
