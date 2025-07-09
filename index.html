@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="assets/applogo.jpg" alt="Project Blue Dot Logo">
+            <img src="Assets/applogo.jpg" alt="Project Blue Dot Logo">
             <h1>Project Blue Dot</h1>
         </div>
         <nav>
@@ -30,64 +30,60 @@
     <main>
         <section id="home" class="hero-section anim-target">
             <div class="hero-content">
-                <h2 class="anim-item">Willkommen beim Project Blue Dot Panel</h2>
-                <p class="anim-item">Hier finden Sie Live-Statistiken über unseren Discord-Bot und eine umfassende Befehlsliste.</p>
-                <a href="#bot-stats" class="btn anim-item">Statistiken ansehen</a>
+                <h2>Willkommen beim Project Blue Dot Panel</h2>
+                <p>Hier finden Sie Live-Statistiken über unseren Discord-Bot und eine umfassende Befehlsliste.</p>
+                <a href="#bot-stats" class="btn">Statistiken ansehen</a>
             </div>
         </section>
 
         <section id="bot-stats" class="stats-section anim-target">
-            <h2 class="anim-item">Bot Statistiken</h2>
+            <h2>Bot Statistiken</h2>
             <div class="stats-grid">
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Status:</span>
                     <span class="stat-value" id="bot-status">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Server:</span>
                     <span class="stat-value" id="server-count">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Nutzer:</span>
                     <span class="stat-value" id="user-count">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Ping:</span>
                     <span class="stat-value" id="bot-ping">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Uptime:</span>
                     <span class="stat-value" id="bot-uptime">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Befehle Gesamt:</span>
                     <span class="stat-value" id="total-commands">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">CPU-Auslastung:</span>
                     <span class="stat-value" id="cpu-usage">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Speicherauslastung:</span>
                     <span class="stat-value" id="memory-usage">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Daten-Auslastung:</span>
                     <span class="stat-value" id="disk-usage">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Python Version:</span>
                     <span class="stat-value" id="python-version">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Nextcord Version:</span>
                     <span class="stat-value" id="nextcord-version">Lade...</span>
                 </div>
-                <div class="stat-item anim-item">
-                    <span class="stat-label">Entwicklungsstatus:</span>
-                    <span class="stat-value" id="development-status">Lade...</span>
-                </div>
-                <div class="stat-item anim-item">
+                <div class="stat-item">
                     <span class="stat-label">Zuletzt aktualisiert:</span>
                     <span class="stat-value" id="last-updated-time">Lade...</span>
                 </div>
@@ -95,8 +91,8 @@
         </section>
 
         <section id="commands" class="commands-section anim-target">
-            <h2 class="anim-item">Unsere Befehle</h2>
-            <div class="category-filters anim-item">
+            <h2>Unsere Befehle</h2>
+            <div class="category-filters">
                 <button class="category-btn active" data-category="all">Alle</button>
                 <button class="category-btn" data-category="economy">Economy</button>
                 <button class="category-btn" data-category="moderation">Moderation</button>
@@ -108,7 +104,7 @@
                 <button class="category-btn" data-category="tickets">Tickets</button>
                 <button class="category-btn" data-category="custom">Eigene Befehle</button>
             </div>
-            <div class="command-list anim-item">
+            <div class="command-list">
                 <div class="command-item" data-category="economy"><h3>:balance</h3><p class="command-description">Zeigt Ihr aktuelles Guthaben an.</p></div>
                 <div class="command-item" data-category="economy"><h3>:bank</h3><p class="command-description">Zeigt Ihr Bankguthaben an.</p></div>
                 <div class="command-item" data-category="economy"><h3>:deposit &lt;amount&gt;</h3><p class="command-description">Zahlt Geld auf Ihr Bankkonto ein.</p></div>
@@ -149,7 +145,7 @@
                 <div class="command-item" data-category="utility"><h3>/avatar [user]</h3><p class="command-description">Zeigt das Avatarbild eines Benutzers an.</p></div>
                 <div class="command-item" data-category="utility"><h3>/stats</h3><p class="command-description">Zeigt Leistungsstatistiken des Bots an (CPU, RAM).</p></div>
                 <div class="command-item" data-category="utility"><h3>/translate &lt;lang&gt; &lt;text&gt;</h3><p class="command-description">Übersetzt Text in eine andere Sprache.</p></div>
-                <div class="command-item" data-category="utility"><h3>/google &lt;query&gt;</h3><p class="command-description">Führt eine Google-Suche durch.</p></div>
+                <div class="command-item" data-category="utility"><h3>/google &lt;query&gt;</h3><p class="command-description">Führt eine Google-Suft durch.</p></div>
                 <div class="command-item" data-category="utility"><h3>/wikipedia &lt;query&gt;</h3><p class="command-description">Sucht nach Informationen auf Wikipedia.</p></div>
                 <div class="command-item" data-category="utility"><h3>/weather &lt;location&gt;</h3><p class="command-description">Zeigt das Wetter für einen bestimmten Ort an.</p></div>
                 <div class="command-item" data-category="utility"><h3>/time &lt;location&gt;</h3><p class="command-description">Zeigt die aktuelle Uhrzeit für einen bestimmten Ort an.</p></div>
@@ -193,14 +189,14 @@
         </section>
 
         <section id="contact" class="contact-section anim-target">
-            <h2 class="anim-item">Kontakt</h2>
-            <p class="anim-item">Haben Sie Fragen oder Feedback? Kontaktieren Sie uns:</p>
-            <div class="contact-info anim-item">
+            <h2>Kontakt</h2>
+            <p>Haben Sie Fragen oder Feedback? Kontaktieren Sie uns:</p>
+            <div class="contact-info">
                 <p>Discord: IhrDiscordTag#1234</p>
                 <p>E-Mail: <a href="mailto:ihremail@example.com">ihremail@example.com</a></p>
             </div>
-            <p class="anim-item">Folgen Sie uns auf sozialen Medien (optional):</p>
-            <div class="social-links anim-item">
+            <p>Folgen Sie uns auf sozialen Medien (optional):</p>
+            <div class="social-links">
                 <a href="#" target="_blank">Discord Server</a>
                 <a href="#" target="_blank">Twitter</a>
             </div>
