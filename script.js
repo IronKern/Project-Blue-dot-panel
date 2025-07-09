@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (infoData) {
             userCount.textContent = infoData.users ? infoData.users.toLocaleString() : 'N/A';
-            botPing.textContent = infoData.latency !== undefined && infoData.latency !== null ? `${infoData.latency}ms` : 'N/A'; // Fixed ping issue
+            // FIX: Use infoData.latency_ms as per the network request screenshot
+            botPing.textContent = infoData.latency_ms !== undefined && infoData.latency_ms !== null ? `${infoData.latency_ms}ms` : 'N/A';
             botUptime.textContent = infoData.uptime_formatted || 'N/A';
         } else {
             // Fallback for infoData if not available
