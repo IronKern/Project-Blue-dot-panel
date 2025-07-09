@@ -17,12 +17,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const userCount = document.getElementById('user-count');
     const botPing = document.getElementById('bot-ping');
     const botUptime = document.getElementById('bot-uptime');
-    const lastCommand = document.getElementById('last-command');
+    // const lastCommand = document.getElementById('last-command'); // ENTFERNT: Letzter Befehl
     const totalCommands = document.getElementById('total-commands');
     const developmentStatus = document.getElementById('development-status');
     const lastUpdatedTime = document.getElementById('last-updated-time');
     const pythonVersion = document.getElementById('python-version');
     const nextcordVersion = document.getElementById('nextcord-version');
+    // NEU: Elemente für CPU, Speicher und Daten
+    const cpuUsage = document.getElementById('cpu-usage');
+    const memoryUsage = document.getElementById('memory-usage');
+    const diskUsage = document.getElementById('disk-usage');
+
 
     // Befehlsfilter
     const categoryButtons = document.querySelectorAll('.category-btn');
@@ -108,8 +113,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (totalCommands) {
             totalCommands.textContent = statsData?.command_count?.toLocaleString() || 'N/A';
         }
-        if (lastCommand) {
-            lastCommand.textContent = (statsData?.last_commands && statsData.last_commands.length > 0) ? statsData.last_commands[statsData.last_commands.length - 1] : 'N/A';
+        // lastCommand wurde entfernt
+
+        // NEU: CPU, Speicher, Daten-Auslastung
+        if (cpuUsage) {
+            cpuUsage.textContent = statsData?.cpu_usage !== undefined && statsData.cpu_usage !== null ? `${statsData.cpu_usage.toFixed(1)}%` : 'N/A';
+        }
+        if (memoryUsage) {
+            memoryUsage.textContent = statsData?.memory_usage !== undefined && statsData.memory_usage !== null ? `${statsData.memory_usage.toFixed(1)}%` : 'N/A';
+        }
+        if (diskUsage) {
+            diskUsage.textContent = statsData?.disk_usage !== undefined && statsData.disk_usage !== null ? `${statsData.disk_usage.toFixed(1)}%` : 'N/A';
         }
 
         // Detaillierte Bot-Informationen
@@ -117,11 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
             userCount.textContent = infoData?.users?.toLocaleString() || 'N/A';
         }
         if (botPing) { //
-            // Ping-Fix: Nutzt 'latency_ms' wie im Screenshot der Netzwerkanfrage gezeigt
             botPing.textContent = (infoData?.latency_ms !== undefined && infoData?.latency_ms !== null) ? `${infoData.latency_ms}ms` : 'N/A';
         }
         if (botUptime) { //
-            // Uptime-Fix: Nutzt 'uptime_seconds' und formatiert es
             botUptime.textContent = formatUptime(infoData?.uptime_seconds);
         }
         if (pythonVersion) { //
@@ -162,16 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!statsResponse.ok) {
                 console.warn(`HTTP error from /api/stats! Status: ${statsResponse.status}`);
-                // Trotzdem versuchen, die Info-Daten zu parsen, falls statsResponse der einzige Fehler war
-                statsData = null; // Setze explizit auf null bei Fehler
             } else {
                 statsData = await statsResponse.json();
             }
 
             if (!infoResponse.ok) {
                 console.warn(`HTTP error from /api/bot/info! Status: ${infoResponse.status}`);
-                // Trotzdem versuchen, die Stats-Daten zu parsen, falls infoResponse der einzige Fehler war
-                infoData = null; // Setze explizit auf null bei Fehler
             } else {
                 infoData = await infoResponse.json();
             }
@@ -208,8 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
         displayBotStats(initialCachedData.stats, initialCachedData.info, true);
     } else {
         console.log('Initial load: No cached data. Displaying "Lade..." or N/A.');
-        // Optional: Hier könnten Sie initial 'Lade...' in alle Felder setzen,
-        // was aber bereits durch die HTML-Platzhalter abgedeckt sein sollte.
         displayBotStats(null, null); // Setzt alles auf N/A bis Daten kommen
     }
     fetchBotStatsAndInfo(); // Immer versuchen, Live-Daten abzurufen
@@ -237,12 +243,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Befehlsfilter Funktionalität
     function filterCommandsByCategory() {
-        const activeCategory = document.querySelector('.category-btn.active')?.dataset.category; // Optional Chaining
+        const activeCategory = document.querySelector('.category-btn.active')?.dataset.category;
 
-        if (!activeCategory) return; // Frühzeitiger Exit, wenn kein aktiver Button gefunden
+        if (!activeCategory) return;
 
         commandItems.forEach(item => {
-            const itemCategories = item.dataset.category?.split(' ') || []; // Optional Chaining und Fallback zu leerem Array
+            const itemCategories = item.dataset.category?.split(' ') || [];
 
             const matchesCategory = activeCategory === 'all' || itemCategories.includes(activeCategory);
 
@@ -257,13 +263,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (categoryButtons.length > 0) {
         categoryButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Entferne 'active' von allen Buttons und füge es dem geklickten hinzu
                 categoryButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 filterCommandsByCategory();
             });
         });
-        // Initialer Filter, um alle Befehle anzuzeigen (oder die Standardkategorie)
         filterCommandsByCategory();
     }
 
@@ -284,10 +288,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
                 });
             } else {
-                // Optional: Animation zurücksetzen, wenn Element den Viewport verlässt
-                // entry.target.classList.remove('in-view');
                 entry.target.querySelectorAll('.anim-item').forEach(item => {
-                    item.style.transitionDelay = '0s'; // Delay zurücksetzen
+                    item.style.transitionDelay = '0s';
                 });
             }
         });
@@ -298,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.observe(target);
         });
 
-        // Sofortige Prüfung beim Laden für Elemente, die bereits im Viewport sind
         observer.takeRecords().forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('in-view');
