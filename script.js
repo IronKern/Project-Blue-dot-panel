@@ -1,717 +1,312 @@
-:root {
-    --bg-dark: #0A0A0A;
-    --bg-light: #1A1A1A;
-    --text-primary: #E0E0E0;
-    --text-secondary: #808080;
-    --text-highlight: #FFFFFF;
-    --accent-blue: #007BFF;
-    --dark-blue: #0047AB;
-    --logo-glow: rgba(0, 123, 255, 0.7);
-
-    --border-color: #333333;
-
-    --font-primary: 'Inter', sans-serif;
-    --font-secondary: 'Montserrat', sans-serif;
-
-    --transition-duration-long: 1.5s;
-    --transition-duration-medium: 0.9s;
-    --transition-duration-short: 0.4s;
-    --transition-ease-extra-smooth: cubic-bezier(0.23, 1, 0.32, 1);
-    --animation-delay-step: 0.05s;
-}
-
-body {
-    font-family: var(--font-primary);
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-dark);
-    color: var(--text-primary);
-    line-height: 1.6;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-}
-
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 40px;
-}
-
-a {
-    color: var(--text-primary);
-    text-decoration: none;
-    transition: color var(--transition-duration-short) var(--transition-ease-extra-smooth);
-}
-
-a:hover {
-    color: var(--text-highlight);
-}
-
-header {
-    background-color: var(--bg-dark);
-    padding: 15px 0;
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 40px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    opacity: 0;
-    transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
-    animation-delay: 0.2s;
-}
-
-.logo img {
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-    box-shadow: 0 0 15px var(--logo-glow);
-    transition: transform var(--transition-duration-short) var(--transition-ease-extra-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-extra-smooth);
-}
-
-.logo img:hover {
-    transform: scale(1.05) rotate(3deg);
-    box-shadow: 0 0 25px var(--logo-glow);
-}
-
-.logo h1 {
-    margin: 0;
-    color: var(--text-highlight);
-    font-size: 1.8em;
-    font-family: var(--font-secondary);
-    letter-spacing: 0.5px;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-nav ul li {
-    margin-left: 30px;
-    opacity: 0;
-    transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
-}
-
-nav ul li a {
-    color: var(--text-secondary);
-    font-weight: 500;
-    padding: 5px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--text-highlight);
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform var(--transition-duration-medium) var(--transition-ease-extra-smooth);
-}
-
-nav ul li a:hover {
-    color: var(--text-highlight);
-}
-
-nav ul li a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-.btn-invite, .btn-primary {
-    padding: 12px 28px;
-    border-radius: 30px;
-    font-weight: 700;
-    border: 1px solid;
-    transition: background-color var(--transition-duration-short) var(--transition-ease-extra-smooth),
-                color var(--transition-duration-short) var(--transition-ease-extra-smooth),
-                transform var(--transition-duration-short) var(--transition-ease-extra-smooth),
-                border-color var(--transition-duration-short) var(--transition-ease-extra-smooth);
-    opacity: 0;
-    transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
-}
-
-.btn-invite {
-    background-color: transparent;
-    color: var(--text-highlight);
-    border-color: var(--text-highlight);
-}
-
-.btn-invite:hover {
-    background-color: var(--accent-blue);
-    color: var(--text-highlight);
-    border-color: var(--accent-blue);
-    transform: translateY(-2px);
-}
-
-.btn-primary {
-    background-color: var(--text-highlight);
-    color: var(--dark-blue);
-    border-color: var(--text-highlight);
-    font-size: 1.2em;
-    padding: 15px 35px;
-    font-weight: 900;
-    letter-spacing: 0.5px;
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-blue);
-    color: var(--text-highlight);
-    border-color: var(--accent-blue);
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 6px;
-    padding: 5px;
-    transition: all var(--transition-duration-medium) var(--transition-ease-extra-smooth);
-}
-
-.hamburger .bar {
-    width: 30px;
-    height: 2px;
-    background-color: var(--text-highlight);
-    border-radius: 2px;
-    transition: all var(--transition-duration-medium) var(--transition-ease-extra-smooth);
-}
-
-section {
-    padding: 100px 0;
-    position: relative;
-}
-
-.content-section {
-    background-color: var(--bg-dark);
-}
-
-.content-section .container {
-    max-width: 800px;
-    padding: 0 20px;
-    text-align: left;
-}
-
-.section-number {
-    font-family: var(--font-primary);
-    font-size: 4em;
-    font-weight: 300;
-    color: var(--text-secondary);
-    margin-bottom: 20px;
-    line-height: 1;
-}
-
-.section-title {
-    font-family: var(--font-secondary);
-    font-size: 2.5em;
-    font-weight: 700;
-    color: var(--text-highlight);
-    margin-bottom: 40px;
-    line-height: 1.2;
-}
-
-.hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at center, rgba(0, 123, 255, 0.1) 0%, transparent 70%), var(--bg-dark);
-    border-bottom: none;
-}
-
-.hero-section .container {
-    text-align: center;
-}
-
-.hero-section h2 {
-    font-size: 5em;
-    font-weight: 800;
-    color: var(--text-highlight);
-    margin-bottom: 20px;
-    line-height: 1.1;
-}
-
-.hero-section p {
-    font-size: 1.6em;
-    font-weight: 300;
-    color: var(--text-primary);
-    margin-bottom: 50px;
-}
-
-.dashboard-section {
-    background-color: var(--bg-light);
-    text-align: left;
-}
-
-.dashboard-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 50px;
-}
-
-.stat-item {
-    padding: 30px;
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-}
-
-.stat-item .stat-label {
-    font-family: var(--font-primary);
-    font-size: 0.9em;
-    font-weight: 500;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 10px;
-    display: block;
-}
-
-.stat-item .stat-value {
-    font-family: var(--font-secondary);
-    font-size: 2.8em;
-    font-weight: 700;
-    color: var(--text-highlight);
-    line-height: 1;
-}
-
-/* Status colors */
-.stat-item .status-online {
-    color: var(--accent-blue);
-}
-.stat-item .status-offline {
-    color: #ff0000; /* Red for Offline */
-}
-.stat-item .status-loading {
-    color: var(--text-secondary); /* Gray for Loading */
-}
-
-
-.last-updated {
-    font-size: 0.9em;
-    color: var(--text-secondary);
-    margin-top: 40px;
-}
-
-.commands-section {
-    background-color: var(--bg-dark);
-}
-
-.search-bar {
-    text-align: left;
-    margin-bottom: 40px;
-}
-
-.search-bar input {
-    width: 100%;
-    padding: 15px 25px;
-    border-radius: 5px;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-light);
-    color: var(--text-primary);
-    font-size: 1.1em;
-    outline: none;
-    transition: border-color var(--transition-duration-short) var(--transition-ease-extra-smooth), box-shadow var(--transition-duration-short) var(--transition-ease-extra-smooth);
-}
-
-.search-bar input::placeholder {
-    color: var(--text-secondary);
-}
-
-.search-bar input:focus {
-    border-color: var(--accent-blue);
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-}
-
-.command-categories {
-    text-align: left;
-    margin-bottom: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.category-btn {
-    background-color: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.95em;
-    font-weight: 500;
-    transition: background-color var(--transition-duration-short) var(--transition-ease-extra-smooth), color var(--transition-duration-short) var(--transition-ease-extra-smooth), border-color var(--transition-duration-short) var(--transition-ease-extra-smooth);
-}
-
-.category-btn:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--text-primary);
-    border-color: var(--text-primary);
-}
-
-.category-btn.active {
-    background-color: var(--text-highlight);
-    color: var(--bg-dark);
-    border-color: var(--text-highlight);
-    font-weight: 600;
-}
-
-.command-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-.command-item {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-}
-
-.command-item:last-child {
-    border-bottom: none;
-}
-
-.command-item h4 {
-    font-family: var(--font-primary);
-    color: var(--text-highlight);
-    font-size: 1.4em;
-    margin-top: 0;
-    margin-bottom: 8px;
-}
-
-.command-item p {
-    font-size: 0.95em;
-    color: var(--text-secondary);
-    margin-bottom: 0;
-}
-
-footer {
-    background-color: var(--bg-dark);
-    color: var(--text-secondary);
-    text-align: center;
-    padding: 60px 20px;
-    font-size: 0.9em;
-    border-top: 1px solid var(--border-color);
-    opacity: 0.8;
-}
-
-.anim-item {
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-.anim-target.in-view .anim-item {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity var(--transition-duration-long) var(--transition-ease-extra-smooth),
-                transform var(--transition-duration-long) var(--transition-ease-extra-smooth);
-}
-
-/* Header specific animations to make them appear slightly delayed on load */
-header .logo,
-header nav ul li,
-header .btn-invite {
-    opacity: 0;
-    transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
-}
-
-header .logo { animation-delay: 0.2s; }
-header nav ul li:nth-child(1) { animation-delay: 0.4s; }
-header nav ul li:nth-child(2) { animation-delay: 0.5s; }
-header nav ul li:nth-child(3) { animation-delay: 0.6s; }
-header nav ul li:nth-child(4) { animation-delay: 0.7s; }
-header nav ul li:nth-child(5) { animation-delay: 0.8s; }
-header .btn-invite { animation-delay: 0.9s; }
-
-@keyframes fadeInSlideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    body {
-        font-size: 1em;
+// script.js - Überarbeitete Version für Project Blue Dot Panel
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Konfiguration ---
+    const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com'; // Ihre Bot-API-Basis-URL
+    const FETCH_INTERVAL = 10000; // Daten alle 10 Sekunden abrufen (10000 ms)
+
+    // --- DOM-Elemente abrufen ---
+    // Navigation
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    // Bot Statistiken
+    const botStatus = document.getElementById('bot-status');
+    const serverCount = document.getElementById('server-count');
+    const userCount = document.getElementById('user-count');
+    const botPing = document.getElementById('bot-ping');
+    const botUptime = document.getElementById('bot-uptime');
+    const lastCommand = document.getElementById('last-command');
+    const totalCommands = document.getElementById('total-commands');
+    const developmentStatus = document.getElementById('development-status');
+    const lastUpdatedTime = document.getElementById('last-updated-time');
+    const pythonVersion = document.getElementById('python-version');
+    const nextcordVersion = document.getElementById('nextcord-version');
+
+    // Befehlsfilter
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    const commandItems = document.querySelectorAll('.command-item');
+
+    // Animations-Elemente
+    const animTargets = document.querySelectorAll('.anim-target');
+
+    // --- Hilfsfunktionen ---
+
+    /**
+     * Formatiert die Uptime von Sekunden in ein menschenlesbares Format (Tage, Stunden, Minuten, Sekunden).
+     * @param {number} totalSeconds - Die Gesamtzahl der Sekunden.
+     * @returns {string} Formatierte Uptime-Zeichenkette.
+     */
+    function formatUptime(totalSeconds) {
+        if (totalSeconds === undefined || totalSeconds === null || isNaN(totalSeconds)) {
+            return 'N/A';
+        }
+
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        totalSeconds %= (3600 * 24);
+        const hours = Math.floor(totalSeconds / 3600);
+        totalSeconds %= 3600;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+
+        const parts = [];
+        if (days > 0) parts.push(`${days}d`);
+        if (hours > 0) parts.push(`${hours}h`);
+        if (minutes > 0) parts.push(`${minutes}m`);
+        // Zeigt Sekunden immer an, es sei denn, es ist eine sehr lange Uptime und Sekunden sind 0
+        if (parts.length === 0 || seconds > 0 || (days === 0 && hours === 0 && minutes === 0 && seconds === 0)) {
+            parts.push(`${seconds}s`);
+        }
+
+        return parts.join(' ') || '0s'; // Stellt sicher, dass bei 0 Sekunden '0s' angezeigt wird
     }
 
-    .container {
-        padding: 0 20px;
+    /**
+     * Speichert Bot-Statistikdaten im Local Storage.
+     * @param {object} data - Das zu speichernde Datenobjekt.
+     */
+    function saveBotStatsToLocalStorage(data) {
+        try {
+            localStorage.setItem('botStatsCache', JSON.stringify(data));
+            localStorage.setItem('lastUpdatedTime', Date.now().toString());
+        } catch (e) {
+            console.error('Error saving to localStorage:', e);
+        }
     }
 
-    header .container {
-        padding: 10px 20px;
+    /**
+     * Lädt Bot-Statistikdaten aus dem Local Storage.
+     * @returns {object|null} Das geladene Datenobjekt oder null, wenn nichts gefunden wurde.
+     */
+    function loadBotStatsFromLocalStorage() {
+        try {
+            const cachedData = localStorage.getItem('botStatsCache');
+            const lastUpdateTime = localStorage.getItem('lastUpdatedTime');
+            return cachedData ? { ...JSON.parse(cachedData), timestamp: lastUpdateTime ? parseInt(lastUpdateTime) : Date.now() } : null;
+        } catch (e) {
+            console.error('Error loading from localStorage:', e);
+            return null;
+        }
     }
 
-    .logo h1 {
-        font-size: 1.5em;
+    /**
+     * Zeigt die Bot-Statistiken auf der Webseite an.
+     * @param {object|null} statsData - Daten vom /api/stats Endpunkt.
+     * @param {object|null} infoData - Daten vom /api/bot/info Endpunkt.
+     * @param {boolean} isCached - Gibt an, ob die angezeigten Daten aus dem Cache stammen.
+     */
+    function displayBotStats(statsData, infoData, isCached = false) {
+        // Status und allgemeine Statistiken
+        if (botStatus) { // Prüfen, ob Element existiert
+            botStatus.textContent = statsData?.status || 'Offline';
+            botStatus.className = `stat-value status-${(statsData?.status || 'offline').toLowerCase()}`;
+        }
+        if (serverCount) {
+            serverCount.textContent = statsData?.server_count?.toLocaleString() || 'N/A';
+        }
+        if (totalCommands) {
+            totalCommands.textContent = statsData?.command_count?.toLocaleString() || 'N/A';
+        }
+        if (lastCommand) {
+            lastCommand.textContent = (statsData?.last_commands && statsData.last_commands.length > 0) ? statsData.last_commands[statsData.last_commands.length - 1] : 'N/A';
+        }
+
+        // Detaillierte Bot-Informationen
+        if (userCount) {
+            userCount.textContent = infoData?.users?.toLocaleString() || 'N/A';
+        }
+        if (botPing) { //
+            // Ping-Fix: Nutzt 'latency_ms' wie im Screenshot der Netzwerkanfrage gezeigt
+            botPing.textContent = (infoData?.latency_ms !== undefined && infoData?.latency_ms !== null) ? `${infoData.latency_ms}ms` : 'N/A';
+        }
+        if (botUptime) { //
+            // Uptime-Fix: Nutzt 'uptime_seconds' und formatiert es
+            botUptime.textContent = formatUptime(infoData?.uptime_seconds);
+        }
+        if (pythonVersion) { //
+            pythonVersion.textContent = infoData?.python_version || 'N/A';
+        }
+        if (nextcordVersion) { //
+            nextcordVersion.textContent = infoData?.nextcord_version || 'N/A';
+        }
+
+        // Statischer Entwicklungsstatus
+        if (developmentStatus) {
+            developmentStatus.textContent = 'Work in progress';
+            developmentStatus.className = 'stat-value status-wip';
+        }
+
+        // Letzte Aktualisierungszeit
+        if (lastUpdatedTime) {
+            const time = isCached ? new Date(localStorage.getItem('lastUpdatedTime') || Date.now()) : new Date();
+            lastUpdatedTime.textContent = isCached ? `Cached: ${time.toLocaleTimeString()}` : time.toLocaleTimeString();
+        }
     }
 
-    .logo img {
-        height: 35px;
-        width: 35px;
+    /**
+     * Holt Bot-Statistiken und -Informationen von den API-Endpunkten.
+     * Bei Erfolg werden die Daten angezeigt und im Local Storage gespeichert.
+     * Bei Fehler werden Daten aus dem Local Storage geladen und angezeigt.
+     */
+    async function fetchBotStatsAndInfo() {
+        let statsData = null;
+        let infoData = null;
+
+        try {
+            // Gleichzeitiger Abruf beider Endpunkte für bessere Performance
+            const [statsResponse, infoResponse] = await Promise.all([
+                fetch(`${BASE_URL}/api/stats`),
+                fetch(`${BASE_URL}/api/bot/info`)
+            ]);
+
+            if (!statsResponse.ok) {
+                console.warn(`HTTP error from /api/stats! Status: ${statsResponse.status}`);
+                // Trotzdem versuchen, die Info-Daten zu parsen, falls statsResponse der einzige Fehler war
+                statsData = null; // Setze explizit auf null bei Fehler
+            } else {
+                statsData = await statsResponse.json();
+            }
+
+            if (!infoResponse.ok) {
+                console.warn(`HTTP error from /api/bot/info! Status: ${infoResponse.status}`);
+                // Trotzdem versuchen, die Stats-Daten zu parsen, falls infoResponse der einzige Fehler war
+                infoData = null; // Setze explizit auf null bei Fehler
+            } else {
+                infoData = await infoResponse.json();
+            }
+
+            // Wenn mindestens ein Datensatz erfolgreich war, oder beide, anzeigen und speichern
+            if (statsData || infoData) {
+                displayBotStats(statsData, infoData);
+                saveBotStatsToLocalStorage({ stats: statsData, info: infoData });
+            } else {
+                // Wenn beide fehlschlagen, versuchen, aus dem Cache zu laden
+                throw new Error("Both API endpoints failed to return valid data.");
+            }
+
+        } catch (error) {
+            console.error("Error fetching bot statistics or info:", error);
+            // Bei jedem Fehler: versuchen, aus dem Cache zu laden
+            const cached = loadBotStatsFromLocalStorage();
+            if (cached && (cached.stats || cached.info)) { // Prüfen, ob überhaupt Daten im Cache sind
+                console.log('Displaying cached data due to fetch error.');
+                displayBotStats(cached.stats, cached.info, true);
+            } else {
+                console.log('No live data and no cached data available. Displaying N/A.');
+                displayBotStats(null, null); // Alle Felder auf N/A setzen
+            }
+        }
     }
 
-    .hamburger {
-        display: flex;
+    // --- Initialisierung & Event Listener ---
+
+    // Initiales Laden: Zuerst Cache prüfen, dann Live-Daten abrufen
+    const initialCachedData = loadBotStatsFromLocalStorage();
+    if (initialCachedData && (initialCachedData.stats || initialCachedData.info)) {
+        console.log('Initial load: Displaying cached data.');
+        displayBotStats(initialCachedData.stats, initialCachedData.info, true);
+    } else {
+        console.log('Initial load: No cached data. Displaying "Lade..." or N/A.');
+        // Optional: Hier könnten Sie initial 'Lade...' in alle Felder setzen,
+        // was aber bereits durch die HTML-Platzhalter abgedeckt sein sollte.
+        displayBotStats(null, null); // Setzt alles auf N/A bis Daten kommen
+    }
+    fetchBotStatsAndInfo(); // Immer versuchen, Live-Daten abzurufen
+
+    // Periodischer Abruf der Statistiken
+    setInterval(fetchBotStatsAndInfo, FETCH_INTERVAL);
+
+    // Hamburger Menü Funktionalität
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            hamburger.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('nav-active')) {
+                    navLinks.classList.remove('nav-active');
+                    hamburger.classList.remove('active');
+                }
+            });
+        });
     }
 
-    nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background-color: var(--bg-dark);
-        position: absolute;
-        top: 60px;
-        left: 0;
-        padding: 20px 0;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-        z-index: 999;
-        text-align: center;
+
+    // Befehlsfilter Funktionalität
+    function filterCommandsByCategory() {
+        const activeCategory = document.querySelector('.category-btn.active')?.dataset.category; // Optional Chaining
+
+        if (!activeCategory) return; // Frühzeitiger Exit, wenn kein aktiver Button gefunden
+
+        commandItems.forEach(item => {
+            const itemCategories = item.dataset.category?.split(' ') || []; // Optional Chaining und Fallback zu leerem Array
+
+            const matchesCategory = activeCategory === 'all' || itemCategories.includes(activeCategory);
+
+            if (matchesCategory) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
     }
 
-    nav ul.nav-active {
-        display: flex;
-        animation: fadeIn var(--transition-duration-short) var(--transition-ease-extra-smooth);
+    if (categoryButtons.length > 0) {
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Entferne 'active' von allen Buttons und füge es dem geklickten hinzu
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterCommandsByCategory();
+            });
+        });
+        // Initialer Filter, um alle Befehle anzuzeigen (oder die Standardkategorie)
+        filterCommandsByCategory();
     }
 
-    nav ul li {
-        margin: 15px 0;
-        opacity: 1;
-        transform: translateY(0);
-        animation: none; /* Disable initial header animations on mobile menu */
-    }
 
-    nav ul li a {
-        padding: 10px 0;
-        font-size: 1.1em;
-    }
+    // Intersection Observer für Animationen
+    const observerOptions = {
+        root: null, // Der Viewport ist die Wurzel
+        rootMargin: '0px',
+        threshold: 0.05 // Auslösen, wenn 5% des Elements sichtbar sind
+    };
 
-    .btn-invite {
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 1em;
-        opacity: 1;
-        transform: translateY(0);
-        animation: none; /* Disable initial header animations on mobile menu */
-    }
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                const animItems = entry.target.querySelectorAll('.anim-item');
+                animItems.forEach((item, index) => {
+                    item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
+                });
+            } else {
+                // Optional: Animation zurücksetzen, wenn Element den Viewport verlässt
+                // entry.target.classList.remove('in-view');
+                entry.target.querySelectorAll('.anim-item').forEach(item => {
+                    item.style.transitionDelay = '0s'; // Delay zurücksetzen
+                });
+            }
+        });
+    }, observerOptions);
 
-    .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
+    if (animTargets.length > 0) {
+        animTargets.forEach(target => {
+            observer.observe(target);
+        });
 
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
+        // Sofortige Prüfung beim Laden für Elemente, die bereits im Viewport sind
+        observer.takeRecords().forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                const animItems = entry.target.querySelectorAll('.anim-item');
+                animItems.forEach((item, index) => {
+                    item.style.transitionDelay = `calc(${index} * var(--animation-delay-step))`;
+                });
+            }
+        });
     }
-
-    .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
-
-    .hero-section {
-        padding: 80px 20px;
-        min-height: 70vh;
-    }
-
-    .hero-section h2 {
-        font-size: 2.8em;
-    }
-
-    .hero-section p {
-        font-size: 1.1em;
-    }
-
-    .btn-primary {
-        font-size: 1.1em;
-        padding: 12px 25px;
-    }
-
-    .content-section {
-        padding: 60px 0;
-    }
-
-    .section-number {
-        font-size: 2.5em;
-    }
-
-    .section-title {
-        font-size: 1.8em;
-    }
-
-    .dashboard-stats {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .stat-item {
-        padding: 20px;
-    }
-
-    .stat-item .stat-value {
-        font-size: 2.2em;
-    }
-
-    .search-bar input {
-        padding: 10px 15px;
-        font-size: 1em;
-    }
-
-    .command-categories {
-        gap: 8px;
-    }
-
-    .category-btn {
-        padding: 8px 15px;
-        font-size: 0.85em;
-    }
-
-    .command-item h4 {
-        font-size: 1.2em;
-    }
-
-    .command-item p {
-        font-size: 0.9em;
-    }
-
-    footer {
-        padding: 40px 20px;
-    }
-}
-
-@media (min-width: 768px) {
-    .container {
-        padding: 0 40px;
-    }
-
-    header .container {
-        padding: 15px 40px;
-    }
-
-    .logo h1 {
-        font-size: 1.8em;
-    }
-
-    .logo img {
-        height: 45px;
-        width: 45px;
-    }
-
-    .hamburger {
-        display: none;
-    }
-
-    nav ul {
-        display: flex;
-        flex-direction: row;
-        position: static;
-        width: auto;
-        background-color: transparent;
-        box-shadow: none;
-        padding: 0;
-    }
-
-    nav ul li {
-        margin-left: 30px;
-    }
-
-    nav ul li a {
-        font-size: 1em;
-    }
-
-    .btn-invite {
-        margin-top: 0;
-        padding: 10px 22px;
-        font-size: 1em;
-    }
-
-    .hero-section {
-        min-height: 100vh;
-        padding: 100px 0;
-    }
-
-    .hero-section h2 {
-        font-size: 5em;
-    }
-
-    .hero-section p {
-        font-size: 1.6em;
-    }
-
-    .btn-primary {
-        font-size: 1.2em;
-        padding: 15px 35px;
-    }
-
-    .content-section {
-        padding: 100px 0;
-    }
-
-    .section-number {
-        font-size: 4em;
-    }
-
-    .section-title {
-        font-size: 2.5em;
-    }
-
-    .dashboard-stats {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-    }
-
-    .stat-item {
-        padding: 30px;
-    }
-
-    .stat-item .stat-value {
-        font-size: 2.8em;
-    }
-
-    .search-bar input {
-        padding: 15px 25px;
-        font-size: 1.1em;
-    }
-
-    .command-categories {
-        gap: 10px;
-    }
-
-    .category-btn {
-        padding: 8px 15px;
-        font-size: 0.95em;
-    }
-
-    .command-item h4 {
-        font-size: 1.2em;
-    }
-
-    .command-item p {
-        font-size: 0.95em;
-    }
-
-    footer {
-        padding: 60px 20px;
-    }
-}
+});
