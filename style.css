@@ -296,15 +296,14 @@ section {
     line-height: 1;
 }
 
-/* Status colors */
 .stat-item .status-online {
     color: var(--accent-blue);
 }
 .stat-item .status-offline {
-    color: #ff0000; /* Red for Offline */
+    color: #ff0000;
 }
 .stat-item .status-loading {
-    color: var(--text-secondary); /* Gray for Loading */
+    color: var(--text-secondary);
 }
 
 .last-updated {
@@ -402,29 +401,15 @@ footer {
                 transform var(--transition-duration-long) var(--transition-ease-extra-smooth);
 }
 
-/* Header specific animations to make them appear slightly delayed on load */
-header .logo,
-header nav ul li,
-header .btn-invite {
-    opacity: 0;
-    transform: translateY(-10px);
-    animation: fadeInSlideDown var(--transition-duration-medium) var(--transition-ease-extra-smooth) forwards;
+.anim-target.anim-delay-0-5s.in-view .anim-item {
+    transition-delay: calc(var(--animation-delay-step) * var(--anim-delay-multiplier, 0));
 }
-
-header .logo { animation-delay: 0.2s; }
-header nav ul li:nth-child(1) { animation-delay: 0.4s; }
-header nav ul li:nth-child(2) { animation-delay: 0.5s; }
-header nav ul li:nth-child(3) { animation-delay: 0.6s; }
-header nav ul li:nth-child(4) { animation-delay: 0.7s; }
-header nav ul li:nth-child(5) { animation-delay: 0.8s; }
-header .btn-invite { animation-delay: 0.9s; }
 
 @keyframes fadeInSlideDown {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     body {
         font-size: 1em;
@@ -474,7 +459,7 @@ header .btn-invite { animation-delay: 0.9s; }
         margin: 15px 0;
         opacity: 1;
         transform: translateY(0);
-        animation: none; /* Disable initial header animations on mobile menu */
+        animation: none;
     }
 
     nav ul li a {
@@ -488,7 +473,7 @@ header .btn-invite { animation-delay: 0.9s; }
         font-size: 1em;
         opacity: 1;
         transform: translateY(0);
-        animation: none; /* Disable initial header animations on mobile menu */
+        animation: none;
     }
 
     .hamburger.active .bar:nth-child(1) {
