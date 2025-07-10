@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const storageUsage = document.getElementById('storage-usage');
     const errorCount = document.getElementById('error-count');
     const botVersion = document.getElementById('bot-version');
-    const pythonVersion = document.getElementById('python-version');
-    const botName = document.getElementById('bot-name');
     const lastUpdatedTime = document.getElementById('last-updated-time');
     const categoryButtons = document.querySelectorAll('.category-btn');
     const commandItems = document.querySelectorAll('.command-item');
@@ -96,12 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (botVersion) {
             botVersion.textContent = statsData?.version || 'N/A';
-        }
-        if (pythonVersion) {
-            pythonVersion.textContent = statsData?.python_version || 'N/A';
-        }
-        if (botName) {
-            botName.textContent = statsData?.bot_name || 'N/A';
         }
         if (lastUpdatedTime) {
             const time = isCached ? new Date(localStorage.getItem('lastUpdatedTime') || Date.now()) : new Date();
