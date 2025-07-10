@@ -20,6 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const pythonVersion = document.getElementById('python-version');
     const nextcordVersion = document.getElementById('nextcord-version');
 
+    // Neue Konstanten für die zusätzlichen Statusfelder
+    const botName = document.getElementById('bot-name');
+    const createdBy = document.getElementById('created-by');
+    const botFeatures = document.getElementById('bot-features');
+    const errorCount = document.getElementById('error-count');
+    const botVersion = document.getElementById('bot-version');
+
     const categoryButtons = document.querySelectorAll('.category-btn');
     const commandItems = document.querySelectorAll('.command-item');
 
@@ -104,6 +111,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (nextcordVersion) {
             nextcordVersion.textContent = 'N/A'; 
+        }
+
+        // Neue Statusfelder aktualisieren
+        if (botName) {
+            botName.textContent = infoData?.Bot_name || 'N/A';
+        }
+        if (createdBy) {
+            createdBy.textContent = infoData?.created_by || 'N/A';
+        }
+        if (botFeatures) {
+            botFeatures.textContent = (infoData?.features && infoData.features.length > 0) ? infoData.features.join(', ') : 'N/A';
+        }
+        if (errorCount) {
+            errorCount.textContent = statsData?.error_count?.toLocaleString() || 'N/A';
+        }
+        if (botVersion) {
+            botVersion.textContent = infoData?.version || statsData?.version || 'N/A';
         }
 
         if (lastUpdatedTime) {
