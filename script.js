@@ -79,21 +79,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (totalCommands) {
             totalCommands.textContent = statsData?.command_count?.toLocaleString() || 'N/A';
         }
+        
         if (cpuUsage) {
-            cpuUsage.textContent = (statsData?.cpu_usage !== undefined && statsData?.cpu_usage !== null) ? `${statsData.cpu_usage.toFixed(2)}%` : 'N/A';
+            cpuUsage.textContent = 'N/A'; 
         }
         if (ramUsage) {
-            ramUsage.textContent = (statsData?.memory_usage !== undefined && statsData?.memory_usage !== null) ? `${statsData.memory_usage.toFixed(2)}MB` : 'N/A';
+            ramUsage.textContent = 'N/A'; 
         }
         if (storageUsage) {
-            storageUsage.textContent = (statsData?.disk_usage !== undefined && statsData?.disk_usage !== null) ? `${statsData.disk_usage.toFixed(2)}GB` : 'N/A';
+            storageUsage.textContent = 'N/A'; 
         }
 
         if (userCount) {
             userCount.textContent = infoData?.users?.toLocaleString() || 'N/A';
         }
         if (botPing) {
-            botPing.textContent = (infoData?.latency_ms !== undefined && infoData?.latency_ms !== null) ? `${infoData.latency_ms}ms` : 'N/A';
+            botPing.textContent = (statsData?.latency !== undefined && statsData?.latency !== null) ? `${statsData.latency}ms` : 'N/A';
         }
         if (botUptime) {
             botUptime.textContent = formatUptime(infoData?.uptime_seconds);
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             pythonVersion.textContent = infoData?.python_version || 'N/A';
         }
         if (nextcordVersion) {
-            nextcordVersion.textContent = infoData?.nextcord_version || 'N/A';
+            nextcordVersion.textContent = 'N/A'; 
         }
 
         if (lastUpdatedTime) {
