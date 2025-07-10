@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com';
-    const FETCH_INTERVAL = 10000;
+    const FETCH_INTERVAL = 10000; // Fetch bot stats every 10 seconds
+    const KEEP_ALIVE_INTERVAL = 14 * 60 * 1000; // Ping every 14 minutes for Render.com keep-alive
 
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -110,6 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function pingEndpoint(url, name) {
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                console.log(`${name} ping successful.`);
+            } else {
+                console.warn(`${name} ping failed with status: ${response.status}`);
+            }
+        } catch (error) {
+            console.error(`Error pinging ${name}:`, error);
+        }
+    }
+
     async function fetchBotStatsAndInfo() {
         let statsData = null;
         let infoData = null;
@@ -154,6 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function performKeepAlivePings() {
+        console.log('Performing keep-alive pings...');
+        await Promise.all([
+            pingEndpoint(`${BASE_URL}/health`, 'Health Check'),
+            pingEndpoint(`${BASE_URL}/ping`, 'Simple Ping'),
+            pingEndpoint(`${BASE_URL}/`, 'Dashboard Root')
+        ]);
+    }
+
     const initialCachedData = loadBotStatsFromLocalStorage();
     if (initialCachedData && (initialCachedData.stats || initialCachedData.info)) {
         console.log('Initial load: Displaying cached data.');
@@ -163,8 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
         displayBotStats(null, null);
     }
     fetchBotStatsAndInfo();
+    performKeepAlivePings(); // Initial ping on load
 
     setInterval(fetchBotStatsAndInfo, FETCH_INTERVAL);
+    setInterval(performKeepAlivePings, KEEP_ALIVE_INTERVAL); // Schedule regular keep-alive pings
 
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
