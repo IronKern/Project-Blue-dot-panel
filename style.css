@@ -277,9 +277,10 @@ section {
     border-radius: 10px;
 }
 
-.stat-item.full-width {
-    grid-column: 1 / -1; /* Spans across all columns */
-}
+/* Removed this style as 'features-list' is no longer a full-width item */
+/* .stat-item.full-width {
+    grid-column: 1 / -1;
+} */
 
 .stat-item .stat-label {
     font-family: var(--font-primary);
@@ -300,6 +301,8 @@ section {
     line-height: 1;
 }
 
+/* This style is no longer strictly needed for a 'features-list' if the item is removed,
+   but keeping it might be useful for other potential text content that needs smaller font */
 .stat-item .features-list {
     font-size: 1.5em; /* Smaller font for list items */
     font-weight: 500;
@@ -539,10 +542,11 @@ footer {
     .stat-item .stat-value {
         font-size: 2.2em;
     }
-    
-    .stat-item.full-width {
-        grid-column: 1 / 1; 
-    }
+
+    /* Removed this style as 'features-list' is no longer a full-width item */
+    /* .stat-item.full-width {
+        grid-column: 1 / 1;
+    } */
 
     .stat-item .features-list {
         font-size: 1.2em;
@@ -659,12 +663,13 @@ footer {
         font-size: 2.8em;
     }
 
-    .stat-item.full-width {
-        grid-column: 1 / -1; 
-    }
+    /* Removed this style as 'features-list' is no longer a full-width item */
+    /* .stat-item.full-width {
+        grid-column: 1 / -1;
+    } */
 
     .stat-item .features-list {
-        font-size: 1.5em; 
+        font-size: 1.5em;
     }
 
     .command-categories {
