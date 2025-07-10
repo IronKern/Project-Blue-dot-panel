@@ -20,10 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const pythonVersion = document.getElementById('python-version');
     const nextcordVersion = document.getElementById('nextcord-version');
 
-    // Neue Konstanten für die zusätzlichen Statusfelder
+    // Removed constants for createdBy and botFeatures
     const botName = document.getElementById('bot-name');
-    const createdBy = document.getElementById('created-by');
-    const botFeatures = document.getElementById('bot-features');
     const errorCount = document.getElementById('error-count');
     const botVersion = document.getElementById('bot-version');
 
@@ -86,15 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (totalCommands) {
             totalCommands.textContent = statsData?.command_count?.toLocaleString() || 'N/A';
         }
-        
+
         if (cpuUsage) {
-            cpuUsage.textContent = 'N/A'; 
+            cpuUsage.textContent = 'N/A';
         }
         if (ramUsage) {
-            ramUsage.textContent = 'N/A'; 
+            ramUsage.textContent = 'N/A';
         }
         if (storageUsage) {
-            storageUsage.textContent = 'N/A'; 
+            storageUsage.textContent = 'N/A';
         }
 
         if (userCount) {
@@ -110,19 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
             pythonVersion.textContent = infoData?.python_version || 'N/A';
         }
         if (nextcordVersion) {
-            nextcordVersion.textContent = 'N/A'; 
+            nextcordVersion.textContent = 'N/A';
         }
 
-        // Neue Statusfelder aktualisieren
+        // Updated display logic for the remaining new status fields
         if (botName) {
             botName.textContent = infoData?.Bot_name || 'N/A';
         }
-        if (createdBy) {
-            createdBy.textContent = infoData?.created_by || 'N/A';
-        }
-        if (botFeatures) {
-            botFeatures.textContent = (infoData?.features && infoData.features.length > 0) ? infoData.features.join(', ') : 'N/A';
-        }
+        // Removed createdBy and botFeatures display logic
         if (errorCount) {
             errorCount.textContent = statsData?.error_count?.toLocaleString() || 'N/A';
         }
