@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             botPing.textContent = (statsData?.latency !== undefined && statsData?.latency !== null) ? `${statsData.latency}ms` : 'N/A';
         }
         if (botUptime) {
-            botUptime.textContent = formatUptime(statsData?.uptime_seconds);
+            botUptime.textContent = formatUptime(statsData?.uptime || statsData?.uptime_seconds);
         }
         if (totalCommands) {
             totalCommands.textContent = statsData?.command_count?.toLocaleString() || 'N/A';
@@ -86,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
             cpuUsage.textContent = (cpuData?.system_cpu_percent !== undefined && cpuData?.system_cpu_percent !== null) ? `${cpuData.system_cpu_percent}%` : 'N/A';
         }
         if (ramUsage) {
-            ramUsage.textContent = (memoryData?.system_memory_usage_gb !== undefined && memoryData?.system_memory_usage_gb !== null) ? `${memoryData.system_memory_usage_gb.toFixed(2)}GB` : 'N/A';
+            ramUsage.textContent = (memoryData?.system_memory?.percent_used !== undefined && memoryData?.system_memory?.percent_used !== null) ? `${memoryData.system_memory.percent_used.toFixed(2)}%` : 'N/A';
         }
         if (storageUsage) {
-            storageUsage.textContent = (storageData?.system_disk_usage_percent !== undefined && storageData?.system_disk_usage_percent !== null) ? `${storageData.system_disk_usage_percent}%` : 'N/A';
+            storageUsage.textContent = (storageData?.current_directory?.percent_used !== undefined && storageData?.current_directory?.percent_used !== null) ? `${storageData.current_directory.percent_used.toFixed(2)}%` : 'N/A';
         }
         if (errorCount) {
             errorCount.textContent = statsData?.error_count?.toLocaleString() || 'N/A';
