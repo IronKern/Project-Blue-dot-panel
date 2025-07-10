@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
     <title>Project Blue Dot - Your Discord Bot</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="assets/applogo.png" type="image/heic">
+    <link rel="icon" href="assets/applogo.jpg" type="image/heic">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <div class="container">
             <div class="logo">
-                <img src="assets/applogo.png" alt="Project Blue Dot Logo">
+                <img src="assets/applogo.png.heic" alt="Project Blue Dot Logo">
                 <h1>Project Blue Dot</h1>
             </div>
             <nav>
@@ -38,7 +38,7 @@
             <div class="container">
                 <h2 class="anim-item">Project Blue Dot.</h2>
                 <p class="anim-item">Your ultimate Discord companion for enhanced server management and interaction.</p>
-                <a href="https://discord.com/oauth2/authorize?client_id=1391506034715263068&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-primary anim-item">Add Bot to Your Server</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_CLIENT_ID&permissions=8&scope=bot%20applications.commands" target="_blank" class="btn-primary anim-item">Add Bot to Your Server</a>
             </div>
         </section>
 
@@ -93,7 +93,31 @@
                         <span class="stat-label">Storage Usage</span>
                         <p id="storage-usage" class="stat-value">Loading...</p>
                     </div>
-                </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Bot Name</span>
+                        <p id="bot-name" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Created By</span>
+                        <p id="created-by" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item full-width">
+                        <span class="stat-label">Features</span>
+                        <p id="bot-features" class="stat-value features-list">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Python Version</span>
+                        <p id="python-version" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Error Count</span>
+                        <p id="error-count" class="stat-value">Loading...</p>
+                    </div>
+                    <div class="stat-item anim-item">
+                        <span class="stat-label">Bot Version</span>
+                        <p id="bot-version" class="stat-value">Loading...</p>
+                    </div>
+                    </div>
                 <p class="anim-item last-updated">Last Updated: <span id="last-updated-time">Loading...</span></p>
             </div>
         </section>
