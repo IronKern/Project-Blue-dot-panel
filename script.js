@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const BASE_URL = 'https://threadbaresurefootedtelevision-1.onrender.com';
-    const FETCH_INTERVAL = 10000; // Fetch bot stats every 10 seconds
-    const KEEP_ALIVE_INTERVAL = 14 * 60 * 1000; // Ping every 14 minutes for Render.com keep-alive
+    const FETCH_INTERVAL = 10000;
+    const KEEP_ALIVE_INTERVAL = 3 * 60 * 1000;
 
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
@@ -186,10 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
         displayBotStats(null, null);
     }
     fetchBotStatsAndInfo();
-    performKeepAlivePings(); // Initial ping on load
+    performKeepAlivePings();
 
     setInterval(fetchBotStatsAndInfo, FETCH_INTERVAL);
-    setInterval(performKeepAlivePings, KEEP_ALIVE_INTERVAL); // Schedule regular keep-alive pings
+    setInterval(performKeepAlivePings, KEEP_ALIVE_INTERVAL);
 
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
